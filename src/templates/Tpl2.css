@@ -39,6 +39,7 @@
     margin: 0.5rem 0;
     font-size: 0.9rem;
     line-height: 1.5;
+    word-break: break-word;
 }
 .sidebar-section a {
     color: #3498db;
@@ -71,6 +72,8 @@
 .resume-main-content {
     width: 65%;
     padding: 2.5rem;
+    /* FIX: Added default text color for visibility in all themes */
+    color: #333;
 }
 .main-header h1 {
     font-size: 3.5rem;

@@ -4,18 +4,17 @@ import { useResumeContext } from '../useContext/UseContext';
 const ThemeToggle = () => {
     const { theme, toggleTheme } = useResumeContext();
 
-    const btnStyle = {
-      backgroundColor: 'transparent',
-      border: '1px solid #888',
-      color: theme === 'light' ? '#333' : '#eee',
-      padding: '8px 12px',
-      borderRadius: '20px',
-      cursor: 'pointer',
-      fontSize: '14px',
-    };
+    // Using Tailwind CSS for styling
+    const btnClass = `
+        px-4 py-2 rounded-full text-sm font-medium transition-colors
+        ${theme === 'light' 
+            ? 'bg-gray-200 text-gray-800 hover:bg-gray-300' 
+            : 'bg-gray-700 text-gray-200 hover:bg-gray-600'
+        }
+    `;
 
     return (
-        <button onClick={toggleTheme} style={btnStyle}>
+        <button onClick={toggleTheme} className={btnClass}>
             {theme === 'light' ? '🌙 Dark' : '☀️ Light'}
         </button>
     );
