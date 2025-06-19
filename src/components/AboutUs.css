@@ -71,3 +71,13 @@ body.dark .tech-stack span {
     background-color: #333;
     color: #ddd;
 }
+
+@media (max-width: 768px) {
+  .about-us-container {
+    padding: 1rem;
+    margin: 1rem auto;
+  }
+  .about-us-content h1 {
+    font-size: 2rem;
+  }
+}

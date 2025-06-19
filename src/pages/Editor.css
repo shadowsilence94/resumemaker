@@ -102,3 +102,10 @@ textarea {
     cursor: pointer;
     line-height: 1;
 }
+
+@media (max-width: 768px) {
+  .profile-image-section {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

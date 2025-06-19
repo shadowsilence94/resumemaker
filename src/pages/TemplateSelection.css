@@ -45,3 +45,13 @@ body.dark .template-preview-viewport {
     background-color: #1e1e1e;
     box-shadow: 0 4px 15px rgba(255,255,255,0.05);
 }
+
+@media (max-width: 768px) {
+  .template-preview-viewport {
+    width: 280px;
+    height: 396px;
+  }
+  .template-preview-scaler {
+    transform: scale(0.33);
+  }
+}

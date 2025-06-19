@@ -36,3 +36,16 @@ body.dark .home-container p {
   background-color: #0056b3;
   transform: translateY(-2px);
 }
+
+@media (max-width: 768px) {
+  .home-container h1 {
+    font-size: 2.5rem;
+  }
+  .home-container p {
+    font-size: 1rem;
+  }
+  .get-started-btn {
+    font-size: 1rem;
+    padding: 12px 25px;
+  }
+}

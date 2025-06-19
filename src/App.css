@@ -31,6 +31,7 @@
   display: flex;
   gap: 10px;
   height: 100%;
+  flex-wrap: wrap; /* Allows links to wrap on small screens */
 }
 
 /* This styles each individual link in the navigation.
@@ -72,8 +73,6 @@ body.dark .nav-link.active {
   color: #8ab4f8;
   border-bottom-color: #8ab4f8;
 }
-/* --- End of Dark Mode Styles --- */
-
 
 /* This is the main content area of your application.
    'flex-grow: 1' is crucial. It tells this element to take up
@@ -81,4 +80,26 @@ body.dark .nav-link.active {
 .app-content {
   padding: 20px;
   flex-grow: 1;
+}
+
+/* Responsive adjustments for mobile */
+@media (max-width: 768px) {
+  .navbar {
+    padding: 0 1rem;
+    height: auto;
+    flex-direction: column;
+    padding-bottom: 1rem;
+  }
+  .nav-links {
+    order: 2; /* Move links below toggle button */
+    justify-content: center;
+    gap: 5px;
+  }
+  .nav-link {
+    font-size: 14px;
+    padding: 8px;
+  }
+  .app-content {
+    padding: 1rem;
+  }
 }

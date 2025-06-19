@@ -58,3 +58,12 @@ body.dark .contact-form-wrapper {
 .submit-btn:hover {
     background-color: #0056b3;
 }
+
+@media (max-width: 768px) {
+  .contact-container {
+    padding: 1rem;
+  }
+  .contact-form-wrapper {
+    padding: 1.5rem;
+  }
+}
