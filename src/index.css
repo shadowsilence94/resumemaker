@@ -1,68 +1,189 @@
-:root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+/* --- Global Styles --- */
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
+/* Light theme (default) */
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  background-color: #f8f9fa;
+  color: #212529;
+  transition: background-color 0.3s, color 0.3s;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+/* Dark theme */
+body.dark {
+  background-color: #121212;
+  color: #e0e0e0;
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+
+/* --- Generic Component Dark Mode Styles --- */
+body.dark .navbar {
+  background-color: #1e1e1e;
+  box-shadow: none;
+  border-bottom: 1px solid #333;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+body.dark fieldset {
+  border-color: #444;
+}
+
+body.dark legend {
+  color: #e0e0e0;
+}
+
+body.dark input,
+body.dark textarea {
+  background-color: #2a2a2a;
+  color: #e0e0e0;
+  border-color: #555;
+}
+
+
+/* --- Template-Specific Dark Mode Styles --- */
+
+/* Tpl1 (Minimalist) Dark Mode */
+body.dark .modern-resume {
+    background-color: #1e1e1e;
+    color: #dcdcdc;
+}
+body.dark .modern-profile-img {
+    border-color: #444;
+}
+body.dark .modern-contact-info {
+    color: #aaa;
+}
+body.dark .modern-contact-info a {
+    color: #8ab4f8;
+}
+body.dark .modern-section h2 {
+    color: #8ab4f8;
+    border-bottom-color: #8ab4f8;
+}
+body.dark .modern-skills-list li {
+    background-color: #333;
+    color: #ddd;
+}
+
+/* Tpl2 (Sidebar Professional) Dark Mode */
+body.dark .sidebar-resume {
+    background: #1e1e1e;
+}
+body.dark .resume-sidebar {
+    background-color: #121212;
+    color: #dcdcdc;
+}
+body.dark .sidebar-profile-img {
+    border-color: #333;
+}
+body.dark .sidebar-section h3 {
+    border-bottom-color: #0d83cd;
+}
+body.dark .sidebar-section a {
+    color: #0d83cd;
+}
+body.dark .sidebar-skills-list li {
+    background: #2c2c2c;
+}
+body.dark .resume-main-content {
+    color: #dcdcdc;
+}
+body.dark .main-header h1 {
+    color: #e8e8e8;
+}
+body.dark .main-section h2 {
+    color: #e8e8e8;
+    border-bottom-color: #555;
+}
+body.dark .main-job h4 {
+    color: #888;
+}
+
+/* Tpl3 (Creative Header) Dark Mode */
+body.dark .creative-header {
+    background-color: #2c3e50; /* Stays dark */
+}
+body.dark .creative-resume {
+    background-color: #1e1e1e;
+    color: #dcdcdc;
+}
+body.dark .section-divider {
+    background-color: #444;
+}
+body.dark .creative-section h2 {
+    color: #ecf0f1;
+}
+body.dark .creative-section h4 {
+    color: #aaa;
+}
+body.dark .creative-skills-list li {
+    background-color: #333;
+    color: #ddd;
+}
+
+/* Tpl4 (Formal Executive) Dark Mode */
+body.dark .executive-resume {
+    background: #1e1e1e;
+    color: #dcdcdc;
+    border-color: #444;
+}
+body.dark .executive-header p {
+    color: #aaa;
+}
+body.dark .executive-divider {
+    border-color: #eee;
+}
+
+/* Tpl5 (Classic Professional) Dark Mode */
+body.dark .tpl5-resume {
+  background-color: #1e1e1e;
+  color: #dcdcdc;
+  border-color: #444;
+}
+body.dark .tpl5-resume .resume-header {
+  border-color: #555;
+}
+body.dark .tpl5-resume .profile-image-container img {
+  border-color: #ccc;
+}
+body.dark .tpl5-resume .section-title {
+  border-color: #555;
+  color: #fff;
+}
+body.dark .tpl5-resume .header-right h1 {
+  color: #fff;
+}
+body.dark .tpl5-resume .contact-info a {
+    color: #8ab4f8;
+}
+body.dark .tpl5-resume .address-line {
+    color: #999;
+}
+body.dark .tpl5-resume .skills-list li {
+    background-color: #333;
+    color: #ddd;
+}
+
+
+/* --- Other Component Styles --- */
+
+/* Download Button Styles */
+.download-btn-main {
+    padding: 10px 20px;
+    font-size: 1em;
+    font-weight: bold;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+.download-btn-main:hover {
+    background-color: #0056b3;
+}
+body.dark .download-btn-main {
+    background-color: #8ab4f8;
+    color: #121212;
+}
+body.dark .download-btn-main:hover {
+    background-color: #a3c5f9;
 }

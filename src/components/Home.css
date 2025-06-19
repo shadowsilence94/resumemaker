@@ -1,0 +1,38 @@
+.home-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+  text-align: center;
+}
+
+.home-container h1 {
+  font-size: 3.5rem;
+}
+
+.home-container p {
+  font-size: 1.2rem;
+  color: #6c757d;
+}
+
+body.dark .home-container p {
+    color: #adb5bd;
+}
+
+.get-started-btn {
+  background-color: #007bff;
+  color: white;
+  padding: 15px 30px;
+  margin-top: 20px;
+  font-size: 1.2em;
+  font-weight: bold;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.get-started-btn:hover {
+  background-color: #0056b3;
+  transform: translateY(-2px);
+}
