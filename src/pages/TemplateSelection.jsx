@@ -32,7 +32,7 @@ const SampleDataProvider = ({ children }) => (
 );
 
 const TemplateSelection = () => {
-    const { resumeData, setSelectedTemplate } = useResumeContext();
+    const { resumeData, setSelectedTemplate, selectedTemplate } = useResumeContext();
     const navigate = useNavigate();
     const hasUserData = resumeData.personalInfo.firstName !== '';
 
@@ -50,16 +50,27 @@ const TemplateSelection = () => {
             <h2 className="text-3xl font-bold mb-4 dark:text-white">{hasUserData ? 'Choose a New Style' : 'Start by Choosing a Template'}</h2>
             <p className="text-gray-600 dark:text-gray-400 mb-8">{hasUserData ? 'See how your information looks in a different layout.' : 'Select a layout you like. You can edit all the content in the next step.'}</p>
             <div className="flex justify-center flex-wrap gap-10 mt-8">
-                {templates.map(template => (
-                    <div key={template.id} className="cursor-pointer group" onClick={() => handleTemplateSelect(template.id)}>
-                        <h3 className="mb-4 font-semibold text-lg group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">{template.name}</h3>
-                        <div className="w-[300px] h-[424px] border border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-900 overflow-hidden relative shadow-lg rounded-md transition-shadow group-hover:shadow-2xl">
-                            <div className="w-[8.5in] origin-top-left transform scale-[0.35]">
-                                {hasUserData ? <template.Component /> : <SampleDataProvider><template.Component /></SampleDataProvider>}
+                {templates.map(template => {
+                    const isSelected = selectedTemplate === template.id;
+                    return (
+                        <div key={template.id} className="cursor-pointer group" onClick={() => handleTemplateSelect(template.id)}>
+                            <h3 className={`mb-4 font-semibold text-lg transition-colors ${
+                                isSelected 
+                                    ? 'text-blue-600 dark:text-blue-400' 
+                                    : 'group-hover:text-blue-600 dark:group-hover:text-blue-400'
+                            }`}>{template.name}</h3>
+                            <div className={`w-[300px] h-[424px] border overflow-hidden relative shadow-lg rounded-md transition-all ${
+                                isSelected 
+                                    ? 'border-blue-500 dark:border-blue-400 bg-blue-50 dark:bg-blue-900/20 shadow-2xl ring-2 ring-blue-500 dark:ring-blue-400' 
+                                    : 'border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-900 group-hover:shadow-2xl'
+                            }`}>
+                                <div className="w-[8.5in] origin-top-left transform scale-[0.35]">
+                                    {hasUserData ? <template.Component /> : <SampleDataProvider><template.Component /></SampleDataProvider>}
+                                </div>
                             </div>
                         </div>
-                    </div>
-                ))}
+                    );
+                })}
             </div>
         </div>
     );
