@@ -204,7 +204,7 @@ const Home = () => {
                 maintaining quality and effectiveness.
               </p>
               <p className="text-gray-600 dark:text-gray-400">
-                Founded in 2023, we've helped over 50,000 job seekers create
+                Founded in 2025, we've helped over 50,000 job seekers create
                 resumes that get noticed.
               </p>
             </motion.div>
@@ -296,7 +296,7 @@ const Home = () => {
                   <div>
                     <h4 className="font-bold">Phone</h4>
                     <p className="text-gray-600 dark:text-gray-400">
-                      +1 (555) 123-4567
+                      +66 123456789
                     </p>
                   </div>
                 </div>
@@ -307,7 +307,7 @@ const Home = () => {
                   <div>
                     <h4 className="font-bold">Address</h4>
                     <p className="text-gray-600 dark:text-gray-400">
-                      123 Resume Street, San Francisco, CA
+                      CentralWorld, 999/9 Rama I Rd, Pathum Wan, Bangkok 10330, Thailand
                     </p>
                   </div>
                 </div>

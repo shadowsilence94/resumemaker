@@ -24,16 +24,33 @@ const Footer = () => {
             Build professional resumes that get you hired faster.
           </p>
           <div className="flex gap-4">
-            {[FaTwitter, FaLinkedin, FaGithub].map((Icon, i) => (
-              <a
-                key={i}
-                href="#"
-                className="text-gray-400 hover:text-blue-400 transition-colors duration-300"
-                aria-label={`Social link ${i}`}
-              >
-                <Icon className="text-xl" />
-              </a>
-            ))}
+            <a
+              href="https://github.com/shadowsilence94"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-400 hover:text-blue-400 transition-colors duration-300"
+              aria-label="GitHub"
+            >
+              <FaGithub className="text-xl" />
+            </a>
+            <a
+              href="https://www.linkedin.com/in/htut-ko-ko-805770202/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-400 hover:text-blue-400 transition-colors duration-300"
+              aria-label="LinkedIn"
+            >
+              <FaLinkedin className="text-xl" />
+            </a>
+            <a
+              href="https://twitter.com/htutkoko"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-400 hover:text-blue-400 transition-colors duration-300"
+              aria-label="Twitter"
+            >
+              <FaTwitter className="text-xl" />
+            </a>
           </div>
         </div>
 
@@ -43,14 +60,19 @@ const Footer = () => {
             Quick Links
           </h4>
           <ul className="space-y-3">
-            {["Templates", "Examples", "Pricing", "Blog"].map((item) => (
-              <li key={item}>
+            {[
+              { name: "Templates", href: "/templates" },
+              { name: "About Us", href: "/about" },
+              { name: "Contact", href: "/contact" },
+              { name: "Reviews", href: "/reviews" }
+            ].map((item) => (
+              <li key={item.name}>
                 <a
-                  href="#"
-                  className="text-gray-400 hover:text-white transition-colors duration-300 flex items-center gap-2"
+                  href={item.href}
+                  className="text-gray-400 hover:text-white transition-colors duration-300 flex items-center gap-2 group"
                 >
                   <span className="w-1 h-1 bg-blue-400 rounded-full opacity-0 group-hover:opacity-100 transition"></span>
-                  {item}
+                  {item.name}
                 </a>
               </li>
             ))}
@@ -64,18 +86,20 @@ const Footer = () => {
           </h4>
           <ul className="space-y-3">
             {[
-              "Resume Tips",
-              "Cover Letters",
-              "Interview Guide",
-              "Career Advice",
+              { name: "Resume Tips", href: "https://www.indeed.com/career-advice/resumes-cover-letters/how-to-make-a-resume" },
+              { name: "CV Examples", href: "https://www.canva.com/resumes/templates/" },
+              { name: "Job Search Guide", href: "https://www.linkedin.com/pulse/ultimate-job-search-guide-2024-tips-strategies-success/" },
+              { name: "Career Resources", href: "https://www.glassdoor.com/blog/guide/career-advice/" }
             ].map((item) => (
-              <li key={item}>
+              <li key={item.name}>
                 <a
-                  href="#"
-                  className="text-gray-400 hover:text-white transition-colors duration-300 flex items-center gap-2"
+                  href={item.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gray-400 hover:text-white transition-colors duration-300 flex items-center gap-2 group"
                 >
                   <span className="w-1 h-1 bg-purple-400 rounded-full opacity-0 group-hover:opacity-100 transition"></span>
-                  {item}
+                  {item.name}
                 </a>
               </li>
             ))}
@@ -111,22 +135,21 @@ const Footer = () => {
       <div className="border-t border-gray-800 py-6 px-6">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-500">
           <div>
-            Â© {new Date().getFullYear()} EasyResume. All rights reserved.
+            © {new Date().getFullYear()} EasyResume. All rights reserved.
           </div>
           <div className="flex gap-6">
-            <a href="#" className="hover:text-white transition-colors">
+            <a href="/privacy" className="hover:text-white transition-colors">
               Privacy Policy
             </a>
-            <a href="#" className="hover:text-white transition-colors">
+            <a href="/terms" className="hover:text-white transition-colors">
               Terms of Service
             </a>
-            <a href="#" className="hover:text-white transition-colors">
+            <a href="/cookies" className="hover:text-white transition-colors">
               Cookies
             </a>
           </div>
           <div className="flex items-center gap-1">
-            Made with <FaRegHeart className="text-red-400 mx-1" />
-            by Ko HtutKoKo & Team
+            Made by Ko HtutKoKo & Team
           </div>
         </div>
       </div>

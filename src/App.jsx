@@ -13,6 +13,9 @@ import AboutUs from './components/AboutUs.jsx';
 import Contact from './components/Contact.jsx';
 import Review from './components/Review.jsx';
 import Footer from './components/Footer.jsx';
+import PrivacyPolicy from './components/PrivacyPolicy.jsx';
+import TermsOfService from './components/TermsOfService.jsx';
+import Cookies from './components/Cookies.jsx';
 
 const AppWithFloatingButton = () => {
     const location = useLocation();
@@ -75,6 +78,9 @@ const App = () => {
             <Route path="/reviews" element={<Review />} />
             <Route path="/about" element={<AboutUs />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/privacy" element={<PrivacyPolicy />} />
+            <Route path="/terms" element={<TermsOfService />} />
+            <Route path="/cookies" element={<Cookies />} />
           </Routes>
         </main>
         <AppWithFloatingButton />
