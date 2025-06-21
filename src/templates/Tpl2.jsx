@@ -20,7 +20,7 @@ const Tpl2 = ({ resumeData, sections }) => {
                 </div>
                 {sections.education && education?.length > 0 && (
                     <div className="sidebar-section"><h3>Education</h3>
-                        {education.map(edu => (<div key={edu.id} className="sidebar-edu"><strong>{edu.degree}</strong><p>{edu.school}</p><p>{edu.graduationDate}</p></div>))}
+                        {education.map(edu => (<div key={edu.id} className="sidebar-edu breakable-unit"><strong>{edu.degree}</strong><p>{edu.school}</p><p>{edu.graduationDate}</p></div>))}
                     </div>
                 )}
                 {sections.skills && skills?.length > 0 && (
@@ -35,7 +35,7 @@ const Tpl2 = ({ resumeData, sections }) => {
                 {sections.experience && experience?.length > 0 && (
                     <section className="main-section"><h2>Experience</h2>
                         {experience.map(exp => (
-                            <div key={exp.id} className="main-job">
+                            <div key={exp.id} className="main-job breakable-unit">
                                 <h3>{exp.jobTitle}</h3>
                                 <h4>{exp.company} | {exp.startDate} - {exp.endDate}</h4>
                                 <ul>{exp.responsibilities?.map((resp, i) => resp && <li key={i}>{resp}</li>)}</ul>
@@ -44,7 +44,7 @@ const Tpl2 = ({ resumeData, sections }) => {
                     </section>
                 )}
                 {customSections?.map(section => (
-                     <section key={section.id} className="main-section">
+                     <section key={section.id} className="main-section breakable-unit">
                         <h2>{section.title}</h2>
                         <div className="main-job">
                             <ul>{section.details?.map((detail, i) => detail && <li key={i}>{detail}</li>)}</ul>

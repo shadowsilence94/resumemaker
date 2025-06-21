@@ -17,16 +17,49 @@ const FinalCV = () => {
     const resumeRef = useRef();
     const TemplateToRender = templateMap[templateId];
 
-    const handleDownloadPdf = () => {
+    const handleDownloadPdf = async () => {
         const input = resumeRef.current;
-        html2canvas(input, { scale: 2 }).then((canvas) => {
+        if (!input) return;
+        
+        try {
+            const canvas = await html2canvas(input, {
+                scale: 2,
+                useCORS: true,
+                allowTaint: true,
+                backgroundColor: '#ffffff',
+                logging: false,
+                letterRendering: true,
+                width: input.scrollWidth,
+                height: input.scrollHeight
+            });
+            
             const imgData = canvas.toDataURL('image/png');
-            const pdf = new jsPDF('p', 'pt', 'a4');
+            const pdf = new jsPDF('p', 'mm', 'a4');
             const pdfWidth = pdf.internal.pageSize.getWidth();
-            const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
-            pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+            const pdfHeight = pdf.internal.pageSize.getHeight();
+            
+            const imgWidth = canvas.width;
+            const imgHeight = canvas.height;
+            const ratio = pdfWidth / imgWidth;
+            const scaledHeight = imgHeight * ratio;
+            
+            let heightLeft = scaledHeight;
+            let position = 0;
+            
+            pdf.addImage(imgData, 'PNG', 0, position, pdfWidth, scaledHeight);
+            heightLeft -= pdfHeight;
+            
+            while (heightLeft > 0) {
+                position = heightLeft - scaledHeight;
+                pdf.addPage();
+                pdf.addImage(imgData, 'PNG', 0, position, pdfWidth, scaledHeight);
+                heightLeft -= pdfHeight;
+            }
+            
             pdf.save(`${templateId}-resume.pdf`);
-        });
+        } catch (error) {
+            console.error('PDF generation failed:', error);
+        }
     };
 
     return (
@@ -39,8 +72,10 @@ const FinalCV = () => {
                     <Layers size={18} className="mr-2"/> Change Template
                 </Link>
             </div>
-            <div ref={resumeRef}>
-                {TemplateToRender ? <TemplateToRender /> : <p className="text-center p-8">Template not found.</p>}
+            <div className="bg-gray-200 dark:bg-gray-700 p-4 overflow-x-auto">
+                <div ref={resumeRef} style={{ minWidth: '210mm' }}>
+                    {TemplateToRender ? <TemplateToRender /> : <p className="text-center p-8">Template not found.</p>}
+                </div>
             </div>
         </div>
     );

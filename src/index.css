@@ -1,18 +1,9 @@
-/* This sets the base font for the entire application */
-body {
-  font-family: 'Inter', sans-serif;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+.preview-container {
+    overflow-x: auto;
 }
 
-/* This media query ensures your resume templates look good on mobile */
-@media (max-width: 768px) {
-  .modern-resume, .sidebar-resume, .creative-resume, .executive-resume, .tpl5-resume {
-    max-width: 100%;
-    width: 100%;
-    box-sizing: border-box;
-    padding: 1rem;
-    min-height: auto;
-    margin: 0;
-    box-shadow: none;
-    border: none;
-  }
-}

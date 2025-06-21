@@ -30,7 +30,6 @@ const Home = () => {
     setActiveFaq(activeFaq === index ? null : index);
   };
 
-  // Sample data
   const features = [
     {
       icon: <FaRegLightbulb className="text-2xl" />,

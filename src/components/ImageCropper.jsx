@@ -1,7 +1,6 @@
 import React, { useState, useCallback } from 'react';
 import Cropper from 'react-easy-crop';
 
-// Helper function to create a cropped image from the canvas
 const createImage = (url) =>
   new Promise((resolve, reject) => {
     const image = new Image();

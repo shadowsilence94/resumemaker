@@ -3,10 +3,12 @@
     font-family: 'Inter', sans-serif;
     padding: 2.5rem;
     color: #222;
-    max-width: 8.5in;
+    width: 8.5in;
     min-height: 11in;
-    margin: 20px auto;
+    margin: 0 auto;
     border: 1px solid #ddd;
+    text-align: left;
+    box-sizing: border-box;
 }
 
 .executive-header {

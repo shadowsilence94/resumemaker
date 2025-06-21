@@ -181,11 +181,10 @@ const AboutUs = () => {
             className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow"
           >
             <p className="text-gray-700 dark:text-gray-300">
-              This application is built as a single-page application using
-              modern web technologies:
+              This application is built using modern web technologies and libraries for optimal performance and user experience:
             </p>
             <div className="flex flex-wrap gap-3 justify-center mt-4">
-              {["Vite + React", "React Router", "Tailwind CSS", "Framer Motion", "React Icons", "React Easy Crop", "jsPDF & html2canvas"].map((tech, index) => (
+              {["Vite + React", "React Router DOM", "Tailwind CSS", "Framer Motion", "React Icons", "Lucide React", "React Easy Crop", "jsPDF", "html2canvas", "html2pdf.js", "Axios"].map((tech, index) => (
                 <motion.span 
                   key={tech}
                   initial={{ opacity: 0, scale: 0.8 }}

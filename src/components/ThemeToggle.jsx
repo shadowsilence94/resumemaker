@@ -4,7 +4,6 @@ import { useResumeContext } from '../useContext/UseContext';
 const ThemeToggle = () => {
     const { theme, toggleTheme } = useResumeContext();
 
-    // Using Tailwind CSS for styling
     const btnClass = `
         px-4 py-2 rounded-full text-sm font-medium transition-colors
         ${theme === 'light' 

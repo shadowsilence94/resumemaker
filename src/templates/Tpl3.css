@@ -1,12 +1,12 @@
 .creative-resume {
     background: #fff;
     font-family: 'Inter', sans-serif;
-    max-width: 8.5in;
+    width: 8.5in;
     min-height: 11in;
-    margin: 20px auto;
+    margin: 0 auto;
     box-shadow: 0 0 15px rgba(0,0,0,0.1);
-    /* FIX: Added default text color */
     color: #333;
+    box-sizing: border-box;
 }
 
 .creative-header {
@@ -38,6 +38,7 @@
 
 .creative-body {
     padding: 2rem;
+    text-align: left;
 }
 
 .section-divider {
