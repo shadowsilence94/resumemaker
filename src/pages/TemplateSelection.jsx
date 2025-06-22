@@ -1,78 +1,144 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useResumeContext, ResumeContext } from '../useContext/UseContext';
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import { useResumeContext, ResumeContext } from "../useContext/UseContext";
 
-import Tpl1 from '../templates/Tpl1';
-import Tpl2 from '../templates/Tpl2';
-import Tpl3 from '../templates/Tpl3';
-import Tpl4 from '../templates/Tpl4';
-import Tpl5 from '../templates/Tpl5';
+import Tpl1 from "../templates/Tpl1";
+import Tpl2 from "../templates/Tpl2";
+import Tpl3 from "../templates/Tpl3";
+import Tpl4 from "../templates/Tpl4";
+import Tpl5 from "../templates/Tpl5";
 
 const sampleData = {
-    personalInfo: { firstName: 'John', lastName: 'Doe', email: 'john.doe@email.com', phone: '123-456-7890', addressLine1: '123 Main Street', addressLine2: 'Anytown, USA 12345', linkedIn: 'linkedin.com/in/johndoe', portfolio: 'github.com/johndoe', profileImage: 'https://placehold.co/150x150/a3c5f9/121212?text=JD' },
-    summary: 'A highly motivated professional with a proven track record of success.',
-    experience: [{ id: 1, jobTitle: 'Software Engineer', company: 'Tech Solutions Inc.', location: 'San Francisco, CA', startDate: 'Jan 2022', endDate: 'Present', responsibilities: ['Developed and maintained web applications.'] }],
-    education: [{ id: 1, degree: 'B.S. in Computer Science', school: 'State University', graduationDate: 'May 2021' }],
-    skills: ['React', 'Node.js', 'JavaScript'],
-    customSections: [],
+  personalInfo: {
+    firstName: "John",
+    lastName: "Doe",
+    email: "john.doe@email.com",
+    phone: "123-456-7890",
+    addressLine1: "123 Main Street",
+    addressLine2: "Anytown, USA 12345",
+    linkedIn: "linkedin.com/in/johndoe",
+    portfolio: "github.com/johndoe",
+    profileImage: "https://placehold.co/150x150/a3c5f9/121212?text=JD",
+  },
+  summary:
+    "A highly motivated professional with a proven track record of success.",
+  experience: [
+    {
+      id: 1,
+      jobTitle: "Software Engineer",
+      company: "Tech Solutions Inc.",
+      location: "San Francisco, CA",
+      startDate: "Jan 2022",
+      endDate: "Present",
+      responsibilities: ["Developed and maintained web applications."],
+    },
+  ],
+  education: [
+    {
+      id: 1,
+      degree: "B.S. in Computer Science",
+      school: "State University",
+      graduationDate: "May 2021",
+    },
+  ],
+  skills: ["React", "Node.js", "JavaScript"],
+  customSections: [],
 };
 
 const templates = [
-    { id: 'tpl1', name: 'Minimalist', Component: Tpl1 },
-    { id: 'tpl2', name: 'Sidebar Professional', Component: Tpl2 },
-    { id: 'tpl3', name: 'Creative Header', Component: Tpl3 },
-    { id: 'tpl4', name: 'Formal Executive', Component: Tpl4 },
-    { id: 'tpl5', name: 'Classic Professional', Component: Tpl5 },
+  { id: "tpl1", name: "Minimalist", Component: Tpl1 },
+  { id: "tpl2", name: "Sidebar Professional", Component: Tpl2 },
+  { id: "tpl3", name: "Creative Header", Component: Tpl3 },
+  { id: "tpl4", name: "Formal Executive", Component: Tpl4 },
+  { id: "tpl5", name: "Classic Professional", Component: Tpl5 },
 ];
 
 const SampleDataProvider = ({ children }) => (
-    <ResumeContext.Provider value={{ resumeData: sampleData, sections: { summary: true, experience: true, education: true, skills: true } }}>
-        {children}
-    </ResumeContext.Provider>
+  <ResumeContext.Provider
+    value={{
+      resumeData: sampleData,
+      sections: {
+        summary: true,
+        experience: true,
+        education: true,
+        skills: true,
+      },
+    }}
+  >
+    {children}
+  </ResumeContext.Provider>
 );
 
 const TemplateSelection = () => {
-    const { resumeData, setSelectedTemplate, selectedTemplate } = useResumeContext();
-    const navigate = useNavigate();
-    const hasUserData = resumeData.personalInfo.firstName !== '';
+  const { resumeData, setSelectedTemplate, selectedTemplate } =
+    useResumeContext();
+  const navigate = useNavigate();
+  const hasUserData =
+    resumeData &&
+    resumeData.personalInfo &&
+    resumeData.personalInfo.firstName !== "";
 
-    const handleTemplateSelect = (templateId) => {
-        setSelectedTemplate(templateId);
-        if (hasUserData) {
-            navigate(`/final-cv/${templateId}`);
-        } else {
-            navigate(`/editor/${templateId}`);
-        }
-    };
+  const handleTemplateSelect = (templateId) => {
+    setSelectedTemplate(templateId);
+    // Navigate to the editor if no user data, otherwise go straight to the CV
+    if (hasUserData) {
+      navigate(`/final-cv/${templateId}`);
+    } else {
+      navigate(`/editor/${templateId}`);
+    }
+  };
 
-    return (
-        <div className="text-center p-4 md:p-8">
-            <h2 className="text-3xl font-bold mb-4 dark:text-white">{hasUserData ? 'Choose a New Style' : 'Start by Choosing a Template'}</h2>
-            <p className="text-gray-600 dark:text-gray-400 mb-8">{hasUserData ? 'See how your information looks in a different layout.' : 'Select a layout you like. You can edit all the content in the next step.'}</p>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-10 mt-8 justify-items-center">
-                {templates.map(template => {
-                    const isSelected = selectedTemplate === template.id;
-                    return (
-                        <div key={template.id} className="cursor-pointer group" onClick={() => handleTemplateSelect(template.id)}>
-                            <h3 className={`mb-4 font-semibold text-lg transition-colors ${
-                                isSelected 
-                                    ? 'text-blue-600 dark:text-blue-400' 
-                                    : 'group-hover:text-blue-600 dark:group-hover:text-blue-400'
-                            }`}>{template.name}</h3>
-                            <div className={`w-[300px] h-[424px] border overflow-hidden relative shadow-lg rounded-md transition-all ${
-                                isSelected 
-                                    ? 'border-blue-500 dark:border-blue-400 bg-blue-50 dark:bg-blue-900/20 shadow-2xl ring-2 ring-blue-500 dark:ring-blue-400' 
-                                    : 'border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-900 group-hover:shadow-2xl'
-                            }`}>
-                                <div className="w-[210mm] origin-top-left transform scale-[0.35] min-h-[297mm]">
-                                    {hasUserData ? <template.Component /> : <SampleDataProvider><template.Component /></SampleDataProvider>}
-                                </div>
-                            </div>
-                        </div>
-                    );
-                })}
+  return (
+    <div className="text-center p-4 md:p-8">
+      <h2 className="text-3xl font-bold mb-4 text-white">
+        {hasUserData ? "Choose a New Style" : "Start by Choosing a Template"}
+      </h2>
+      <p className="text-gray-400 mb-8 max-w-2xl mx-auto">
+        {hasUserData
+          ? "See how your information looks in a different layout."
+          : "Select a layout you like. You can edit all the content in the next step."}
+      </p>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-10 mt-8 justify-items-center">
+        {templates.map((template) => {
+          const isSelected = selectedTemplate === template.id;
+          return (
+            <div
+              key={template.id}
+              className="cursor-pointer group"
+              onClick={() => handleTemplateSelect(template.id)}
+            >
+              <h3
+                className={`mb-4 font-semibold text-lg transition-colors ${
+                  isSelected
+                    ? "text-blue-400"
+                    : "text-white group-hover:text-blue-400"
+                }`}
+              >
+                {template.name}
+              </h3>
+              <div
+                className={`w-[300px] h-[424px] border overflow-hidden relative shadow-lg rounded-md transition-all ${
+                  isSelected
+                    ? "border-blue-400 bg-blue-900/20 shadow-2xl ring-2 ring-blue-400"
+                    : "border-gray-700 bg-[#1F2937] group-hover:shadow-2xl group-hover:border-blue-400"
+                }`}
+              >
+                <div className="absolute top-0 left-0 w-[210mm] origin-top-left transform scale-[0.35] min-h-[297mm]">
+                  {/* Corrected Logic: Use SampleDataProvider when there's no user data */}
+                  {hasUserData ? (
+                    <template.Component />
+                  ) : (
+                    <SampleDataProvider>
+                      <template.Component />
+                    </SampleDataProvider>
+                  )}
+                </div>
+              </div>
             </div>
-        </div>
-    );
+          );
+        })}
+      </div>
+    </div>
+  );
 };
 export default TemplateSelection;

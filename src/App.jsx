@@ -59,7 +59,7 @@ const App = () => {
 
   return (
     <BrowserRouter>
-      <div className="flex flex-col min-h-screen bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-200">
+      <div className="flex flex-col min-h-screen bg-[#111827] dark:bg-[#111827] text-gray-900 dark:text-gray-200">
         <nav className="bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm px-4 md:px-10 h-16 shadow-sm sticky top-0 z-50 flex justify-between items-center border-b border-gray-200 dark:border-gray-800">
           <div className="flex gap-2 md:gap-4 items-center">
             <NavLink to="/" className={navLinkClasses}>Home</NavLink>
