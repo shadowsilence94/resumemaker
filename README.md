@@ -117,9 +117,8 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## 🔗 Links
 
-- **GitHub**: [https://github.com/shadowsilence94](https://github.com/shadowsilence94)
-- **LinkedIn**: [https://www.linkedin.com/in/htut-ko-ko-805770202/](https://linkedin.com/in/htutkoko)
-- **Twitter**: [https://twitter.com/htutkoko](https://twitter.com/htutkoko)
+- **GitHub**: [View Repository](https://github.com/shadowsilence94)
+- **LinkedIn**: [check my profile](https://www.linkedin.com/in/htut-ko-ko-805770202/)
 
 ---
 
