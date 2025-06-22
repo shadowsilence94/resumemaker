@@ -122,4 +122,4 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 ---
 
-Made with ❤️ by Ko HtutKoKo & Team
+Made by HtutKoKo & Team

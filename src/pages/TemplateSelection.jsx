@@ -49,7 +49,7 @@ const TemplateSelection = () => {
         <div className="text-center p-4 md:p-8">
             <h2 className="text-3xl font-bold mb-4 dark:text-white">{hasUserData ? 'Choose a New Style' : 'Start by Choosing a Template'}</h2>
             <p className="text-gray-600 dark:text-gray-400 mb-8">{hasUserData ? 'See how your information looks in a different layout.' : 'Select a layout you like. You can edit all the content in the next step.'}</p>
-            <div className="flex justify-center flex-wrap gap-10 mt-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-10 mt-8 justify-items-center">
                 {templates.map(template => {
                     const isSelected = selectedTemplate === template.id;
                     return (
@@ -64,7 +64,7 @@ const TemplateSelection = () => {
                                     ? 'border-blue-500 dark:border-blue-400 bg-blue-50 dark:bg-blue-900/20 shadow-2xl ring-2 ring-blue-500 dark:ring-blue-400' 
                                     : 'border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-900 group-hover:shadow-2xl'
                             }`}>
-                                <div className="w-[8.5in] origin-top-left transform scale-[0.35]">
+                                <div className="w-[210mm] origin-top-left transform scale-[0.35] min-h-[297mm]">
                                     {hasUserData ? <template.Component /> : <SampleDataProvider><template.Component /></SampleDataProvider>}
                                 </div>
                             </div>

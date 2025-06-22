@@ -149,7 +149,7 @@ const Footer = () => {
             </a>
           </div>
           <div className="flex items-center gap-1">
-            Made by Ko HtutKoKo & Team
+            Made by Htut Ko Ko & Team
           </div>
         </div>
       </div>
