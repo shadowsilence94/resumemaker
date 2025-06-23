@@ -1,22 +1,14 @@
 import React from "react";
 import { useResumeContext } from "../../../context/ResumeContext";
-import "./Tpl5.css";
+import styles from "./Tpl5.module.css";
 
-const Tpl5 = ({ resumeData: propResumeData, sections: propSections }) => {
-  const context = useResumeContext();
-  const resumeData = propResumeData || context?.resumeData;
-  const sections = propSections || context?.sections;
+const Tpl5 = ({ resumeData: propResumeData }) => {
+  const { resumeData: contextResumeData, sections } = useResumeContext();
+  const resumeData = propResumeData || contextResumeData;
 
-  if (!resumeData) return <div>No data available</div>;
+  if (!resumeData) return null;
 
-  const {
-    personalInfo,
-    summary,
-    experience,
-    education,
-    skills,
-    customSections,
-  } = resumeData;
+  const { personalInfo, summary, experience, education, skills } = resumeData;
 
   const formatUrl = (url) => {
     if (!url) return "#";
@@ -25,30 +17,27 @@ const Tpl5 = ({ resumeData: propResumeData, sections: propSections }) => {
   };
 
   return (
-    <div className="tpl5-resume">
-      <header className="resume-header">
-        <div className="header-left">
+    <div className={styles.tpl5Resume}>
+      <header className={styles.header}>
+        <div className={styles.headerLeft}>
           {personalInfo?.profileImage && (
-            <div className="profile-image-container">
-              <img
-                src={personalInfo.profileImage}
-                alt="Profile"
-                className="profile-img"
-              />
-            </div>
+            <img
+              src={personalInfo.profileImage}
+              alt="Profile"
+              className={styles.profileImg}
+            />
           )}
         </div>
-        <div className="header-right">
+        <div className={styles.headerRight}>
           <h1>
             {personalInfo?.firstName} {personalInfo?.lastName}
           </h1>
-          <div className="contact-info">
+          <div className={styles.contactInfo}>
             {personalInfo?.email && <div>{personalInfo.email}</div>}
             {personalInfo?.phone && <div>{personalInfo.phone}</div>}
             {personalInfo?.addressLine1 && (
               <div>
-                {personalInfo.addressLine1}
-                {personalInfo?.addressLine2 && `, ${personalInfo.addressLine2}`}
+                {personalInfo.addressLine1} {personalInfo?.addressLine2}
               </div>
             )}
             {personalInfo?.linkedIn && (
@@ -64,35 +53,36 @@ const Tpl5 = ({ resumeData: propResumeData, sections: propSections }) => {
           </div>
         </div>
       </header>
-
       {sections?.summary && summary && (
-        <section className="section">
-          <h2 className="section-title">Professional Summary</h2>
-          <p className="summary-text">{summary}</p>
+        <section className={styles.section}>
+          <h2 className={styles.sectionTitle}>Professional Summary</h2>
+          <p className={styles.summaryText}>{summary}</p>
         </section>
       )}
-
       {sections?.experience && (experience || []).length > 0 && (
-        <section className="section">
-          <h2 className="section-title">Work Experience</h2>
+        <section className={styles.section}>
+          <h2 className={styles.sectionTitle}>Work Experience</h2>
           {(experience || []).map((exp, index) => (
-            <div key={exp.id || index} className="section-item">
-              <div className="item-header">
+            <div key={exp.id || index} className={styles.item}>
+              <div className={styles.itemHeader}>
                 <div>
-                  <h3 className="item-title">{exp.jobTitle}</h3>
-                  <h4 className="item-subtitle">{exp.company}</h4>
+                  <h3 className={styles.itemTitle}>{exp.jobTitle}</h3>
+                  <h4 className={styles.itemSubtitle}>{exp.company}</h4>
                 </div>
                 <div>
-                  <span className="item-date">
+                  <span className={styles.itemDate}>
                     {exp.startDate} - {exp.endDate}
                   </span>
                   {exp.location && (
-                    <span className="item-subtitle"> • {exp.location}</span>
+                    <span className={styles.itemSubtitle}>
+                      {" "}
+                      • {exp.location}
+                    </span>
                   )}
                 </div>
               </div>
               {(exp.responsibilities || []).length > 0 && (
-                <ul className="item-description">
+                <ul className={styles.itemDescription}>
                   {(exp.responsibilities || []).map(
                     (resp, idx) => resp && <li key={idx}>{resp}</li>
                   )}
@@ -102,21 +92,23 @@ const Tpl5 = ({ resumeData: propResumeData, sections: propSections }) => {
           ))}
         </section>
       )}
-
       {sections?.education && (education || []).length > 0 && (
-        <section className="section">
-          <h2 className="section-title">Education</h2>
+        <section className={styles.section}>
+          <h2 className={styles.sectionTitle}>Education</h2>
           {(education || []).map((edu, index) => (
-            <div key={edu.id || index} className="section-item">
-              <div className="item-header">
+            <div key={edu.id || index} className={styles.item}>
+              <div className={styles.itemHeader}>
                 <div>
-                  <h3 className="item-title">{edu.degree}</h3>
-                  <h4 className="item-subtitle">{edu.school}</h4>
+                  <h3 className={styles.itemTitle}>{edu.degree}</h3>
+                  <h4 className={styles.itemSubtitle}>{edu.school}</h4>
                 </div>
                 <div>
-                  <span className="item-date">{edu.graduationDate}</span>
+                  <span className={styles.itemDate}>{edu.graduationDate}</span>
                   {edu.location && (
-                    <span className="item-subtitle"> • {edu.location}</span>
+                    <span className={styles.itemSubtitle}>
+                      {" "}
+                      • {edu.location}
+                    </span>
                   )}
                 </div>
               </div>
@@ -124,37 +116,20 @@ const Tpl5 = ({ resumeData: propResumeData, sections: propSections }) => {
           ))}
         </section>
       )}
-
       {sections?.skills && (skills || []).length > 0 && (
-        <section className="section">
-          <h2 className="section-title">Skills</h2>
-          <div className="skills-list">
+        <section className={styles.section}>
+          <h2 className={styles.sectionTitle}>Skills</h2>
+          <div className={styles.skillsList}>
             {(skills || []).map(
               (skill, index) =>
                 skill && (
-                  <span key={index} className="skill-item">
+                  <span key={index} className={styles.skillItem}>
                     {skill}
                   </span>
                 )
             )}
           </div>
         </section>
-      )}
-
-      {(customSections || []).map(
-        (section, index) =>
-          sections?.customSections && (
-            <section key={section.id || index} className="section">
-              <h2 className="section-title">{section.title}</h2>
-              {(section.details || []).length > 0 && (
-                <ul className="item-description">
-                  {(section.details || []).map(
-                    (detail, idx) => detail && <li key={idx}>{detail}</li>
-                  )}
-                </ul>
-              )}
-            </section>
-          )
       )}
     </div>
   );

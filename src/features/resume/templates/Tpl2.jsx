@@ -1,22 +1,14 @@
 import React from "react";
 import { useResumeContext } from "../../../context/ResumeContext";
-import "./Tpl2.css";
+import styles from "./Tpl2.module.css";
 
-const Tpl2 = ({ resumeData: propResumeData, sections: propSections }) => {
-  const context = useResumeContext();
-  const resumeData = propResumeData || context?.resumeData;
-  const sections = propSections || context?.sections;
+const Tpl2 = ({ resumeData: propResumeData }) => {
+  const { resumeData: contextResumeData, sections } = useResumeContext();
+  const resumeData = propResumeData || contextResumeData;
 
-  if (!resumeData) return <div>No data available</div>;
+  if (!resumeData) return null;
 
-  const {
-    personalInfo,
-    summary,
-    experience,
-    education,
-    skills,
-    customSections,
-  } = resumeData;
+  const { personalInfo, summary, experience, education, skills } = resumeData;
 
   const formatUrl = (url) => {
     if (!url) return "#";
@@ -25,16 +17,16 @@ const Tpl2 = ({ resumeData: propResumeData, sections: propSections }) => {
   };
 
   return (
-    <div className="sidebar-resume">
-      <aside className="resume-sidebar">
+    <div className={styles.sidebarResume}>
+      <aside className={styles.resumeSidebar}>
         {personalInfo?.profileImage && (
           <img
             src={personalInfo.profileImage}
             alt="Profile"
-            className="sidebar-profile-img"
+            className={styles.sidebarProfileImg}
           />
         )}
-        <div className="sidebar-section">
+        <div className={styles.sidebarSection}>
           <h3>Contact</h3>
           {personalInfo?.email && (
             <p>
@@ -65,11 +57,10 @@ const Tpl2 = ({ resumeData: propResumeData, sections: propSections }) => {
             </p>
           )}
         </div>
-
         {sections?.skills && (skills || []).length > 0 && (
-          <div className="sidebar-section">
+          <div className={styles.sidebarSection}>
             <h3>Skills</h3>
-            <ul className="sidebar-skills">
+            <ul className={styles.sidebarSkills}>
               {(skills || []).map(
                 (skill, index) => skill && <li key={index}>{skill}</li>
               )}
@@ -77,33 +68,30 @@ const Tpl2 = ({ resumeData: propResumeData, sections: propSections }) => {
           </div>
         )}
       </aside>
-
-      <main className="resume-main">
-        <header className="main-header">
+      <main className={styles.resumeMain}>
+        <header className={styles.mainHeader}>
           <h1>
             {personalInfo?.firstName} {personalInfo?.lastName}
           </h1>
         </header>
-
         {sections?.summary && summary && (
-          <section className="main-section">
+          <section className={styles.mainSection}>
             <h2>Summary</h2>
             <p>{summary}</p>
           </section>
         )}
-
         {sections?.experience && (experience || []).length > 0 && (
-          <section className="main-section">
+          <section className={styles.mainSection}>
             <h2>Experience</h2>
             {(experience || []).map((exp, index) => (
-              <div key={exp.id || index} className="main-job">
-                <div className="job-header">
+              <div key={exp.id || index} className={styles.mainJob}>
+                <div className={styles.jobHeader}>
                   <h3>{exp.jobTitle}</h3>
                   <span>
                     {exp.startDate} - {exp.endDate}
                   </span>
                 </div>
-                <div className="job-subheader">
+                <div className={styles.jobSubheader}>
                   <h4>{exp.company}</h4>
                   {exp.location && <span>{exp.location}</span>}
                 </div>
@@ -118,39 +106,22 @@ const Tpl2 = ({ resumeData: propResumeData, sections: propSections }) => {
             ))}
           </section>
         )}
-
         {sections?.education && (education || []).length > 0 && (
-          <section className="main-section">
+          <section className={styles.mainSection}>
             <h2>Education</h2>
             {(education || []).map((edu, index) => (
-              <div key={edu.id || index} className="main-job">
-                <div className="job-header">
+              <div key={edu.id || index} className={styles.mainJob}>
+                <div className={styles.jobHeader}>
                   <h3>{edu.degree}</h3>
                   <span>{edu.graduationDate}</span>
                 </div>
-                <div className="job-subheader">
+                <div className={styles.jobSubheader}>
                   <h4>{edu.school}</h4>
                   {edu.location && <span>{edu.location}</span>}
                 </div>
               </div>
             ))}
           </section>
-        )}
-
-        {(customSections || []).map(
-          (section, index) =>
-            sections?.customSections && (
-              <section key={section.id || index} className="main-section">
-                <h2>{section.title}</h2>
-                {(section.details || []).length > 0 && (
-                  <ul>
-                    {(section.details || []).map(
-                      (detail, idx) => detail && <li key={idx}>{detail}</li>
-                    )}
-                  </ul>
-                )}
-              </section>
-            )
         )}
       </main>
     </div>

@@ -1,0 +1,132 @@
+.executiveResume {
+  width: 210mm;
+  min-height: 297mm;
+  margin: 0 auto;
+  background: #fff;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  font-family: "Times New Roman", Times, serif;
+  box-sizing: border-box;
+  padding: 15mm 20mm;
+  font-size: 11px;
+  line-height: 1.4;
+}
+.dark .executiveResume {
+  background: #111827;
+  color: #f9fafb;
+}
+.header {
+  text-align: center;
+  margin-bottom: 15mm;
+}
+.header h1 {
+  font-size: 28px;
+  font-weight: bold;
+  margin: 0 0 8mm 0;
+  color: #1a202c;
+  text-transform: uppercase;
+}
+.dark .header h1 {
+  color: #f7fafc;
+}
+.contactDetails {
+  font-size: 10px;
+  color: #4a5568;
+  line-height: 1.5;
+}
+.dark .contactDetails {
+  color: #d1d5db;
+}
+.profileImg {
+  width: 80px;
+  height: 80px;
+  border-radius: 4px;
+  object-fit: cover;
+  margin: 10px auto;
+  border: 2px solid #2d3748;
+}
+.dark .profileImg {
+  border-color: #6b7280;
+}
+.section {
+  margin-bottom: 15mm;
+}
+.title {
+  font-size: 16px;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+  color: #1a202c;
+  border-bottom: 2px solid #2d3748;
+  padding-bottom: 8px;
+}
+.dark .title {
+  color: #f7fafc;
+  border-bottom-color: #64748b;
+}
+.item {
+  margin-bottom: 12px;
+}
+.item:not(:last-child) {
+  padding-bottom: 12px;
+  border-bottom: 1px solid #e5e7eb;
+}
+.dark .item:not(:last-child) {
+  border-bottom-color: #374151;
+}
+.itemHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 4px;
+}
+.item h3 {
+  font-size: 14px;
+  font-weight: bold;
+  margin: 0;
+  color: #1a202c;
+}
+.item h4 {
+  font-size: 12px;
+  font-weight: normal;
+  color: #2d3748;
+  margin: 4px 0;
+  font-style: italic;
+}
+.date {
+  font-size: 9px;
+  color: #6b7280;
+  font-weight: 500;
+  white-space: nowrap;
+}
+.item ul {
+  padding-left: 20px;
+  font-size: 10px;
+  line-height: 1.4;
+  color: #4b5563;
+  margin: 6px 0;
+}
+.dark .item h3,
+.dark .item h4,
+.dark .date,
+.dark .item ul {
+  color: #e2e8f0;
+}
+.skillsList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
+}
+.skillItem {
+  background: #f3f4f6;
+  color: #374151;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 9px;
+  border: 1px solid #e5e7eb;
+}
+.dark .skillItem {
+  background: #374151;
+  color: #e2e8f0;
+  border-color: #4a5568;
+}

@@ -1,22 +1,14 @@
 import React from "react";
 import { useResumeContext } from "../../../context/ResumeContext";
-import "./Tpl4.css";
+import styles from "./Tpl4.module.css";
 
-const Tpl4 = ({ resumeData: propResumeData, sections: propSections }) => {
-  const context = useResumeContext();
-  const resumeData = propResumeData || context?.resumeData;
-  const sections = propSections || context?.sections;
+const Tpl4 = ({ resumeData: propResumeData }) => {
+  const { resumeData: contextResumeData, sections } = useResumeContext();
+  const resumeData = propResumeData || contextResumeData;
 
-  if (!resumeData) return <div>No data available</div>;
+  if (!resumeData) return null;
 
-  const {
-    personalInfo,
-    summary,
-    experience,
-    education,
-    skills,
-    customSections,
-  } = resumeData;
+  const { personalInfo, summary, experience, education, skills } = resumeData;
 
   const formatUrl = (url) => {
     if (!url) return "#";
@@ -25,71 +17,66 @@ const Tpl4 = ({ resumeData: propResumeData, sections: propSections }) => {
   };
 
   return (
-    <div className="executive-resume">
-      <header className="executive-header">
-        <div className="header-main">
-          <h1>
-            {personalInfo?.firstName} {personalInfo?.lastName}
-          </h1>
-          <div className="contact-details">
-            {personalInfo?.email && <span>{personalInfo.email}</span>}
-            {personalInfo?.phone && <span> • {personalInfo.phone}</span>}
-            {personalInfo?.addressLine1 && (
-              <span>
-                {" "}
-                • {personalInfo.addressLine1}
-                {personalInfo?.addressLine2 && `, ${personalInfo.addressLine2}`}
-              </span>
-            )}
-            {personalInfo?.linkedIn && (
-              <span>
-                {" "}
-                • <a href={formatUrl(personalInfo.linkedIn)}>LinkedIn</a>
-              </span>
-            )}
-            {personalInfo?.portfolio && (
-              <span>
-                {" "}
-                • <a href={formatUrl(personalInfo.portfolio)}>Portfolio</a>
-              </span>
-            )}
-          </div>
-        </div>
+    <div className={styles.executiveResume}>
+      <header className={styles.header}>
         {personalInfo?.profileImage && (
           <img
             src={personalInfo.profileImage}
             alt="Profile"
-            className="executive-profile-img"
+            className={styles.profileImg}
           />
         )}
+        <h1>
+          {personalInfo?.firstName} {personalInfo?.lastName}
+        </h1>
+        <div className={styles.contactDetails}>
+          {personalInfo?.email && <span>{personalInfo.email}</span>}
+          {personalInfo?.phone && <span> • {personalInfo.phone}</span>}
+          {personalInfo?.addressLine1 && (
+            <span>
+              {" "}
+              • {personalInfo.addressLine1}
+              {personalInfo?.addressLine2 && `, ${personalInfo.addressLine2}`}
+            </span>
+          )}
+          {personalInfo?.linkedIn && (
+            <span>
+              {" "}
+              • <a href={formatUrl(personalInfo.linkedIn)}>LinkedIn</a>
+            </span>
+          )}
+          {personalInfo?.portfolio && (
+            <span>
+              {" "}
+              • <a href={formatUrl(personalInfo.portfolio)}>Portfolio</a>
+            </span>
+          )}
+        </div>
       </header>
 
       {sections?.summary && summary && (
-        <section className="executive-section">
-          <h2 className="executive-title">Executive Summary</h2>
+        <section className={styles.section}>
+          <h2 className={styles.title}>Executive Summary</h2>
           <p>{summary}</p>
         </section>
       )}
 
       {sections?.experience && (experience || []).length > 0 && (
-        <section className="executive-section">
-          <h2 className="executive-title">Professional Experience</h2>
+        <section className={styles.section}>
+          <h2 className={styles.title}>Professional Experience</h2>
           {(experience || []).map((exp, index) => (
-            <div key={exp.id || index} className="executive-job">
-              <div className="job-title-line">
+            <div key={exp.id || index} className={styles.item}>
+              <div className={styles.itemHeader}>
                 <h3>{exp.jobTitle}</h3>
-                <span className="job-period">
+                <span className={styles.date}>
                   {exp.startDate} - {exp.endDate}
                 </span>
               </div>
-              <div className="job-company-line">
-                <h4>{exp.company}</h4>
-                {exp.location && (
-                  <span className="job-location">{exp.location}</span>
-                )}
-              </div>
+              <h4>
+                {exp.company} {exp.location && `• ${exp.location}`}
+              </h4>
               {(exp.responsibilities || []).length > 0 && (
-                <ul className="job-achievements">
+                <ul>
                   {(exp.responsibilities || []).map(
                     (resp, idx) => resp && <li key={idx}>{resp}</li>
                   )}
@@ -101,55 +88,36 @@ const Tpl4 = ({ resumeData: propResumeData, sections: propSections }) => {
       )}
 
       {sections?.education && (education || []).length > 0 && (
-        <section className="executive-section">
-          <h2 className="executive-title">Education</h2>
+        <section className={styles.section}>
+          <h2 className={styles.title}>Education</h2>
           {(education || []).map((edu, index) => (
-            <div key={edu.id || index} className="executive-job">
-              <div className="job-title-line">
+            <div key={edu.id || index} className={styles.item}>
+              <div className={styles.itemHeader}>
                 <h3>{edu.degree}</h3>
-                <span className="job-period">{edu.graduationDate}</span>
+                <span className={styles.date}>{edu.graduationDate}</span>
               </div>
-              <div className="job-company-line">
-                <h4>{edu.school}</h4>
-                {edu.location && (
-                  <span className="job-location">{edu.location}</span>
-                )}
-              </div>
+              <h4>
+                {edu.school} {edu.location && `• ${edu.location}`}
+              </h4>
             </div>
           ))}
         </section>
       )}
 
       {sections?.skills && (skills || []).length > 0 && (
-        <section className="executive-section">
-          <h2 className="executive-title">Core Competencies</h2>
-          <div className="skills-list">
+        <section className={styles.section}>
+          <h2 className={styles.title}>Core Competencies</h2>
+          <div className={styles.skillsList}>
             {(skills || []).map(
               (skill, index) =>
                 skill && (
-                  <span key={index} className="skill-item">
+                  <span key={index} className={styles.skillItem}>
                     {skill}
                   </span>
                 )
             )}
           </div>
         </section>
-      )}
-
-      {(customSections || []).map(
-        (section, index) =>
-          sections?.customSections && (
-            <section key={section.id || index} className="executive-section">
-              <h2 className="executive-title">{section.title}</h2>
-              {(section.details || []).length > 0 && (
-                <ul>
-                  {(section.details || []).map(
-                    (detail, idx) => detail && <li key={idx}>{detail}</li>
-                  )}
-                </ul>
-              )}
-            </section>
-          )
       )}
     </div>
   );
