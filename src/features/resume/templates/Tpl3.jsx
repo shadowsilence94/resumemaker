@@ -50,12 +50,17 @@ const Tpl3 = ({ resumeData: propResumeData, sections: propSections }) => {
           )}
         </div>
         <div className="contact-line">
-           {personalInfo?.linkedIn && (
-              <span><a href={formatUrl(personalInfo.linkedIn)}>LinkedIn</a></span>
-            )}
-            {personalInfo?.portfolio && (
-              <span> • <a href={formatUrl(personalInfo.portfolio)}>Portfolio</a></span>
-            )}
+          {personalInfo?.linkedIn && (
+            <span>
+              <a href={formatUrl(personalInfo.linkedIn)}>LinkedIn</a>
+            </span>
+          )}
+          {personalInfo?.portfolio && (
+            <span>
+              {" "}
+              • <a href={formatUrl(personalInfo.portfolio)}>Portfolio</a>
+            </span>
+          )}
         </div>
       </header>
 
@@ -67,23 +72,27 @@ const Tpl3 = ({ resumeData: propResumeData, sections: propSections }) => {
           </section>
         )}
 
-        {sections?.experience && experience?.length > 0 && (
+        {sections?.experience && (experience || []).length > 0 && (
           <section className="creative-section">
             <h2>Experience</h2>
-            {experience.map((exp, index) => (
-              <div key={exp.id || index} className="creative-item"> {/* Corrected class */}
+            {(experience || []).map((exp, index) => (
+              <div key={exp.id || index} className="creative-item">
                 <div className="creative-item-header">
                   <div>
                     <h3>{exp.jobTitle}</h3>
-                    <h4>{exp.company} • {exp.location}</h4>
+                    <h4>
+                      {exp.company} • {exp.location}
+                    </h4>
                   </div>
-                  <span className="creative-date">{exp.startDate} - {exp.endDate}</span>
+                  <span className="creative-date">
+                    {exp.startDate} - {exp.endDate}
+                  </span>
                 </div>
-                {exp.responsibilities && exp.responsibilities.length > 0 && (
+                {(exp.responsibilities || []).length > 0 && (
                   <ul>
-                    {exp.responsibilities.map((resp, idx) => (
-                      resp && <li key={idx}>{resp}</li>
-                    ))}
+                    {(exp.responsibilities || []).map(
+                      (resp, idx) => resp && <li key={idx}>{resp}</li>
+                    )}
                   </ul>
                 )}
               </div>
@@ -91,15 +100,17 @@ const Tpl3 = ({ resumeData: propResumeData, sections: propSections }) => {
           </section>
         )}
 
-        {sections?.education && education?.length > 0 && (
+        {sections?.education && (education || []).length > 0 && (
           <section className="creative-section">
             <h2>Education</h2>
-            {education.map((edu, index) => (
-              <div key={edu.id || index} className="creative-item"> {/* Corrected class */}
+            {(education || []).map((edu, index) => (
+              <div key={edu.id || index} className="creative-item">
                 <div className="creative-item-header">
                   <div>
                     <h3>{edu.degree}</h3>
-                    <h4>{edu.school} • {edu.location}</h4>
+                    <h4>
+                      {edu.school} • {edu.location}
+                    </h4>
                   </div>
                   <span className="creative-date">{edu.graduationDate}</span>
                 </div>
@@ -108,29 +119,37 @@ const Tpl3 = ({ resumeData: propResumeData, sections: propSections }) => {
           </section>
         )}
 
-        {sections?.skills && skills?.length > 0 && (
+        {sections?.skills && (skills || []).length > 0 && (
           <section className="creative-section">
             <h2>Skills</h2>
             <div className="creative-skills">
-              {skills.map((skill, index) => (
-                skill && <span key={index} className="creative-skill">{skill}</span>
-              ))}
+              {(skills || []).map(
+                (skill, index) =>
+                  skill && (
+                    <span key={index} className="creative-skill">
+                      {skill}
+                    </span>
+                  )
+              )}
             </div>
           </section>
         )}
 
-        {sections?.customSections && customSections.map((section, index) => (
-          <section key={section.id || index} className="creative-section">
-            <h2>{section.title}</h2>
-            {section.details && section.details.length > 0 && (
-              <ul>
-                {section.details.map((detail, idx) => (
-                  detail && <li key={idx}>{detail}</li>
-                ))}
-              </ul>
-            )}
-          </section>
-        ))}
+        {(customSections || []).map(
+          (section, index) =>
+            sections?.customSections && (
+              <section key={section.id || index} className="creative-section">
+                <h2>{section.title}</h2>
+                {(section.details || []).length > 0 && (
+                  <ul>
+                    {(section.details || []).map(
+                      (detail, idx) => detail && <li key={idx}>{detail}</li>
+                    )}
+                  </ul>
+                )}
+              </section>
+            )
+        )}
       </div>
     </div>
   );

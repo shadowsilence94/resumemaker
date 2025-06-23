@@ -4,12 +4,11 @@ import "./Tpl5.css";
 
 const Tpl5 = ({ resumeData: propResumeData, sections: propSections }) => {
   const context = useResumeContext();
-  
   const resumeData = propResumeData || context?.resumeData;
   const sections = propSections || context?.sections;
-  
+
   if (!resumeData) return <div>No data available</div>;
-  
+
   const {
     personalInfo,
     summary,
@@ -34,13 +33,15 @@ const Tpl5 = ({ resumeData: propResumeData, sections: propSections }) => {
               <img
                 src={personalInfo.profileImage}
                 alt="Profile"
-                className="profile-img" // Corrected class
+                className="profile-img"
               />
             </div>
           )}
         </div>
         <div className="header-right">
-          <h1>{personalInfo?.firstName} {personalInfo?.lastName}</h1>
+          <h1>
+            {personalInfo?.firstName} {personalInfo?.lastName}
+          </h1>
           <div className="contact-info">
             {personalInfo?.email && <div>{personalInfo.email}</div>}
             {personalInfo?.phone && <div>{personalInfo.phone}</div>}
@@ -51,42 +52,50 @@ const Tpl5 = ({ resumeData: propResumeData, sections: propSections }) => {
               </div>
             )}
             {personalInfo?.linkedIn && (
-              <div><a href={formatUrl(personalInfo.linkedIn)}>LinkedIn</a></div>
+              <div>
+                <a href={formatUrl(personalInfo.linkedIn)}>LinkedIn</a>
+              </div>
             )}
             {personalInfo?.portfolio && (
-              <div><a href={formatUrl(personalInfo.portfolio)}>Portfolio</a></div>
+              <div>
+                <a href={formatUrl(personalInfo.portfolio)}>Portfolio</a>
+              </div>
             )}
           </div>
         </div>
       </header>
 
       {sections?.summary && summary && (
-        <section className="section"> {/* Corrected class */}
+        <section className="section">
           <h2 className="section-title">Professional Summary</h2>
-          <p className="summary-text">{summary}</p> {/* Corrected class */}
+          <p className="summary-text">{summary}</p>
         </section>
       )}
 
-      {sections?.experience && experience?.length > 0 && (
-        <section className="section"> {/* Corrected class */}
+      {sections?.experience && (experience || []).length > 0 && (
+        <section className="section">
           <h2 className="section-title">Work Experience</h2>
-          {experience.map((exp, index) => (
-            <div key={exp.id || index} className="section-item"> {/* Corrected class */}
-              <div className="item-header"> {/* Corrected class */}
+          {(experience || []).map((exp, index) => (
+            <div key={exp.id || index} className="section-item">
+              <div className="item-header">
                 <div>
-                  <h3 className="item-title">{exp.jobTitle}</h3> {/* Corrected class */}
-                  <h4 className="item-subtitle">{exp.company}</h4> {/* Corrected class */}
+                  <h3 className="item-title">{exp.jobTitle}</h3>
+                  <h4 className="item-subtitle">{exp.company}</h4>
                 </div>
                 <div>
-                  <span className="item-date">{exp.startDate} - {exp.endDate}</span> {/* Corrected class */}
-                  {exp.location && <span className="item-subtitle"> • {exp.location}</span>}
+                  <span className="item-date">
+                    {exp.startDate} - {exp.endDate}
+                  </span>
+                  {exp.location && (
+                    <span className="item-subtitle"> • {exp.location}</span>
+                  )}
                 </div>
               </div>
-              {exp.responsibilities && exp.responsibilities.length > 0 && (
-                <ul className="item-description"> {/* Corrected class */}
-                  {exp.responsibilities.map((resp, idx) => (
-                    resp && <li key={idx}>{resp}</li>
-                  ))}
+              {(exp.responsibilities || []).length > 0 && (
+                <ul className="item-description">
+                  {(exp.responsibilities || []).map(
+                    (resp, idx) => resp && <li key={idx}>{resp}</li>
+                  )}
                 </ul>
               )}
             </div>
@@ -94,19 +103,21 @@ const Tpl5 = ({ resumeData: propResumeData, sections: propSections }) => {
         </section>
       )}
 
-      {sections?.education && education?.length > 0 && (
-        <section className="section"> {/* Corrected class */}
+      {sections?.education && (education || []).length > 0 && (
+        <section className="section">
           <h2 className="section-title">Education</h2>
-          {education.map((edu, index) => (
-            <div key={edu.id || index} className="section-item"> {/* Corrected class */}
-              <div className="item-header"> {/* Corrected class */}
+          {(education || []).map((edu, index) => (
+            <div key={edu.id || index} className="section-item">
+              <div className="item-header">
                 <div>
-                  <h3 className="item-title">{edu.degree}</h3> {/* Corrected class */}
-                  <h4 className="item-subtitle">{edu.school}</h4> {/* Corrected class */}
+                  <h3 className="item-title">{edu.degree}</h3>
+                  <h4 className="item-subtitle">{edu.school}</h4>
                 </div>
                 <div>
-                  <span className="item-date">{edu.graduationDate}</span> {/* Corrected class */}
-                  {edu.location && <span className="item-subtitle"> • {edu.location}</span>}
+                  <span className="item-date">{edu.graduationDate}</span>
+                  {edu.location && (
+                    <span className="item-subtitle"> • {edu.location}</span>
+                  )}
                 </div>
               </div>
             </div>
@@ -114,29 +125,37 @@ const Tpl5 = ({ resumeData: propResumeData, sections: propSections }) => {
         </section>
       )}
 
-      {sections?.skills && skills?.length > 0 && (
-        <section className="section"> {/* Corrected class */}
+      {sections?.skills && (skills || []).length > 0 && (
+        <section className="section">
           <h2 className="section-title">Skills</h2>
-          <div className="skills-list"> {/* Corrected class */}
-            {skills.map((skill, index) => (
-              skill && <span key={index} className="skill-item">{skill}</span> /* Corrected class */
-            ))}
+          <div className="skills-list">
+            {(skills || []).map(
+              (skill, index) =>
+                skill && (
+                  <span key={index} className="skill-item">
+                    {skill}
+                  </span>
+                )
+            )}
           </div>
         </section>
       )}
 
-      {sections?.customSections && customSections?.length > 0 && customSections.map((section, index) => (
-        <section key={section.id || index} className="section"> {/* Corrected class */}
-          <h2 className="section-title">{section.title}</h2>
-          {section.details && section.details.length > 0 && (
-            <ul className="item-description"> {/* Corrected class */}
-              {section.details.map((detail, idx) => (
-                detail && <li key={idx}>{detail}</li>
-              ))}
-            </ul>
-          )}
-        </section>
-      ))}
+      {(customSections || []).map(
+        (section, index) =>
+          sections?.customSections && (
+            <section key={section.id || index} className="section">
+              <h2 className="section-title">{section.title}</h2>
+              {(section.details || []).length > 0 && (
+                <ul className="item-description">
+                  {(section.details || []).map(
+                    (detail, idx) => detail && <li key={idx}>{detail}</li>
+                  )}
+                </ul>
+              )}
+            </section>
+          )
+      )}
     </div>
   );
 };
