@@ -17,6 +17,7 @@
 .header {
   text-align: center;
   margin-bottom: 15mm;
+  page-break-inside: avoid;
 }
 .header h1 {
   font-size: 28px;
@@ -49,6 +50,7 @@
 }
 .section {
   margin-bottom: 15mm;
+  page-break-inside: avoid;
 }
 .title {
   font-size: 16px;
@@ -65,6 +67,7 @@
 }
 .item {
   margin-bottom: 12px;
+  page-break-inside: avoid;
 }
 .item:not(:last-child) {
   padding-bottom: 12px;

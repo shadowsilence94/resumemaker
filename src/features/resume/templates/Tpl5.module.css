@@ -21,6 +21,7 @@
   margin-bottom: 15mm;
   border-bottom: 2px solid #333;
   padding-bottom: 10mm;
+  page-break-inside: avoid;
 }
 .dark .header {
   border-bottom-color: #4b5563;
@@ -63,6 +64,7 @@
 }
 .section {
   margin-bottom: 15mm;
+  page-break-inside: avoid;
 }
 .sectionTitle {
   font-size: 20px;
@@ -82,6 +84,7 @@
 }
 .item {
   margin-bottom: 12mm;
+  page-break-inside: avoid;
 }
 .itemHeader {
   display: flex;

@@ -20,6 +20,7 @@
   padding: 20mm 20mm 15mm 20mm;
   text-align: center;
   position: relative;
+  page-break-inside: avoid;
 }
 .dark .header {
   background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
@@ -60,6 +61,7 @@
   margin-bottom: 25px;
   position: relative;
   padding-left: 20px;
+  page-break-inside: avoid;
 }
 .section::before {
   content: "";
@@ -83,6 +85,7 @@
 }
 .item {
   margin-bottom: 12px;
+  page-break-inside: avoid;
 }
 .item:not(:last-child) {
   padding-bottom: 12px;
@@ -109,7 +112,7 @@
 }
 .item ul {
   padding-left: 20px;
-} /* Added for proper list indentation */
+}
 .date {
   font-size: 9px;
   color: #718096;
@@ -151,7 +154,6 @@
   background: #2d3748;
   border-left-color: #818cf8;
 }
-/* This new rule fixes the invisible text in lists */
 .dark .item ul {
   color: #d1d5db;
 }
