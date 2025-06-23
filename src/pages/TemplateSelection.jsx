@@ -48,6 +48,17 @@ const sampleData = {
   skills: ["JavaScript", "React", "Node.js", "Python", "SQL", "Tailwind CSS"],
 };
 
+const SampleDataProvider = ({ children }) => {
+  const { setResumeData } = useResumeContext();
+  React.useEffect(() => {
+    const originalData = { ...setResumeData.resumeData };
+    setResumeData(sampleData);
+    return () => setResumeData(originalData);
+  }, [setResumeData]);
+
+  return <>{children}</>;
+};
+
 const templates = [
   { id: "tpl1", name: "Modern Professional", Component: Tpl1 },
   { id: "tpl2", name: "Minimalist Sidebar", Component: Tpl2 },
@@ -58,19 +69,13 @@ const templates = [
 
 const TemplateSelection = () => {
   const navigate = useNavigate();
-  // Get the clearResumeData function from the context
-  const { resumeData, setSelectedTemplate, selectedTemplate, clearResumeData } =
+  const { resumeData, setResumeData, setSelectedTemplate, selectedTemplate } =
     useResumeContext();
 
   const hasUserData =
     resumeData?.personalInfo?.firstName || resumeData?.personalInfo?.lastName;
 
   const handleTemplateSelect = (templateId) => {
-    // If the user was looking at sample data, clear it before navigating
-    if (!hasUserData) {
-      clearResumeData();
-    }
-
     setSelectedTemplate(templateId);
     navigate(`/editor/${templateId}`);
   };
@@ -115,10 +120,13 @@ const TemplateSelection = () => {
                       : "border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 group-hover:shadow-xl group-hover:border-blue-400 dark:group-hover:border-blue-500 group-hover:transform group-hover:scale-102"
                   }`}
                 >
-                  {/* Simplified rendering: pass the correct data via props */}
-                  <template.Component
-                    resumeData={hasUserData ? resumeData : sampleData}
-                  />
+                  {hasUserData ? (
+                    <template.Component resumeData={resumeData} />
+                  ) : (
+                    <SampleDataProvider>
+                      <template.Component resumeData={sampleData} />
+                    </SampleDataProvider>
+                  )}
 
                   {isSelected && (
                     <div className="absolute inset-0 bg-blue-500/10 flex items-center justify-center rounded-lg">
@@ -147,23 +155,27 @@ const TemplateSelection = () => {
           top: 0;
           left: 0;
           transform-origin: top left;
-          background-color: #ffffff;
+          /* The line below was forcing a white background and has been removed. */
+          /* background-color: #ffffff; */
           box-shadow: none !important;
           margin: 0 !important;
         }
 
+        /* 2-column layout (up to 1024px) */
         @media (max-width: 1023px) {
           .template-preview-frame [class*="-resume"] {
             transform: scale(0.44);
           }
         }
 
+        /* 3-column layout (1024px to 1279px) */
         @media (min-width: 1024px) and (max-width: 1279px) {
           .template-preview-frame [class*="-resume"] {
             transform: scale(0.42);
           }
         }
         
+        /* 5-column layout (1280px and up) */
         @media (min-width: 1280px) {
           .template-preview-frame [class*="-resume"] {
             transform: scale(0.32);

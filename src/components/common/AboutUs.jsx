@@ -82,6 +82,16 @@ const AboutUs = () => {
         github: "#"
       }
     },
+        {
+      name: "Htut Ko Ko",
+      role: "Product Manager",
+      image: "/profiles/htutkoko.jpg", 
+      bio: "Strategic thinker focused on building products that solve real problems for users.",
+      social: {
+        linkedin: "https://www.linkedin.com/in/htut-ko-ko-805770202/",
+        github: "https://github.com/shadowsilence94"
+      }
+    },
     {
       name: "Erina",
       role: "UI/UX Designer", 
@@ -90,16 +100,6 @@ const AboutUs = () => {
       social: {
         linkedin: "#",
         github: "https://github.com/Erina943"
-      }
-    },
-    {
-      name: "Htut Ko Ko",
-      role: "Product Manager",
-      image: "/profiles/htutkoko.jpg", 
-      bio: "Strategic thinker focused on building products that solve real problems for users.",
-      social: {
-        linkedin: "https://www.linkedin.com/in/htut-ko-ko-805770202/",
-        github: "https://github.com/shadowsilence94"
       }
     }
   ];

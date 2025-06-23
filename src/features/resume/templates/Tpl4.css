@@ -1,312 +1,139 @@
 .executive-resume {
-    width: 210mm;
-    min-height: 297mm;
-    margin: 0 auto;
-    background: #fff;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-    font-family: 'Times New Roman', Times, serif;
-    box-sizing: border-box;
-    padding: 15mm 20mm;
-    font-size: 11px;
-    line-height: 1.4;
-    position: relative;
+  width: 210mm;
+  min-height: 297mm;
+  margin: 0 auto;
+  background: #fff;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  font-family: "Times New Roman", Times, serif;
+  box-sizing: border-box;
+  padding: 15mm 20mm;
+  font-size: 11px;
+  line-height: 1.4;
+  position: relative;
 }
-
-@media print, (max-width: 0) {
-    .executive-resume {
-        box-shadow: none;
-        margin: 0;
-        width: 210mm;
-        min-height: 297mm;
-        font-size: 10px;
-        line-height: 1.3;
-    }
-}
-
 .dark .executive-resume {
-    background: #111827;
-    color: #f9fafb;
-    box-shadow: 0 0 25px rgba(0,0,0,0.5);
+  background: #111827;
+  color: #f9fafb;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.5);
 }
-
-.executive-header {
-    text-align: center;
-    margin-bottom: 15mm;
-    page-break-inside: avoid;
+.executive-resume .executive-header {
+  text-align: center;
+  margin-bottom: 15mm;
 }
-
-.executive-header h1 {
-    font-size: 28px;
-    font-weight: bold;
-    margin: 0 0 8mm 0;
-    color: #1a202c;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    font-family: 'Times New Roman', Times, serif;
+.executive-resume .executive-header h1 {
+  font-size: 28px;
+  font-weight: bold;
+  margin: 0 0 8mm 0;
+  color: #1a202c;
+  text-transform: uppercase;
+  letter-spacing: 2px;
 }
-
-.dark .executive-header h1 {
-    color: #f7fafc;
-    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+.dark .executive-resume .executive-header h1 {
+  color: #f7fafc;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
-
-.executive-contact {
-    font-size: 10px;
-    color: #4a5568;
-    margin-top: 6mm;
-    line-height: 1.5;
+.executive-resume .contact-details {
+  font-size: 10px;
+  color: #4a5568;
+  line-height: 1.5;
 }
-
-.dark .executive-contact {
-    color: #d1d5db;
+.dark .executive-resume .contact-details {
+  color: #d1d5db;
 }
-
-.executive-divider {
-    border-top: 2px solid #2d3748;
-    margin: 8mm 0;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+.executive-resume .executive-profile-img {
+  width: 80px;
+  height: 80px;
+  border-radius: 4px;
+  object-fit: cover;
+  margin: 0 auto 8mm auto;
+  display: block;
+  border: 2px solid #2d3748;
 }
-
-.dark .executive-divider {
-    border-top-color: #4a5568;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.3);
+.dark .executive-resume .executive-profile-img {
+  border-color: #6b7280;
 }
-
-.executive-profile-img {
-    width: 80px;
-    height: 80px;
-    border-radius: 4px;
-    object-fit: cover;
-    margin: 0 auto 8mm auto;
-    display: block;
-    border: 2px solid #2d3748;
+.executive-resume .executive-section {
+  margin-bottom: 15mm;
 }
-
-.dark .executive-profile-img {
-    border-color: #6b7280;
-}
-
-.executive-section {
-    margin-bottom: 15mm;
-    page-break-inside: avoid;
-}
-
-.executive-section:last-child {
-    margin-bottom: 0;
-}
-
-.executive-title {
-    font-family: 'Times New Roman', Times, serif;
-    font-size: 16px; 
-    font-weight: bold;
-    text-transform: uppercase;
-    letter-spacing: 1.5px; 
-    margin-bottom: 12px; 
-    color: #1a202c;
-    border-bottom: 2px solid #2d3748; 
-    padding: 8px 0; 
-    text-align: left; 
-    background: none; 
-    border-radius: 0; 
-    box-shadow: none; 
-}
-
-.dark .executive-title {
-    color: #f7fafc;
-    border-bottom-color: #64748b; 
-}
-
-.executive-title::before {
-    display: none;
-}
-
-.dark .executive-title::before {
-    background: linear-gradient(90deg, #60a5fa 0%, #3b82f6 100%);
-    box-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
-}
-
-.executive-item {
-    margin-bottom: 12px;
-    page-break-inside: avoid;
-}
-
-.executive-item-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 4px;
-    flex-wrap: wrap;
-    gap: 8px;
-}
-
-.executive-item h3 {
-    font-size: 14px;
-    font-weight: bold;
-    margin: 0;
-    color: #1a202c;
-    font-family: 'Times New Roman', Times, serif;
-    text-transform: capitalize;
-}
-
-.dark .executive-item h3 {
-    color: #f7fafc;
-}
-
-.executive-item h4 {
-    font-size: 12px;
-    font-weight: normal;
-    color: #2d3748;
-    margin: 4px 0;
-    font-style: italic;
-    font-family: 'Times New Roman', Times, serif;
-}
-
-.dark .executive-item h4 {
-    color: #cbd5e0;
-}
-
-.executive-date {
-    font-size: 9px;
-    color: #6b7280;
-    font-weight: 500;
-    white-space: nowrap;
-    background: #f3f4f6;
-    padding: 2px 6px;
-    border-radius: 4px;
-}
-
-.dark .executive-date {
-    color: #cbd5e0;
-    background: #374151;
-}
-
-.executive-item p {
-    font-size: 10px;
-    line-height: 1.4;
-    color: #4b5563;
-    margin: 6px 0;
-    text-align: justify;
-}
-
-.dark .executive-item p {
-    color: #e2e8f0;
-}
-
-.executive-item li {
-    font-size: 10px;
-    line-height: 1.4;
-    color: #4b5563;
-    margin: 2px 0;
-}
-
-.dark .executive-item li {
-    color: #e2e8f0;
-}
-
-.executive-skills {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-    margin-top: 8px;
-}
-
-.executive-skill {
-    background: #f3f4f6;
-    color: #374151;
-    padding: 4px 8px;
-    border-radius: 4px;
-    font-size: 9px;
-    font-weight: 500;
-    border: 1px solid #e5e7eb;
-}
-
-.dark .executive-skill {
-    background: #374151;
-    color: #e2e8f0;
-    border-color: #4a5568;
-}
-
-.executive-summary {
-    font-size: 11px;
-    line-height: 1.5;
-    color: #4b5563;
-    text-align: justify;
-    margin-bottom: 15mm;
-    padding: 10px;
-    background: #f8f9fa;
-    border: 1px solid #e9ecef;
-    border-radius: 4px;
-}
-
-.dark .executive-summary {
-    color: #e2e8f0;
-    background: #1f2937;
-    border: 1px solid #374151;
-}
-
-@media (max-width: 768px) {
-    .executive-resume {
-        padding: 8mm 12mm;
-        font-size: 9px;
-        width: 100%;
-        min-width: 280px;
-        box-shadow: none;
-    }
-    
-    .executive-header h1 {
-        font-size: 22px;
-    }
-    
-    .executive-title {
-        font-size: 18px;
-        padding: 12px 20px;
-        letter-spacing: 2px;
-        margin-left: 0;
-        margin-right: 0;
-    }
-    
-    .executive-profile-img {
-        width: 60px;
-        height: 60px;
-    }
-    
-    .executive-item-header {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-    
-    .executive-skills {
-        gap: 4px;
-    }
-    
-    .executive-item h3 {
-        font-size: 12px;
-    }
-    
-    .executive-item h4 {
-        font-size: 10px;
-    }
-}
-
-.avoid-break {
-    page-break-inside: avoid;
-    break-inside: avoid;
-}
-
-.executive-section,
-.executive-item {
-    page-break-inside: avoid;
-    break-inside: avoid;
-}
-
-/* Add this to the end of Tpl4.css */
-
-.executive-job:not(:last-child) {
-  padding-bottom: 12px;
+.executive-resume .executive-title {
+  font-size: 16px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
   margin-bottom: 12px;
-  border-bottom: 1px solid #d1d5db;
+  color: #1a202c;
+  border-bottom: 2px solid #2d3748;
+  padding: 8px 0;
+  text-align: left;
 }
-
-.dark .executive-job:not(:last-child) {
-  border-bottom-color: #374151;
+.dark .executive-resume .executive-title {
+  color: #f7fafc;
+  border-bottom-color: #64748b;
+}
+.executive-resume .executive-job {
+  margin-bottom: 12px;
+}
+.executive-resume .job-title-line,
+.executive-resume .job-company-line {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 4px;
+}
+.executive-resume .job-title-line h3 {
+  font-size: 14px;
+  font-weight: bold;
+  margin: 0;
+}
+.executive-resume .job-company-line h4 {
+  font-size: 12px;
+  font-style: italic;
+  color: #2d3748;
+  margin: 0;
+}
+.executive-resume .job-period,
+.executive-resume .job-location {
+  font-size: 9px;
+  color: #6b7280;
+  white-space: nowrap;
+}
+.executive-resume .job-achievements {
+  padding-left: 20px;
+  margin-top: 6px;
+  font-size: 10px;
+  color: #4b5563;
+}
+.executive-resume .skills-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
+}
+.executive-resume .skill-item {
+  background: #f3f4f6;
+  color: #374151;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 9px;
+  border: 1px solid #e5e7eb;
+}
+.dark .executive-resume h3,
+.dark .executive-resume .executive-title {
+  color: #f7fafc;
+}
+.dark .executive-resume h4,
+.dark .executive-resume .job-location {
+  color: #cbd5e0;
+}
+.dark .executive-resume .job-period {
+  color: #cbd5e0;
+}
+.dark .executive-resume .job-achievements,
+.dark .executive-resume .job-achievements li {
+  color: #e2e8f0;
+}
+.dark .executive-resume .skill-item {
+  background: #374151;
+  color: #e2e8f0;
+  border-color: #4a5568;
 }
