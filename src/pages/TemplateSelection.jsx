@@ -86,7 +86,7 @@ const TemplateSelection = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 lg:gap-8 max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-8 max-w-7xl mx-auto">
           {templates.map((template) => {
             const isSelected = selectedTemplate === template.id;
             return (
@@ -147,24 +147,34 @@ const TemplateSelection = () => {
           margin: 0 !important;
         }
 
-        /* Rule for extra small screens (phones) */
-        @media (max-width: 639px) {
-          .template-preview-scaler { transform: scale(0.24); }
+        /* --- Updated Scaling Rules for New Layout --- */
+        /* For smaller phones (e.g., iPhone SE) */
+        @media (max-width: 413px) {
+          .template-preview-scaler { transform: scale(0.43); }
         }
 
-        /* Rule for small screens (tablets) */
+        /* For standard and large phones (e.g., iPhone 14, Pro Max) */
+        @media (min-width: 414px) and (max-width: 639px) {
+          .template-preview-scaler { transform: scale(0.5); }
+        }
+
+        /* Rule for tablets (640px to 1023px) */
         @media (min-width: 640px) and (max-width: 1023px) {
           .template-preview-scaler { transform: scale(0.44); }
         }
 
-        /* Rule for medium screens */
+        /* Rule for medium desktops (1024px to 1279px) */
         @media (min-width: 1024px) and (max-width: 1279px) {
-          .template-preview-scaler { transform: scale(0.42); }
+          .template-preview-scaler { transform: scale(0.37); }
         }
         
-        /* Rule for large screens */
-        @media (min-width: 1280px) {
-          .template-preview-scaler { transform: scale(0.32); }
+        /* Rule for large desktops (1280px and up) */
+        @media (min-width: 1280px) and (max-width: 1535px){
+          .template-preview-scaler { transform: scale(0.27); }
+        }
+
+        @media (min-width: 1535px) {
+          .template-preview-scaler { transform: scale(0.29); }
         }
       `}</style>
     </div>
