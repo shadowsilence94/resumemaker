@@ -57,7 +57,8 @@ const Tpl4 = ({ resumeData: propResumeData }) => {
       {sections?.summary && summary && (
         <section className={styles.section}>
           <h2 className={styles.title}>Executive Summary</h2>
-          <p>{summary}</p>
+          <p className={styles.summaryText}>{summary}</p>{" "}
+          {/* Changed this line */}
         </section>
       )}
 

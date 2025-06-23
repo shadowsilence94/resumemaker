@@ -123,6 +123,15 @@
 .dark .item ul {
   color: #e2e8f0;
 }
+.summaryText {
+  font-size: 11px;
+  line-height: 1.5;
+  color: #4b5563;
+  text-align: justify;
+}
+.dark .summaryText {
+  color: #d1d5db;
+}
 .skillsList {
   display: flex;
   flex-wrap: wrap;
