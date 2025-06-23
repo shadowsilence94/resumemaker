@@ -1,6 +1,6 @@
 # Easy Resume - Professional Resume Builder
 
-![Easy Resume](https://easyresume-eight.vercel.app/)
+[Easy Resume](https://easyresume-eight.vercel.app/)
 
 Easy Resume is a modern, user-friendly web application designed to help users create, customize, and download professional-looking resumes with ease. Built with React and Vite, this project provides a seamless experience for crafting job-winning resumes, offering multiple templates and a real-time preview.
 
@@ -65,7 +65,7 @@ Make sure you have Node.js and npm (or yarn) installed on your machine.
 
 1.  **Clone the repo**
     ```sh
-    git clone [https://github.com/shadowsilence94/resumemaker.git](https://github.com/shadowsilence94/resumemaker.git) resumemaker
+    git clone https://github.com/shadowsilence94/resumemaker.git resumemaker
     ```
 2.  **Navigate to the project directory**
     ```sh
