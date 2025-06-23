@@ -6,11 +6,9 @@ export const generateOptimizedPDF = async (
   filename = "resume.pdf"
 ) => {
   const styleId = "pdf-override-style";
-  // Check if the page is in dark mode before we start
   const wasInDarkMode = document.documentElement.classList.contains("dark");
 
   try {
-    // If in dark mode, temporarily remove it to force a light-mode render for the PDF
     if (wasInDarkMode) {
       document.documentElement.classList.remove("dark");
     }
@@ -18,10 +16,9 @@ export const generateOptimizedPDF = async (
     const overrideStyle = document.createElement("style");
     overrideStyle.id = styleId;
 
-    // This CSS rule is temporarily injected to ensure the PDF looks perfect.
+    // This selector is now corrected to match the new CSS Module class names (e.g., "modernResume")
     overrideStyle.innerHTML = `
-      /* General rule to remove margins from all templates */
-      [class*="-resume"] {
+      [class*="Resume"] {
         margin: 0 !important;
         box-shadow: none !important;
         border: none !important;
@@ -30,7 +27,6 @@ export const generateOptimizedPDF = async (
 
     document.head.appendChild(overrideStyle);
 
-    // Allow a brief moment for styles to apply
     await new Promise((resolve) => setTimeout(resolve, 50));
 
     const options = {
@@ -60,12 +56,10 @@ export const generateOptimizedPDF = async (
     console.error("Error generating PDF:", error);
     throw new Error("Failed to generate PDF: " + error.message);
   } finally {
-    // This 'finally' block always runs, ensuring our temporary changes are reverted.
     const styleToRemove = document.getElementById(styleId);
     if (styleToRemove) {
       styleToRemove.remove();
     }
-    // If the page was originally in dark mode, add the class back.
     if (wasInDarkMode) {
       document.documentElement.classList.add("dark");
     }
