@@ -5,7 +5,6 @@ import "./Tpl4.css";
 const Tpl4 = ({ resumeData: propResumeData, sections: propSections }) => {
   const context = useResumeContext();
   
-  // Use props if provided (for template selection), otherwise use context
   const resumeData = propResumeData || context?.resumeData;
   const sections = propSections || context?.sections;
   
@@ -56,14 +55,14 @@ const Tpl4 = ({ resumeData: propResumeData, sections: propSections }) => {
 
       {sections?.summary && summary && (
         <section className="executive-section">
-          <h2>Executive Summary</h2>
+          <h2 className="executive-title">Executive Summary</h2> {/* ADDED CLASS */}
           <p>{summary}</p>
         </section>
       )}
 
       {sections?.experience && experience?.length > 0 && (
         <section className="executive-section">
-          <h2>Professional Experience</h2>
+          <h2 className="executive-title">Professional Experience</h2> {/* ADDED CLASS */}
           {experience.map((exp, index) => (
             <div key={exp.id || index} className="executive-job">
               <div className="job-title-line">
@@ -88,7 +87,7 @@ const Tpl4 = ({ resumeData: propResumeData, sections: propSections }) => {
 
       {sections?.education && education?.length > 0 && (
         <section className="executive-section">
-          <h2>Education</h2>
+          <h2 className="executive-title">Education</h2> {/* ADDED CLASS */}
           {education.map((edu, index) => (
             <div key={edu.id || index} className="executive-job">
               <div className="job-title-line">
@@ -106,7 +105,7 @@ const Tpl4 = ({ resumeData: propResumeData, sections: propSections }) => {
 
       {sections?.skills && skills?.length > 0 && (
         <section className="executive-section">
-          <h2>Core Competencies</h2>
+          <h2 className="executive-title">Core Competencies</h2> {/* ADDED CLASS */}
           <div className="skills-list">
             {skills.map((skill, index) => (
               skill && <span key={index} className="skill-item">{skill}</span>
@@ -117,7 +116,7 @@ const Tpl4 = ({ resumeData: propResumeData, sections: propSections }) => {
 
       {sections?.customSections && customSections?.length > 0 && customSections.map((section, index) => (
         <section key={section.id || index} className="executive-section">
-          <h2>{section.title}</h2>
+          <h2 className="executive-title">{section.title}</h2> {/* ADDED CLASS */}
           {section.details && section.details.length > 0 && (
             <ul>
               {section.details.map((detail, idx) => (

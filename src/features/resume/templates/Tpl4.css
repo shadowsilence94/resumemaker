@@ -97,42 +97,27 @@
 
 .executive-title {
     font-family: 'Times New Roman', Times, serif;
-    font-size: 22px;
+    font-size: 16px; 
     font-weight: bold;
     text-transform: uppercase;
-    letter-spacing: 3px;
-    margin-bottom: 20px;
+    letter-spacing: 1.5px; 
+    margin-bottom: 12px; 
     color: #1a202c;
-    border-bottom: 4px double #2d3748;
-    padding: 18px 30px;
-    position: relative;
-    text-align: center;
-    background: linear-gradient(135deg, #f8f9fa 0%, #e2e8f0 100%);
-    border-radius: 10px;
-    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
-    text-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    margin-left: -10px;
-    margin-right: -10px;
+    border-bottom: 2px solid #2d3748; 
+    padding: 8px 0; 
+    text-align: left; 
+    background: none; 
+    border-radius: 0; 
+    box-shadow: none; 
 }
 
 .dark .executive-title {
     color: #f7fafc;
-    border-bottom-color: #4a5568;
-    background: linear-gradient(135deg, #1f2937 0%, #374151 100%);
-    box-shadow: 0 6px 12px rgba(0,0,0,0.4);
-    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+    border-bottom-color: #64748b; 
 }
 
 .executive-title::before {
-    content: '';
-    position: absolute;
-    left: 50%;
-    bottom: -4px;
-    transform: translateX(-50%);
-    width: 120px;
-    height: 4px;
-    background: linear-gradient(90deg, #2d3748 0%, #4a5568 100%);
-    border-radius: 2px;
+    display: none;
 }
 
 .dark .executive-title::before {
@@ -312,4 +297,16 @@
 .executive-item {
     page-break-inside: avoid;
     break-inside: avoid;
+}
+
+/* Add this to the end of Tpl4.css */
+
+.executive-job:not(:last-child) {
+  padding-bottom: 12px;
+  margin-bottom: 12px;
+  border-bottom: 1px solid #d1d5db;
+}
+
+.dark .executive-job:not(:last-child) {
+  border-bottom-color: #374151;
 }

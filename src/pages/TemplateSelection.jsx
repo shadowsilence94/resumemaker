@@ -21,34 +21,42 @@ const sampleData = {
     profileImage: "https://placehold.co/150x150/a3c5f9/121212?text=JD",
   },
   summary:
-    "A highly motivated professional with a proven track record of success.",
+    "A highly motivated professional with a proven track record of success in managing technical operations and driving business development.",
   experience: [
     {
       id: 1,
       jobTitle: "Software Engineer",
       company: "Tech Solutions Inc.",
       location: "San Francisco, CA",
-      startDate: "2020-01",
+      startDate: "01/2020",
       endDate: "Present",
-      description: "Developed and maintained web applications using modern technologies.",
+      responsibilities: [
+        "Developed and maintained web applications using modern technologies.",
+        "Collaborated with cross-functional teams to deliver high-quality software.",
+      ],
     },
   ],
   education: [
     {
       id: 1,
-      degree: "Bachelor of Science",
+      degree: "B.S. in Computer Science",
       school: "University of Technology",
       location: "San Francisco, CA",
-      startDate: "2016-09",
-      endDate: "2020-05",
-      description: "Computer Science with focus on web development.",
+      graduationDate: "05/2020",
     },
   ],
-  skills: ["JavaScript", "React", "Node.js", "Python", "SQL"],
+  skills: ["JavaScript", "React", "Node.js", "Python", "SQL", "Tailwind CSS"],
 };
 
 const SampleDataProvider = ({ children }) => {
-  return <div style={{ transform: "scale(1)", transformOrigin: "top left" }}>{children}</div>;
+  const { setResumeData } = useResumeContext();
+  React.useEffect(() => {
+    const originalData = { ...setResumeData.resumeData };
+    setResumeData(sampleData);
+    return () => setResumeData(originalData);
+  }, [setResumeData]);
+
+  return <>{children}</>;
 };
 
 const templates = [
@@ -61,9 +69,11 @@ const templates = [
 
 const TemplateSelection = () => {
   const navigate = useNavigate();
-  const { resumeData, setSelectedTemplate, selectedTemplate } = useResumeContext();
+  const { resumeData, setResumeData, setSelectedTemplate, selectedTemplate } =
+    useResumeContext();
 
-  const hasUserData = resumeData?.personalInfo?.firstName || resumeData?.personalInfo?.lastName;
+  const hasUserData =
+    resumeData?.personalInfo?.firstName || resumeData?.personalInfo?.lastName;
 
   const handleTemplateSelect = (templateId) => {
     setSelectedTemplate(templateId);
@@ -84,7 +94,7 @@ const TemplateSelection = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 lg:gap-8 max-w-7xl mx-auto">
+        <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 lg:gap-8 max-w-7xl mx-auto">
           {templates.map((template) => {
             const isSelected = selectedTemplate === template.id;
             return (
@@ -96,59 +106,33 @@ const TemplateSelection = () => {
                 <h3
                   className={`mb-4 font-semibold text-lg text-center transition-colors ${
                     isSelected
-                      ? "text-primary-600 dark:text-primary-400"
-                      : "text-gray-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400"
+                      ? "text-blue-600 dark:text-blue-400"
+                      : "text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400"
                   }`}
                 >
                   {template.name}
                 </h3>
-                
+
                 <div
-                  className={`w-full aspect-[210/297] border-2 relative shadow-lg rounded-lg transition-all duration-300 ${
+                  className={`w-full aspect-[210/297] border-2 relative shadow-lg rounded-lg transition-all duration-300 overflow-hidden ${
                     isSelected
-                      ? "border-primary-500 bg-primary-50 dark:bg-primary-900/20 shadow-xl ring-4 ring-primary-200 dark:ring-primary-800 transform scale-105"
-                      : "border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 group-hover:shadow-xl group-hover:border-primary-400 dark:group-hover:border-primary-500 group-hover:transform group-hover:scale-102"
+                      ? "border-blue-500 bg-blue-50 dark:bg-blue-900/20 shadow-xl ring-4 ring-blue-200 dark:ring-blue-800 transform scale-105"
+                      : "border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 group-hover:shadow-xl group-hover:border-blue-400 dark:group-hover:border-blue-500 group-hover:transform group-hover:scale-102"
                   }`}
-                  style={{ 
-                    overflow: 'hidden',
-                    position: 'relative'
-                  }}
                 >
-                  <div 
-                    className="template-preview-wrapper"
-                    style={{
-                      position: 'absolute',
-                      top: 0,
-                      left: 0,
-                      width: '100%',
-                      height: '100%',
-                      overflow: 'hidden'
-                    }}
-                  >
-                    <div
-                      className="template-preview-content"
-                      style={{
-                        width: '210mm',
-                        height: '297mm',
-                        transformOrigin: 'top left',
-                        backgroundColor: '#ffffff',
-                        margin: 0,
-                        padding: 0
-                      }}
-                    >
-                      {hasUserData ? (
-                        <template.Component />
-                      ) : (
-                        <SampleDataProvider>
-                          <template.Component />
-                        </SampleDataProvider>
-                      )}
-                    </div>
+                  <div className="template-preview-scaler">
+                    {hasUserData ? (
+                      <template.Component resumeData={resumeData} />
+                    ) : (
+                      <SampleDataProvider>
+                        <template.Component resumeData={sampleData} />
+                      </SampleDataProvider>
+                    )}
                   </div>
-                  
+
                   {isSelected && (
-                    <div className="absolute inset-0 bg-primary-500/10 flex items-center justify-center rounded-lg">
-                      <div className="bg-primary-600 text-white px-4 py-2 rounded-full font-semibold shadow-lg">
+                    <div className="absolute inset-0 bg-blue-500/10 flex items-center justify-center rounded-lg">
+                      <div className="bg-blue-600 text-white px-4 py-2 rounded-full font-semibold shadow-lg">
                         Selected
                       </div>
                     </div>
@@ -161,113 +145,45 @@ const TemplateSelection = () => {
 
         <div className="text-center mt-12">
           <p className="text-gray-600 dark:text-gray-400 mb-6">
-            Click on any template above to start building your resume immediately.
+            Click on any template above to start building your resume
+            immediately.
           </p>
         </div>
       </div>
-      
+
       <style>{`
-        .template-preview-wrapper {
+        .template-preview-scaler {
           position: absolute;
           top: 0;
           left: 0;
-          width: 100%;
-          height: 100%;
-          overflow: hidden;
-        }
-        
-        .template-preview-content {
-          position: absolute;
-          top: 0;
-          left: 0;
-          transform-origin: top left;
-          background-color: #ffffff;
-          margin: 0;
-          padding: 0;
           width: 210mm;
           height: 297mm;
+          transform-origin: top left;
+          background-color: #ffffff;
         }
-        
-        /* Calculate scale to fit container perfectly */
-        @media (max-width: 640px) {
-          .template-preview-content {
-            transform: scale(0.28);
-          }
+        .template-preview-scaler [class*="-resume"] {
+            box-shadow: none !important;
+            margin: 0 !important;
         }
-        
-        @media (min-width: 641px) and (max-width: 768px) {
-          .template-preview-content {
-            transform: scale(0.32);
-          }
-        }
-        
-        @media (min-width: 769px) and (max-width: 1024px) {
-          .template-preview-content {
-            transform: scale(0.36);
-          }
-        }
-        
-        @media (min-width: 1025px) and (max-width: 1279px) {
-          .template-preview-content {
-            transform: scale(0.40);
-          }
-        }
-        
-        @media (min-width: 1280px) and (max-width: 1535px) {
-          .template-preview-content {
+
+        /* 2-column layout (up to 1024px) */
+        @media (max-width: 1023px) {
+          .template-preview-scaler {
             transform: scale(0.44);
           }
         }
-        
-        @media (min-width: 1536px) {
-          .template-preview-content {
-            transform: scale(0.48);
+
+        /* 3-column layout (1024px to 1279px) */
+        @media (min-width: 1024px) and (max-width: 1279px) {
+          .template-preview-scaler {
+            transform: scale(0.42);
           }
         }
         
-        /* Force templates to fill container */
-        .template-preview-content > * {
-          width: 210mm !important;
-          height: 297mm !important;
-          margin: 0 !important;
-          padding: 0 !important;
-          box-sizing: border-box !important;
-        }
-        
-        /* Specific fixes for template components */
-        .template-preview-content .executive-resume,
-        .template-preview-content .tpl5-resume,
-        .template-preview-content [class*="resume"],
-        .template-preview-content [class*="template"] {
-          width: 210mm !important;
-          height: 297mm !important;
-          min-height: 297mm !important;
-          max-width: 210mm !important;
-          margin: 0 !important;
-          padding: 15mm 20mm !important;
-          box-sizing: border-box !important;
-          overflow: hidden !important;
-        }
-        
-        /* Container responsive adjustments */
-        @media (min-width: 640px) and (max-width: 768px) {
-          .container {
-            padding-left: 1.5rem;
-            padding-right: 1.5rem;
-          }
-        }
-        
-        @media (min-width: 769px) and (max-width: 1179px) {
-          .container {
-            padding-left: 2rem;
-            padding-right: 2rem;
-            max-width: 1024px;
-          }
-        }
-        
-        @media (min-width: 1180px) {
-          .container {
-            max-width: 1280px;
+        /* 5-column layout (1280px and up) */
+        @media (min-width: 1280px) {
+          .template-preview-scaler {
+            transform: scale(0.32);
           }
         }
       `}</style>

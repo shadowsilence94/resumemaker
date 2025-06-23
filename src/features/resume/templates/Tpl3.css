@@ -350,3 +350,13 @@
     page-break-inside: avoid;
     break-inside: avoid;
 }
+
+.creative-item:not(:last-child) {
+  padding-bottom: 12px;
+  margin-bottom: 12px;
+  border-bottom: 1px dashed #d1d5db;
+}
+
+.dark .creative-item:not(:last-child) {
+  border-bottom-color: #4b5563;
+}

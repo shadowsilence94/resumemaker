@@ -5,7 +5,6 @@ import "./Tpl5.css";
 const Tpl5 = ({ resumeData: propResumeData, sections: propSections }) => {
   const context = useResumeContext();
   
-  // Use props if provided (for template selection), otherwise use context
   const resumeData = propResumeData || context?.resumeData;
   const sections = propSections || context?.sections;
   
@@ -35,14 +34,18 @@ const Tpl5 = ({ resumeData: propResumeData, sections: propSections }) => {
               <img
                 src={personalInfo.profileImage}
                 alt="Profile"
+                className="profile-img" // Corrected class
               />
             </div>
           )}
+        </div>
+        <div className="header-right">
+          <h1>{personalInfo?.firstName} {personalInfo?.lastName}</h1>
           <div className="contact-info">
-            {personalInfo?.email && <div className="email">{personalInfo.email}</div>}
-            {personalInfo?.phone && <div className="phone">{personalInfo.phone}</div>}
+            {personalInfo?.email && <div>{personalInfo.email}</div>}
+            {personalInfo?.phone && <div>{personalInfo.phone}</div>}
             {personalInfo?.addressLine1 && (
-              <div className="address-line">
+              <div>
                 {personalInfo.addressLine1}
                 {personalInfo?.addressLine2 && `, ${personalInfo.addressLine2}`}
               </div>
@@ -55,35 +58,32 @@ const Tpl5 = ({ resumeData: propResumeData, sections: propSections }) => {
             )}
           </div>
         </div>
-        <div className="header-right">
-          <h1>{personalInfo?.firstName} {personalInfo?.lastName}</h1>
-        </div>
       </header>
 
       {sections?.summary && summary && (
-        <section className="classic-section">
-          <h2>Professional Summary</h2>
-          <p>{summary}</p>
+        <section className="section"> {/* Corrected class */}
+          <h2 className="section-title">Professional Summary</h2>
+          <p className="summary-text">{summary}</p> {/* Corrected class */}
         </section>
       )}
 
       {sections?.experience && experience?.length > 0 && (
-        <section className="classic-section">
-          <h2>Work Experience</h2>
+        <section className="section"> {/* Corrected class */}
+          <h2 className="section-title">Work Experience</h2>
           {experience.map((exp, index) => (
-            <div key={exp.id || index} className="classic-job">
-              <div className="job-header">
-                <div className="job-title-company">
-                  <h3>{exp.jobTitle}</h3>
-                  <h4>{exp.company}</h4>
+            <div key={exp.id || index} className="section-item"> {/* Corrected class */}
+              <div className="item-header"> {/* Corrected class */}
+                <div>
+                  <h3 className="item-title">{exp.jobTitle}</h3> {/* Corrected class */}
+                  <h4 className="item-subtitle">{exp.company}</h4> {/* Corrected class */}
                 </div>
-                <div className="job-details">
-                  <span className="job-dates">{exp.startDate} - {exp.endDate}</span>
-                  {exp.location && <span className="job-location">{exp.location}</span>}
+                <div>
+                  <span className="item-date">{exp.startDate} - {exp.endDate}</span> {/* Corrected class */}
+                  {exp.location && <span className="item-subtitle"> • {exp.location}</span>}
                 </div>
               </div>
               {exp.responsibilities && exp.responsibilities.length > 0 && (
-                <ul className="job-responsibilities">
+                <ul className="item-description"> {/* Corrected class */}
                   {exp.responsibilities.map((resp, idx) => (
                     resp && <li key={idx}>{resp}</li>
                   ))}
@@ -95,18 +95,18 @@ const Tpl5 = ({ resumeData: propResumeData, sections: propSections }) => {
       )}
 
       {sections?.education && education?.length > 0 && (
-        <section className="classic-section">
-          <h2>Education</h2>
+        <section className="section"> {/* Corrected class */}
+          <h2 className="section-title">Education</h2>
           {education.map((edu, index) => (
-            <div key={edu.id || index} className="classic-job">
-              <div className="job-header">
-                <div className="job-title-company">
-                  <h3>{edu.degree}</h3>
-                  <h4>{edu.school}</h4>
+            <div key={edu.id || index} className="section-item"> {/* Corrected class */}
+              <div className="item-header"> {/* Corrected class */}
+                <div>
+                  <h3 className="item-title">{edu.degree}</h3> {/* Corrected class */}
+                  <h4 className="item-subtitle">{edu.school}</h4> {/* Corrected class */}
                 </div>
-                <div className="job-details">
-                  <span className="job-dates">{edu.graduationDate}</span>
-                  {edu.location && <span className="job-location">{edu.location}</span>}
+                <div>
+                  <span className="item-date">{edu.graduationDate}</span> {/* Corrected class */}
+                  {edu.location && <span className="item-subtitle"> • {edu.location}</span>}
                 </div>
               </div>
             </div>
@@ -115,21 +115,21 @@ const Tpl5 = ({ resumeData: propResumeData, sections: propSections }) => {
       )}
 
       {sections?.skills && skills?.length > 0 && (
-        <section className="classic-section">
-          <h2>Skills</h2>
-          <div className="skills-container">
+        <section className="section"> {/* Corrected class */}
+          <h2 className="section-title">Skills</h2>
+          <div className="skills-list"> {/* Corrected class */}
             {skills.map((skill, index) => (
-              skill && <span key={index} className="skill-badge">{skill}</span>
+              skill && <span key={index} className="skill-item">{skill}</span> /* Corrected class */
             ))}
           </div>
         </section>
       )}
 
       {sections?.customSections && customSections?.length > 0 && customSections.map((section, index) => (
-        <section key={section.id || index} className="classic-section">
-          <h2>{section.title}</h2>
+        <section key={section.id || index} className="section"> {/* Corrected class */}
+          <h2 className="section-title">{section.title}</h2>
           {section.details && section.details.length > 0 && (
-            <ul>
+            <ul className="item-description"> {/* Corrected class */}
               {section.details.map((detail, idx) => (
                 detail && <li key={idx}>{detail}</li>
               ))}

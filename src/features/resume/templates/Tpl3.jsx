@@ -4,13 +4,11 @@ import "./Tpl3.css";
 
 const Tpl3 = ({ resumeData: propResumeData, sections: propSections }) => {
   const context = useResumeContext();
-  
-  // Use props if provided (for template selection), otherwise use context
   const resumeData = propResumeData || context?.resumeData;
   const sections = propSections || context?.sections;
-  
+
   if (!resumeData) return <div>No data available</div>;
-  
+
   const {
     personalInfo,
     summary,
@@ -21,46 +19,51 @@ const Tpl3 = ({ resumeData: propResumeData, sections: propSections }) => {
   } = resumeData;
 
   const formatUrl = (url) => {
-    if (!url) return '#';
-    if (url.startsWith('http://') || url.startsWith('https://')) return url;
+    if (!url) return "#";
+    if (url.startsWith("http://") || url.startsWith("https://")) return url;
     return `https://${url}`;
   };
 
   return (
     <div className="creative-resume">
       <header className="creative-header">
-        <div className="header-content">
-          {personalInfo?.profileImage && (
-            <img
-              src={personalInfo.profileImage}
-              alt="Profile"
-              className="creative-profile-img"
-            />
+        {personalInfo?.profileImage && (
+          <img
+            src={personalInfo.profileImage}
+            alt="Profile"
+            className="creative-profile-img"
+          />
+        )}
+        <h1>
+          {personalInfo?.firstName} {personalInfo?.lastName}
+        </h1>
+        <div className="contact-line">
+          {personalInfo?.email && <span>{personalInfo.email}</span>}
+          {personalInfo?.phone && <span> • {personalInfo.phone}</span>}
+        </div>
+        <div className="contact-line">
+          {personalInfo?.addressLine1 && (
+            <span>
+              {personalInfo.addressLine1}
+              {personalInfo?.addressLine2 && `, ${personalInfo.addressLine2}`}
+            </span>
           )}
-          <div className="header-text">
-            <h1>{personalInfo?.firstName} {personalInfo?.lastName}</h1>
-            <div className="contact-info">
-              {personalInfo?.email && <span>{personalInfo.email}</span>}
-              {personalInfo?.phone && <span> • {personalInfo.phone}</span>}
-              {personalInfo?.addressLine1 && (
-                <span> • {personalInfo.addressLine1}{personalInfo?.addressLine2 && `, ${personalInfo.addressLine2}`}</span>
-              )}
-              {personalInfo?.linkedIn && (
-                <span> • <a href={formatUrl(personalInfo.linkedIn)}>LinkedIn</a></span>
-              )}
-              {personalInfo?.portfolio && (
-                <span> • <a href={formatUrl(personalInfo.portfolio)}>Portfolio</a></span>
-              )}
-            </div>
-          </div>
+        </div>
+        <div className="contact-line">
+           {personalInfo?.linkedIn && (
+              <span><a href={formatUrl(personalInfo.linkedIn)}>LinkedIn</a></span>
+            )}
+            {personalInfo?.portfolio && (
+              <span> • <a href={formatUrl(personalInfo.portfolio)}>Portfolio</a></span>
+            )}
         </div>
       </header>
 
-      <div className="creative-content">
+      <div className="creative-body">
         {sections?.summary && summary && (
           <section className="creative-section">
             <h2>Summary</h2>
-            <p>{summary}</p>
+            <p className="creative-summary">{summary}</p>
           </section>
         )}
 
@@ -68,17 +71,16 @@ const Tpl3 = ({ resumeData: propResumeData, sections: propSections }) => {
           <section className="creative-section">
             <h2>Experience</h2>
             {experience.map((exp, index) => (
-              <div key={exp.id || index} className="creative-job">
-                <div className="job-header">
-                  <h3>{exp.jobTitle}</h3>
-                  <span className="job-date">{exp.startDate} - {exp.endDate}</span>
-                </div>
-                <div className="job-company">
-                  <h4>{exp.company}</h4>
-                  {exp.location && <span>{exp.location}</span>}
+              <div key={exp.id || index} className="creative-item"> {/* Corrected class */}
+                <div className="creative-item-header">
+                  <div>
+                    <h3>{exp.jobTitle}</h3>
+                    <h4>{exp.company} • {exp.location}</h4>
+                  </div>
+                  <span className="creative-date">{exp.startDate} - {exp.endDate}</span>
                 </div>
                 {exp.responsibilities && exp.responsibilities.length > 0 && (
-                  <ul className="job-responsibilities">
+                  <ul>
                     {exp.responsibilities.map((resp, idx) => (
                       resp && <li key={idx}>{resp}</li>
                     ))}
@@ -93,14 +95,13 @@ const Tpl3 = ({ resumeData: propResumeData, sections: propSections }) => {
           <section className="creative-section">
             <h2>Education</h2>
             {education.map((edu, index) => (
-              <div key={edu.id || index} className="creative-job">
-                <div className="job-header">
-                  <h3>{edu.degree}</h3>
-                  <span className="job-date">{edu.graduationDate}</span>
-                </div>
-                <div className="job-company">
-                  <h4>{edu.school}</h4>
-                  {edu.location && <span>{edu.location}</span>}
+              <div key={edu.id || index} className="creative-item"> {/* Corrected class */}
+                <div className="creative-item-header">
+                  <div>
+                    <h3>{edu.degree}</h3>
+                    <h4>{edu.school} • {edu.location}</h4>
+                  </div>
+                  <span className="creative-date">{edu.graduationDate}</span>
                 </div>
               </div>
             ))}
@@ -110,15 +111,15 @@ const Tpl3 = ({ resumeData: propResumeData, sections: propSections }) => {
         {sections?.skills && skills?.length > 0 && (
           <section className="creative-section">
             <h2>Skills</h2>
-            <div className="skills-grid">
+            <div className="creative-skills">
               {skills.map((skill, index) => (
-                skill && <span key={index} className="skill-tag">{skill}</span>
+                skill && <span key={index} className="creative-skill">{skill}</span>
               ))}
             </div>
           </section>
         )}
 
-        {sections?.customSections && customSections?.length > 0 && customSections.map((section, index) => (
+        {sections?.customSections && customSections.map((section, index) => (
           <section key={section.id || index} className="creative-section">
             <h2>{section.title}</h2>
             {section.details && section.details.length > 0 && (
