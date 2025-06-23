@@ -91,6 +91,9 @@
   margin: 0;
   color: #1a202c;
 }
+.dark .item h3 {
+  color: #f7fafc;
+}
 .item h4 {
   font-size: 12px;
   font-weight: normal;
@@ -98,11 +101,17 @@
   margin: 4px 0;
   font-style: italic;
 }
+.dark .item h4 {
+  color: #cbd5e0;
+}
 .date {
   font-size: 9px;
   color: #6b7280;
   font-weight: 500;
   white-space: nowrap;
+}
+.dark .date {
+  color: #cbd5e0;
 }
 .item ul {
   padding-left: 20px;
@@ -110,15 +119,6 @@
   line-height: 1.4;
   color: #4b5563;
   margin: 6px 0;
-}
-.dark .item h3 {
-  color: #f7fafc;
-}
-.dark .item h4 {
-  color: #cbd5e0;
-}
-.dark .date {
-  color: #cbd5e0;
 }
 .dark .item ul {
   color: #e2e8f0;

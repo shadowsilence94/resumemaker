@@ -65,11 +65,9 @@ const TemplateSelection = () => {
     resumeData?.personalInfo?.firstName || resumeData?.personalInfo?.lastName;
 
   const handleTemplateSelect = (templateId) => {
-    // If the user was viewing sample data, clear it before navigating to the editor
     if (!hasUserData) {
       clearResumeData();
     }
-
     setSelectedTemplate(templateId);
     navigate(`/editor/${templateId}`);
   };
@@ -115,7 +113,6 @@ const TemplateSelection = () => {
                   }`}
                 >
                   <div className="template-preview-scaler">
-                    {/* This logic now passes data directly, without a separate provider */}
                     <template.Component
                       resumeData={hasUserData ? resumeData : sampleData}
                     />

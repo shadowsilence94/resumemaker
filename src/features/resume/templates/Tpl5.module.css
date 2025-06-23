@@ -82,9 +82,6 @@
   border-bottom-color: #6b7280;
   background: #1f2937;
 }
-.sectionTitle::after {
-  display: none;
-} /* Hide decorative element for simplicity */
 .item {
   margin-bottom: 12mm;
   page-break-inside: avoid;
@@ -101,11 +98,17 @@
   margin: 0;
   color: #1a202c;
 }
+.dark .itemTitle {
+  color: #f9fafb;
+}
 .itemSubtitle {
   font-size: 12px;
   font-style: italic;
   color: #2d3748;
   margin: 4px 0;
+}
+.dark .itemSubtitle {
+  color: #d1d5db;
 }
 .itemDate {
   font-size: 9px;
@@ -113,12 +116,18 @@
   font-weight: 500;
   white-space: nowrap;
 }
+.dark .itemDate {
+  color: #d1d5db;
+}
 .itemDescription {
   font-size: 10px;
   line-height: 1.4;
   color: #4b5563;
   margin: 6px 0;
   padding-left: 20px;
+}
+.dark .itemDescription {
+  color: #d1d5db;
 }
 .skillsList {
   display: flex;
@@ -133,6 +142,10 @@
   border-radius: 4px;
   font-size: 9px;
 }
+.dark .skillItem {
+  background: #374151;
+  color: #d1d5db;
+}
 .summaryText {
   font-size: 11px;
   line-height: 1.5;
@@ -141,23 +154,16 @@
   padding: 10px;
   background: #f8f9fa;
 }
-.dark .itemTitle,
-.dark .itemSubtitle,
-.dark .itemDate,
-.dark .itemDescription,
-.dark .summaryText,
-.dark .skillItem {
+.dark .summaryText {
   color: #d1d5db;
-}
-.dark .summaryText,
-.dark .skillItem {
-  background: #374151;
+  background: #1f2937;
 }
 
-/* These styles are ONLY applied during PDF generation for cleaner page breaks */
+/* Simpler print styles for better PDF page breaks */
 @media print {
   .sectionTitle {
     background: #f1f1f1 !important;
+    color: #1a202c !important;
     box-shadow: none !important;
     margin-left: 0 !important;
     margin-right: 0 !important;

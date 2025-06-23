@@ -16,7 +16,6 @@ export const generateOptimizedPDF = async (
     const overrideStyle = document.createElement("style");
     overrideStyle.id = styleId;
 
-    // This selector is now corrected to match the new CSS Module class names (e.g., "modernResume")
     overrideStyle.innerHTML = `
       [class*="Resume"] {
         margin: 0 !important;
