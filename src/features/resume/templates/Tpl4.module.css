@@ -37,6 +37,9 @@
 .dark .contactDetails {
   color: #d1d5db;
 }
+.dark .contactDetails a {
+  color: #90caf9;
+}
 .profileImg {
   width: 80px;
   height: 80px;
@@ -108,9 +111,15 @@
   color: #4b5563;
   margin: 6px 0;
 }
-.dark .item h3,
-.dark .item h4,
-.dark .date,
+.dark .item h3 {
+  color: #f7fafc;
+}
+.dark .item h4 {
+  color: #cbd5e0;
+}
+.dark .date {
+  color: #cbd5e0;
+}
 .dark .item ul {
   color: #e2e8f0;
 }
