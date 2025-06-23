@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import { useState, useRef } from "react";
 import { useResumeContext } from "../context/ResumeContext";
 import ImageCropper from "../components/forms/ImageCropper";
 import DatePicker from "../components/forms/DatePicker";
@@ -26,13 +26,11 @@ const Editor = () => {
   const handleImageFileChange = (e) => {
     const file = e.target.files[0];
     if (file) {
-      // Validate file type
       if (!file.type.startsWith("image/")) {
         alert("Please select a valid image file.");
         return;
       }
 
-      // Validate file size (max 5MB)
       if (file.size > 5 * 1024 * 1024) {
         alert("Please select an image smaller than 5MB.");
         return;
@@ -47,7 +45,6 @@ const Editor = () => {
       };
       reader.readAsDataURL(file);
     }
-    // Clear the input value to allow selecting the same file again
     e.target.value = "";
   };
   const handleCropComplete = (croppedImage) => {

@@ -1,4 +1,3 @@
-import React from "react";
 import { useResumeContext } from "../../../context/ResumeContext";
 import styles from "./Tpl4.module.css";
 
@@ -127,7 +126,6 @@ const Tpl4 = ({ resumeData: propResumeData }) => {
         </section>
       )}
 
-      {/* Added Custom Sections */}
       {(customSections || []).map(
         (section) =>
           sections?.customSections && (

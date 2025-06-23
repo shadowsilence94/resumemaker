@@ -3,10 +3,10 @@
  */
 
 const STORAGE_KEYS = {
-  RESUME_DATA: 'resumeData',
-  SECTIONS: 'resumeSections',
-  THEME: 'theme',
-  SELECTED_TEMPLATE: 'selectedTemplate'
+  RESUME_DATA: "resumeData",
+  SECTIONS: "resumeSections",
+  THEME: "theme",
+  SELECTED_TEMPLATE: "selectedTemplate",
 };
 
 /**
@@ -21,7 +21,7 @@ class StorageService {
     try {
       localStorage.setItem(STORAGE_KEYS.RESUME_DATA, JSON.stringify(data));
     } catch (error) {
-      console.error('Error saving resume data:', error);
+      console.error("Error saving resume data:", error);
     }
   }
 
@@ -34,7 +34,7 @@ class StorageService {
       const data = localStorage.getItem(STORAGE_KEYS.RESUME_DATA);
       return data ? JSON.parse(data) : null;
     } catch (error) {
-      console.error('Error loading resume data:', error);
+      console.error("Error loading resume data:", error);
       return null;
     }
   }
@@ -47,7 +47,7 @@ class StorageService {
     try {
       localStorage.setItem(STORAGE_KEYS.SECTIONS, JSON.stringify(sections));
     } catch (error) {
-      console.error('Error saving sections:', error);
+      console.error("Error saving sections:", error);
     }
   }
 
@@ -60,7 +60,7 @@ class StorageService {
       const sections = localStorage.getItem(STORAGE_KEYS.SECTIONS);
       return sections ? JSON.parse(sections) : null;
     } catch (error) {
-      console.error('Error loading sections:', error);
+      console.error("Error loading sections:", error);
       return null;
     }
   }
@@ -73,7 +73,7 @@ class StorageService {
     try {
       localStorage.setItem(STORAGE_KEYS.THEME, theme);
     } catch (error) {
-      console.error('Error saving theme:', error);
+      console.error("Error saving theme:", error);
     }
   }
 
@@ -85,7 +85,7 @@ class StorageService {
     try {
       return localStorage.getItem(STORAGE_KEYS.THEME);
     } catch (error) {
-      console.error('Error loading theme:', error);
+      console.error("Error loading theme:", error);
       return null;
     }
   }
@@ -98,7 +98,7 @@ class StorageService {
     try {
       localStorage.setItem(STORAGE_KEYS.SELECTED_TEMPLATE, template);
     } catch (error) {
-      console.error('Error saving selected template:', error);
+      console.error("Error saving selected template:", error);
     }
   }
 
@@ -110,7 +110,7 @@ class StorageService {
     try {
       return localStorage.getItem(STORAGE_KEYS.SELECTED_TEMPLATE);
     } catch (error) {
-      console.error('Error loading selected template:', error);
+      console.error("Error loading selected template:", error);
       return null;
     }
   }
@@ -120,11 +120,11 @@ class StorageService {
    */
   clearAll() {
     try {
-      Object.values(STORAGE_KEYS).forEach(key => {
+      Object.values(STORAGE_KEYS).forEach((key) => {
         localStorage.removeItem(key);
       });
     } catch (error) {
-      console.error('Error clearing storage:', error);
+      console.error("Error clearing storage:", error);
     }
   }
 
@@ -137,7 +137,7 @@ class StorageService {
       resumeData: this.loadResumeData(),
       sections: this.loadSections(),
       theme: this.loadTheme(),
-      selectedTemplate: this.loadSelectedTemplate()
+      selectedTemplate: this.loadSelectedTemplate(),
     };
   }
 

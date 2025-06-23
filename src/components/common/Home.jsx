@@ -1,4 +1,3 @@
-import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useResumeContext } from "../../context/ResumeContext";
 import { motion } from "framer-motion";
@@ -13,13 +12,13 @@ import {
   FaClock,
   FaMobile,
 } from "react-icons/fa";
-import { 
-  featureCardAnimations, 
-  iconAnimations, 
-  staggerContainer, 
+import {
+  featureCardAnimations,
+  iconAnimations,
+  staggerContainer,
   staggerItem,
   typingAnimation,
-  letterAnimation
+  letterAnimation,
 } from "../../utils/animationUtils";
 
 const Home = () => {
@@ -35,50 +34,66 @@ const Home = () => {
     {
       icon: <FaRocket className="text-3xl text-blue-600 dark:text-blue-400" />,
       title: "Lightning Fast",
-      description: "Create professional resumes in minutes, not hours. Our streamlined process gets you results quickly.",
+      description:
+        "Create professional resumes in minutes, not hours. Our streamlined process gets you results quickly.",
       gradient: "from-blue-500 to-cyan-500",
       animation: featureCardAnimations.speedFeature,
-      iconAnimation: iconAnimations.speed
+      iconAnimation: iconAnimations.speed,
     },
     {
-      icon: <FaPalette className="text-3xl text-purple-600 dark:text-purple-400" />,
+      icon: (
+        <FaPalette className="text-3xl text-purple-600 dark:text-purple-400" />
+      ),
       title: "5 Professional Templates",
-      description: "Choose from carefully crafted templates designed by professionals to make you stand out.",
+      description:
+        "Choose from carefully crafted templates designed by professionals to make you stand out.",
       gradient: "from-purple-500 to-pink-500",
       animation: featureCardAnimations.designFeature,
-      iconAnimation: iconAnimations.customize
+      iconAnimation: iconAnimations.customize,
     },
     {
-      icon: <FaFileDownload className="text-3xl text-green-600 dark:text-green-400" />,
+      icon: (
+        <FaFileDownload className="text-3xl text-green-600 dark:text-green-400" />
+      ),
       title: "Instant PDF Export",
-      description: "Download your resume as a high-quality PDF ready for printing or digital sharing.",
+      description:
+        "Download your resume as a high-quality PDF ready for printing or digital sharing.",
       gradient: "from-green-500 to-emerald-500",
       animation: featureCardAnimations.downloadFeature,
-      iconAnimation: iconAnimations.download
+      iconAnimation: iconAnimations.download,
     },
     {
-      icon: <FaMobile className="text-3xl text-orange-600 dark:text-orange-400" />,
+      icon: (
+        <FaMobile className="text-3xl text-orange-600 dark:text-orange-400" />
+      ),
       title: "Mobile Responsive",
-      description: "Edit your resume on any device. Our responsive design works perfectly on phones and tablets.",
+      description:
+        "Edit your resume on any device. Our responsive design works perfectly on phones and tablets.",
       gradient: "from-orange-500 to-red-500",
       animation: featureCardAnimations.customizationFeature,
-      iconAnimation: iconAnimations.document
+      iconAnimation: iconAnimations.document,
     },
     {
-      icon: <FaRegLightbulb className="text-3xl text-yellow-600 dark:text-yellow-400" />,
+      icon: (
+        <FaRegLightbulb className="text-3xl text-yellow-600 dark:text-yellow-400" />
+      ),
       title: "Smart Suggestions",
-      description: "Get intelligent recommendations for content and formatting to improve your resume.",
+      description:
+        "Get intelligent recommendations for content and formatting to improve your resume.",
       gradient: "from-yellow-500 to-orange-500",
       animation: featureCardAnimations.aiFeature,
-      iconAnimation: iconAnimations.customize
+      iconAnimation: iconAnimations.customize,
     },
     {
-      icon: <FaShieldAlt className="text-3xl text-indigo-600 dark:text-indigo-400" />,
+      icon: (
+        <FaShieldAlt className="text-3xl text-indigo-600 dark:text-indigo-400" />
+      ),
       title: "Privacy First",
-      description: "Your data stays secure with local storage. No servers, no tracking, complete privacy.",
+      description:
+        "Your data stays secure with local storage. No servers, no tracking, complete privacy.",
       gradient: "from-indigo-500 to-purple-500",
       animation: featureCardAnimations.securityFeature,
-      iconAnimation: iconAnimations.document
+      iconAnimation: iconAnimations.document,
     },
   ];
 
@@ -95,7 +110,7 @@ const Home = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-blue-50 dark:from-gray-900 dark:via-gray-800 dark:to-blue-900">
       {/* Hero Section */}
-      <motion.section 
+      <motion.section
         className="relative py-20 px-4 overflow-hidden"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -112,7 +127,7 @@ const Home = () => {
             transition={{
               duration: 20,
               repeat: Infinity,
-              ease: "linear"
+              ease: "linear",
             }}
           />
           <motion.div
@@ -124,7 +139,7 @@ const Home = () => {
             transition={{
               duration: 25,
               repeat: Infinity,
-              ease: "linear"
+              ease: "linear",
             }}
           />
         </div>
@@ -149,17 +164,17 @@ const Home = () => {
             </h1>
           </motion.div>
 
-          <motion.p 
+          <motion.p
             className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 mb-8 max-w-3xl mx-auto leading-relaxed"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.5 }}
           >
-            Build a professional resume that gets you hired. Choose from beautiful templates, 
-            customize with ease, and download instantly.
+            Build a professional resume that gets you hired. Choose from
+            beautiful templates, customize with ease, and download instantly.
           </motion.p>
 
-          <motion.div 
+          <motion.div
             className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -168,9 +183,9 @@ const Home = () => {
             <motion.button
               onClick={handleGetStarted}
               className="group relative px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center space-x-2 text-lg"
-              whileHover={{ 
+              whileHover={{
                 scale: 1.05,
-                boxShadow: "0 20px 40px rgba(59, 130, 246, 0.3)"
+                boxShadow: "0 20px 40px rgba(59, 130, 246, 0.3)",
               }}
               whileTap={{ scale: 0.95 }}
             >
@@ -194,7 +209,7 @@ const Home = () => {
           </motion.div>
 
           {/* Stats Section */}
-          <motion.div 
+          <motion.div
             className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto"
             variants={staggerContainer}
             initial="hidden"
@@ -207,10 +222,14 @@ const Home = () => {
                 className="text-center"
                 whileHover={{ scale: 1.05 }}
               >
-                <motion.div 
+                <motion.div
                   className="text-3xl text-blue-600 dark:text-blue-400 mb-2"
                   animate={{ rotate: [0, 10, -10, 0] }}
-                  transition={{ duration: 2, repeat: Infinity, delay: index * 0.5 }}
+                  transition={{
+                    duration: 2,
+                    repeat: Infinity,
+                    delay: index * 0.5,
+                  }}
                 >
                   {stat.icon}
                 </motion.div>
@@ -227,7 +246,7 @@ const Home = () => {
       </motion.section>
 
       {/* Features Section */}
-      <motion.section 
+      <motion.section
         className="py-20 px-4 bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
@@ -235,16 +254,16 @@ const Home = () => {
         transition={{ duration: 0.8 }}
       >
         <div className="max-w-7xl mx-auto">
-          <motion.div 
+          <motion.div
             className="text-center mb-16"
             initial={{ y: 50, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            <motion.h2 
+            <motion.h2
               className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-gray-900 to-gray-600 dark:from-white dark:to-gray-300 bg-clip-text text-transparent"
-              animate={{ 
+              animate={{
                 backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
               }}
               transition={{ duration: 3, repeat: Infinity }}
@@ -252,11 +271,12 @@ const Home = () => {
               Why Choose Easy Resume?
             </motion.h2>
             <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
-              Everything you need to create a professional resume that gets you hired
+              Everything you need to create a professional resume that gets you
+              hired
             </p>
           </motion.div>
 
-          <motion.div 
+          <motion.div
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
             variants={staggerContainer}
             initial="hidden"
@@ -274,7 +294,7 @@ const Home = () => {
                 className="group relative bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-200/50 dark:border-gray-700/50 cursor-pointer overflow-hidden"
               >
                 <div className="flex flex-col items-center text-center relative z-10">
-                  <motion.div 
+                  <motion.div
                     className="mb-6 p-4 rounded-full bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-700 dark:to-gray-600"
                     variants={feature.iconAnimation}
                     initial="initial"
@@ -291,15 +311,15 @@ const Home = () => {
                     {feature.description}
                   </p>
                 </div>
-                
+
                 {/* Animated gradient border */}
-                <motion.div 
+                <motion.div
                   className={`absolute inset-0 bg-gradient-to-r ${feature.gradient} opacity-0 group-hover:opacity-10 rounded-2xl`}
                   initial={{ scale: 0 }}
                   whileHover={{ scale: 1 }}
                   transition={{ duration: 0.3 }}
                 />
-                
+
                 {/* Floating particles effect */}
                 <div className="absolute inset-0 overflow-hidden rounded-2xl">
                   {[...Array(3)].map((_, i) => (
@@ -329,7 +349,7 @@ const Home = () => {
       </motion.section>
 
       {/* CTA Section */}
-      <motion.section 
+      <motion.section
         className="py-20 px-4 bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 text-white relative overflow-hidden"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
@@ -370,14 +390,15 @@ const Home = () => {
               Ready to Land Your Dream Job?
             </h2>
             <p className="text-xl mb-8 opacity-90 max-w-2xl mx-auto">
-              Join thousands of professionals who have successfully created their resumes with our platform
+              Join thousands of professionals who have successfully created
+              their resumes with our platform
             </p>
             <motion.button
               onClick={handleGetStarted}
               className="group px-10 py-4 bg-white text-blue-600 font-bold rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center space-x-3 mx-auto text-lg"
-              whileHover={{ 
+              whileHover={{
                 scale: 1.05,
-                boxShadow: "0 20px 40px rgba(255, 255, 255, 0.3)"
+                boxShadow: "0 20px 40px rgba(255, 255, 255, 0.3)",
               }}
               whileTap={{ scale: 0.95 }}
             >

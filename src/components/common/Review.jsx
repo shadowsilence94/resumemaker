@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaStar, FaQuoteLeft, FaQuoteRight, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import { testimonialAnimations, staggerContainer, staggerItem } from '../../utils/animationUtils';
@@ -134,8 +134,6 @@ const Review = () => {
             Join thousands of satisfied users who have created professional resumes with our platform
           </motion.p>
         </motion.div>
-
-        {/* Featured Testimonial Carousel */}
         <motion.div 
           className="mb-20 max-w-4xl mx-auto"
           initial={{ opacity: 0, scale: 0.9 }}

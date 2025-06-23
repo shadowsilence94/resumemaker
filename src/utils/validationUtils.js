@@ -1,8 +1,4 @@
 /**
- * Validation utilities for resume data
- */
-
-/**
  * Validate email format
  * @param {string} email - Email to validate
  * @returns {boolean} True if email is valid
@@ -19,7 +15,7 @@ export const isValidEmail = (email) => {
  */
 export const isValidPhone = (phone) => {
   const phoneRegex = /^[\+]?[1-9][\d]{0,15}$/;
-  return phoneRegex.test(phone.replace(/[\s\-\(\)]/g, ''));
+  return phoneRegex.test(phone.replace(/[\s\-\(\)]/g, ""));
 };
 
 /**
@@ -43,31 +39,40 @@ export const isValidURL = (url) => {
  */
 export const validateResumeData = (resumeData) => {
   const errors = {};
-  
+
   // Personal Info validation
   if (!resumeData.personalInfo?.firstName?.trim()) {
-    errors.firstName = 'First name is required';
+    errors.firstName = "First name is required";
   }
-  
+
   if (!resumeData.personalInfo?.lastName?.trim()) {
-    errors.lastName = 'Last name is required';
+    errors.lastName = "Last name is required";
   }
-  
-  if (resumeData.personalInfo?.email && !isValidEmail(resumeData.personalInfo.email)) {
-    errors.email = 'Please enter a valid email address';
+
+  if (
+    resumeData.personalInfo?.email &&
+    !isValidEmail(resumeData.personalInfo.email)
+  ) {
+    errors.email = "Please enter a valid email address";
   }
-  
-  if (resumeData.personalInfo?.phone && !isValidPhone(resumeData.personalInfo.phone)) {
-    errors.phone = 'Please enter a valid phone number';
+
+  if (
+    resumeData.personalInfo?.phone &&
+    !isValidPhone(resumeData.personalInfo.phone)
+  ) {
+    errors.phone = "Please enter a valid phone number";
   }
-  
-  if (resumeData.personalInfo?.website && !isValidURL(resumeData.personalInfo.website)) {
-    errors.website = 'Please enter a valid URL';
+
+  if (
+    resumeData.personalInfo?.website &&
+    !isValidURL(resumeData.personalInfo.website)
+  ) {
+    errors.website = "Please enter a valid URL";
   }
-  
+
   return {
     isValid: Object.keys(errors).length === 0,
-    errors
+    errors,
   };
 };
 
@@ -77,6 +82,6 @@ export const validateResumeData = (resumeData) => {
  * @returns {string} Cleaned text
  */
 export const cleanText = (text) => {
-  if (!text) return '';
-  return text.trim().replace(/\s+/g, ' ');
+  if (!text) return "";
+  return text.trim().replace(/\s+/g, " ");
 };

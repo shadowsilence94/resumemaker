@@ -1,6 +1,4 @@
-/**
- * Custom hook for debouncing values
- */
+
 import { useState, useEffect } from 'react';
 
 /**

@@ -1,7 +1,4 @@
-/**
- * Custom hook for localStorage management
- */
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
 /**
  * Custom hook to manage localStorage with React state
@@ -10,7 +7,6 @@ import { useState, useEffect } from 'react';
  * @returns {[value, setValue]} - Current value and setter function
  */
 export const useLocalStorage = (key, initialValue) => {
-  // Get value from localStorage or use initial value
   const [storedValue, setStoredValue] = useState(() => {
     try {
       const item = window.localStorage.getItem(key);
@@ -21,11 +17,10 @@ export const useLocalStorage = (key, initialValue) => {
     }
   });
 
-  // Update localStorage when state changes
   const setValue = (value) => {
     try {
-      // Allow value to be a function so we have the same API as useState
-      const valueToStore = value instanceof Function ? value(storedValue) : value;
+      const valueToStore =
+        value instanceof Function ? value(storedValue) : value;
       setStoredValue(valueToStore);
       window.localStorage.setItem(key, JSON.stringify(valueToStore));
     } catch (error) {

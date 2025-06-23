@@ -1,20 +1,20 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { 
-  FaEnvelope, 
-  FaMapMarkerAlt, 
-  FaPhone, 
-  FaClock, 
+import {
+  FaEnvelope,
+  FaMapMarkerAlt,
+  FaPhone,
+  FaClock,
   FaGlobe,
   FaPaperPlane,
   FaCheckCircle,
-  FaExclamationTriangle
+  FaExclamationTriangle,
 } from "react-icons/fa";
-import { 
-  staggerContainer, 
-  staggerItem, 
+import {
+  staggerContainer,
+  staggerItem,
   featureCardAnimations,
-  iconAnimations
+  iconAnimations,
 } from "../../utils/animationUtils";
 
 const Contact = () => {
@@ -23,7 +23,7 @@ const Contact = () => {
     email: "",
     message: "",
   });
-  
+
   const [showAlert, setShowAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
   const [alertType, setAlertType] = useState("success");
@@ -31,7 +31,7 @@ const Contact = () => {
 
   const handleChange = (e) =>
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-    
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!formData.name || !formData.email || !formData.message) {
@@ -43,10 +43,12 @@ const Contact = () => {
     }
 
     setIsSubmitting(true);
-    
+
     // Simulate form submission
     setTimeout(() => {
-      setAlertMessage("Thank you for your message! We'll get back to you soon.");
+      setAlertMessage(
+        "Thank you for your message! We'll get back to you soon."
+      );
       setAlertType("success");
       setShowAlert(true);
       setFormData({ name: "", email: "", message: "" });
@@ -57,12 +59,14 @@ const Contact = () => {
 
   const contactInfo = [
     {
-      icon: <FaEnvelope className="text-2xl text-blue-600 dark:text-blue-400" />,
+      icon: (
+        <FaEnvelope className="text-2xl text-blue-600 dark:text-blue-400" />
+      ),
       title: "Email Us",
       content: "support@easyresume.com",
       description: "Get in touch via email",
       animation: featureCardAnimations.speedFeature,
-      iconAnimation: iconAnimations.document
+      iconAnimation: iconAnimations.document,
     },
     {
       icon: <FaPhone className="text-2xl text-green-600 dark:text-green-400" />,
@@ -70,58 +74,61 @@ const Contact = () => {
       content: "+66 (123) 456-7890",
       description: "Mon-Fri, 9AM-6PM EST",
       animation: featureCardAnimations.downloadFeature,
-      iconAnimation: iconAnimations.speed
+      iconAnimation: iconAnimations.speed,
     },
     {
-      icon: <FaMapMarkerAlt className="text-2xl text-red-600 dark:text-red-400" />,
+      icon: (
+        <FaMapMarkerAlt className="text-2xl text-red-600 dark:text-red-400" />
+      ),
       title: "Visit Us",
       content: "123 4th Floor, Central World",
       description: "Bangkok, Thailand",
       animation: featureCardAnimations.designFeature,
-      iconAnimation: iconAnimations.customize
+      iconAnimation: iconAnimations.customize,
     },
     {
-      icon: <FaClock className="text-2xl text-purple-600 dark:text-purple-400" />,
+      icon: (
+        <FaClock className="text-2xl text-purple-600 dark:text-purple-400" />
+      ),
       title: "Business Hours",
       content: "Monday - Friday",
       description: "9:00 AM - 6:00 PM EST",
       animation: featureCardAnimations.aiFeature,
-      iconAnimation: iconAnimations.speed
-    }
+      iconAnimation: iconAnimations.speed,
+    },
   ];
 
   const formAnimation = {
     initial: { opacity: 0, x: 50 },
-    animate: { 
-      opacity: 1, 
+    animate: {
+      opacity: 1,
       x: 0,
       transition: {
         duration: 0.8,
-        ease: "easeOut"
-      }
-    }
+        ease: "easeOut",
+      },
+    },
   };
 
   const inputAnimation = {
     initial: { opacity: 0, y: 20 },
-    animate: { 
-      opacity: 1, 
+    animate: {
+      opacity: 1,
       y: 0,
       transition: {
         duration: 0.5,
-        ease: "easeOut"
-      }
+        ease: "easeOut",
+      },
     },
     focus: {
       scale: 1.02,
-      transition: { duration: 0.2 }
-    }
+      transition: { duration: 0.2 },
+    },
   };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-purple-900 py-20 px-4">
       <div className="max-w-7xl mx-auto">
-        
         {/* Header Section */}
         <motion.div
           className="text-center mb-16"
@@ -129,28 +136,28 @@ const Contact = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <motion.h1 
+          <motion.h1
             className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 bg-clip-text text-transparent mb-6"
-            animate={{ 
+            animate={{
               backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
             }}
             transition={{ duration: 4, repeat: Infinity }}
           >
             Get in Touch
           </motion.h1>
-          <motion.p 
+          <motion.p
             className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3, duration: 0.8 }}
           >
-            Have questions about our resume builder? Need help with your resume? 
+            Have questions about our resume builder? Need help with your resume?
             We're here to help you succeed in your career journey.
           </motion.p>
         </motion.div>
 
         {/* Contact Info Cards */}
-        <motion.div 
+        <motion.div
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16"
           variants={staggerContainer}
           initial="hidden"
@@ -169,9 +176,9 @@ const Contact = () => {
             >
               {/* Background decoration */}
               <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-blue-100 to-purple-100 dark:from-blue-900 dark:to-purple-900 rounded-full -translate-y-10 translate-x-10 opacity-0 group-hover:opacity-30 transition-opacity duration-300"></div>
-              
+
               <div className="relative z-10">
-                <motion.div 
+                <motion.div
                   className="mb-4 flex justify-center"
                   variants={info.iconAnimation}
                   initial="initial"
@@ -197,7 +204,6 @@ const Contact = () => {
 
         {/* Main Content */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          
           {/* Contact Form */}
           <motion.div
             variants={formAnimation}
@@ -206,7 +212,7 @@ const Contact = () => {
             viewport={{ once: true }}
             className="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700"
           >
-            <motion.h2 
+            <motion.h2
               className="text-3xl font-bold text-gray-900 dark:text-white mb-6"
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -215,7 +221,7 @@ const Contact = () => {
             >
               Send us a Message
             </motion.h2>
-            
+
             <form onSubmit={handleSubmit} className="space-y-6">
               <motion.div
                 variants={inputAnimation}
@@ -287,9 +293,9 @@ const Contact = () => {
                 type="submit"
                 disabled={isSubmitting}
                 className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold py-4 px-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed"
-                whileHover={{ 
+                whileHover={{
                   scale: isSubmitting ? 1 : 1.02,
-                  boxShadow: "0 20px 40px rgba(59, 130, 246, 0.3)"
+                  boxShadow: "0 20px 40px rgba(59, 130, 246, 0.3)",
                 }}
                 whileTap={{ scale: isSubmitting ? 1 : 0.98 }}
                 initial={{ opacity: 0, y: 20 }}
@@ -302,7 +308,11 @@ const Contact = () => {
                     <motion.div
                       className="w-5 h-5 border-2 border-white border-t-transparent rounded-full"
                       animate={{ rotate: 360 }}
-                      transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                      transition={{
+                        duration: 1,
+                        repeat: Infinity,
+                        ease: "linear",
+                      }}
                     />
                     <span>Sending...</span>
                   </>
@@ -325,7 +335,7 @@ const Contact = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
           >
             {/* Visit Us Section */}
-            <motion.div 
+            <motion.div
               className="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700"
               whileHover={{ scale: 1.02 }}
               transition={{ duration: 0.3 }}
@@ -334,7 +344,7 @@ const Contact = () => {
                 <FaMapMarkerAlt className="mr-3 text-primary-600" />
                 Visit Us
               </h3>
-              
+
               {/* Interactive Map */}
               <div className="mb-6 rounded-xl overflow-hidden shadow-lg">
                 <iframe
@@ -348,10 +358,10 @@ const Contact = () => {
                   className="rounded-xl"
                 ></iframe>
               </div>
-              
+
               {/* Location Details */}
               <div className="space-y-4">
-                <motion.div 
+                <motion.div
                   className="flex items-start space-x-3"
                   initial={{ opacity: 0, x: -20 }}
                   whileInView={{ opacity: 1, x: 0 }}
@@ -360,16 +370,20 @@ const Contact = () => {
                 >
                   <FaMapMarkerAlt className="text-primary-600 mt-1 flex-shrink-0" />
                   <div>
-                    <h4 className="font-semibold text-gray-900 dark:text-white">Address</h4>
+                    <h4 className="font-semibold text-gray-900 dark:text-white">
+                      Address
+                    </h4>
                     <p className="text-gray-600 dark:text-gray-400">
-                      CentralWorld Shopping Center<br />
-                      999/9 Rama I Road, Pathumwan<br />
+                      CentralWorld Shopping Center
+                      <br />
+                      999/9 Rama I Road, Pathumwan
+                      <br />
                       Bangkok 10330, Thailand
                     </p>
                   </div>
                 </motion.div>
-                
-                <motion.div 
+
+                <motion.div
                   className="flex items-start space-x-3"
                   initial={{ opacity: 0, x: -20 }}
                   whileInView={{ opacity: 1, x: 0 }}
@@ -378,16 +392,20 @@ const Contact = () => {
                 >
                   <FaClock className="text-primary-600 mt-1 flex-shrink-0" />
                   <div>
-                    <h4 className="font-semibold text-gray-900 dark:text-white">Business Hours</h4>
+                    <h4 className="font-semibold text-gray-900 dark:text-white">
+                      Business Hours
+                    </h4>
                     <p className="text-gray-600 dark:text-gray-400">
-                      Monday - Sunday: 10:00 AM - 10:00 PM<br />
-                      Public Holidays: 10:00 AM - 8:00 PM<br />
+                      Monday - Sunday: 10:00 AM - 10:00 PM
+                      <br />
+                      Public Holidays: 10:00 AM - 8:00 PM
+                      <br />
                       24/7 Online Support Available
                     </p>
                   </div>
                 </motion.div>
-                
-                <motion.div 
+
+                <motion.div
                   className="flex items-start space-x-3"
                   initial={{ opacity: 0, x: -20 }}
                   whileInView={{ opacity: 1, x: 0 }}
@@ -396,10 +414,13 @@ const Contact = () => {
                 >
                   <FaGlobe className="text-primary-600 mt-1 flex-shrink-0" />
                   <div>
-                    <h4 className="font-semibold text-gray-900 dark:text-white">Service Area</h4>
+                    <h4 className="font-semibold text-gray-900 dark:text-white">
+                      Service Area
+                    </h4>
                     <p className="text-gray-600 dark:text-gray-400">
-                      We serve clients globally with our online resume building platform.
-                      Local consultations available in Bangkok and surrounding areas.
+                      We serve clients globally with our online resume building
+                      platform. Local consultations available in Bangkok and
+                      surrounding areas.
                     </p>
                   </div>
                 </motion.div>
@@ -407,13 +428,13 @@ const Contact = () => {
             </motion.div>
 
             {/* Quick Links */}
-            <motion.div 
+            <motion.div
               className="bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 text-white p-8 rounded-2xl shadow-xl"
               whileHover={{ scale: 1.02 }}
               transition={{ duration: 0.3 }}
             >
               <h3 className="text-2xl font-bold mb-6">Quick Links</h3>
-              <motion.div 
+              <motion.div
                 className="grid grid-cols-1 sm:grid-cols-2 gap-4"
                 variants={staggerContainer}
                 initial="hidden"
@@ -421,10 +442,22 @@ const Contact = () => {
                 viewport={{ once: true }}
               >
                 {[
-                  { name: "Create Resume", icon: <FaGlobe />, path: "/templates" },
-                  { name: "View Templates", icon: <FaEnvelope />, path: "/templates" },
-                  { name: "About Us", icon: <FaMapMarkerAlt />, path: "/about" },
-                  { name: "Reviews", icon: <FaClock />, path: "/reviews" }
+                  {
+                    name: "Create Resume",
+                    icon: <FaGlobe />,
+                    path: "/templates",
+                  },
+                  {
+                    name: "View Templates",
+                    icon: <FaEnvelope />,
+                    path: "/templates",
+                  },
+                  {
+                    name: "About Us",
+                    icon: <FaMapMarkerAlt />,
+                    path: "/about",
+                  },
+                  { name: "Reviews", icon: <FaClock />, path: "/reviews" },
                 ].map((link, index) => (
                   <motion.a
                     key={index}
@@ -458,18 +491,24 @@ const Contact = () => {
             exit={{ opacity: 0, x: 100, scale: 0.8 }}
             transition={{ duration: 0.3 }}
           >
-            <div className={`p-4 rounded-lg shadow-lg flex items-center space-x-3 ${
-              alertType === 'success' 
-                ? 'bg-green-500 text-white' 
-                : 'bg-red-500 text-white'
-            }`}>
-              {alertType === 'success' ? <FaCheckCircle /> : <FaExclamationTriangle />}
+            <div
+              className={`p-4 rounded-lg shadow-lg flex items-center space-x-3 ${
+                alertType === "success"
+                  ? "bg-green-500 text-white"
+                  : "bg-red-500 text-white"
+              }`}
+            >
+              {alertType === "success" ? (
+                <FaCheckCircle />
+              ) : (
+                <FaExclamationTriangle />
+              )}
               <span>{alertMessage}</span>
             </div>
           </motion.div>
         )}
       </AnimatePresence>
-      
+
       {/* Responsive CSS for tablet range */}
       <style>{`
         @media (min-width: 768px) and (max-width: 1179px) {

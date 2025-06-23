@@ -1,20 +1,20 @@
-import React, { useState, useCallback } from 'react';
-import Cropper from 'react-easy-crop';
-import { X, Check, RotateCcw } from 'lucide-react';
+import { useState, useCallback } from "react";
+import Cropper from "react-easy-crop";
+import { X, Check, RotateCcw } from "lucide-react";
 
 const createImage = (url) =>
   new Promise((resolve, reject) => {
     const image = new Image();
-    image.addEventListener('load', () => resolve(image));
-    image.addEventListener('error', (error) => reject(error));
-    image.setAttribute('crossOrigin', 'anonymous');
+    image.addEventListener("load", () => resolve(image));
+    image.addEventListener("error", (error) => reject(error));
+    image.setAttribute("crossOrigin", "anonymous");
     image.src = url;
   });
 
 async function getCroppedImg(imageSrc, pixelCrop) {
   const image = await createImage(imageSrc);
-  const canvas = document.createElement('canvas');
-  const ctx = canvas.getContext('2d');
+  const canvas = document.createElement("canvas");
+  const ctx = canvas.getContext("2d");
 
   if (!ctx) {
     return null;
@@ -38,7 +38,7 @@ async function getCroppedImg(imageSrc, pixelCrop) {
   return new Promise((resolve) => {
     canvas.toBlob((blob) => {
       if (!blob) {
-        console.error('Canvas is empty');
+        console.error("Canvas is empty");
         return;
       }
       const reader = new FileReader();
@@ -46,7 +46,7 @@ async function getCroppedImg(imageSrc, pixelCrop) {
       reader.onloadend = () => {
         resolve(reader.result);
       };
-    }, 'image/jpeg');
+    }, "image/jpeg");
   });
 }
 
@@ -69,19 +69,22 @@ const ImageCropper = ({ imageSrc, onCropComplete, onClose }) => {
     setRotation(rotation);
   }, []);
 
-  const onCropCompleteCallback = useCallback((croppedArea, croppedAreaPixels) => {
-    setCroppedAreaPixels(croppedAreaPixels);
-  }, []);
+  const onCropCompleteCallback = useCallback(
+    (croppedArea, croppedAreaPixels) => {
+      setCroppedAreaPixels(croppedAreaPixels);
+    },
+    []
+  );
 
   const handleCropConfirm = useCallback(async () => {
     if (!croppedAreaPixels) return;
-    
+
     setIsProcessing(true);
     try {
       const croppedImage = await getCroppedImg(imageSrc, croppedAreaPixels);
       onCropComplete(croppedImage);
     } catch (e) {
-      console.error('Error cropping image:', e);
+      console.error("Error cropping image:", e);
     } finally {
       setIsProcessing(false);
     }
@@ -96,7 +99,6 @@ const ImageCropper = ({ imageSrc, onCropComplete, onClose }) => {
   return (
     <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 p-4">
       <div className="bg-white dark:bg-gray-800 rounded-lg shadow-2xl w-full max-w-2xl max-h-[90vh] flex flex-col">
-        {/* Header */}
         <div className="flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-700">
           <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
             Crop Profile Image
@@ -110,7 +112,6 @@ const ImageCropper = ({ imageSrc, onCropComplete, onClose }) => {
           </button>
         </div>
 
-        {/* Cropper Area */}
         <div className="relative flex-1 min-h-[400px] bg-gray-100 dark:bg-gray-900">
           <Cropper
             image={imageSrc}
@@ -127,9 +128,7 @@ const ImageCropper = ({ imageSrc, onCropComplete, onClose }) => {
           />
         </div>
 
-        {/* Controls */}
         <div className="p-4 border-t border-gray-200 dark:border-gray-700 space-y-4">
-          {/* Zoom Control */}
           <div className="flex items-center space-x-3">
             <label className="text-sm font-medium text-gray-700 dark:text-gray-300 min-w-[60px]">
               Zoom:
@@ -148,7 +147,6 @@ const ImageCropper = ({ imageSrc, onCropComplete, onClose }) => {
             </span>
           </div>
 
-          {/* Rotation Control */}
           <div className="flex items-center space-x-3">
             <label className="text-sm font-medium text-gray-700 dark:text-gray-300 min-w-[60px]">
               Rotate:
@@ -166,11 +164,13 @@ const ImageCropper = ({ imageSrc, onCropComplete, onClose }) => {
               onClick={() => setRotation(0)}
               className="p-1 hover:bg-gray-100 dark:hover:bg-gray-700 rounded transition-colors"
             >
-              <RotateCcw size={16} className="text-gray-500 dark:text-gray-400" />
+              <RotateCcw
+                size={16}
+                className="text-gray-500 dark:text-gray-400"
+              />
             </button>
           </div>
 
-          {/* Action Buttons */}
           <div className="flex justify-end space-x-3 pt-2">
             <button
               onClick={handleClose}
