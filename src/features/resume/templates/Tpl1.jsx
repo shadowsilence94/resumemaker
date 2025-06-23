@@ -8,7 +8,14 @@ const Tpl1 = ({ resumeData: propResumeData }) => {
 
   if (!resumeData) return null;
 
-  const { personalInfo, summary, experience, education, skills } = resumeData;
+  const {
+    personalInfo,
+    summary,
+    experience,
+    education,
+    skills,
+    customSections,
+  } = resumeData;
 
   const formatUrl = (url) => {
     if (!url) return "#";
@@ -106,6 +113,21 @@ const Tpl1 = ({ resumeData: propResumeData }) => {
             )}
           </ul>
         </section>
+      )}
+
+      {/* Added Custom Sections */}
+      {(customSections || []).map(
+        (section) =>
+          sections?.customSections && (
+            <section key={section.id} className={styles.section}>
+              <h2>{section.title}</h2>
+              <ul>
+                {(section.details || []).map(
+                  (detail, idx) => detail && <li key={idx}>{detail}</li>
+                )}
+              </ul>
+            </section>
+          )
       )}
     </div>
   );

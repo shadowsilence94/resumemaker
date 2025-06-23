@@ -8,7 +8,14 @@ const Tpl4 = ({ resumeData: propResumeData }) => {
 
   if (!resumeData) return null;
 
-  const { personalInfo, summary, experience, education, skills } = resumeData;
+  const {
+    personalInfo,
+    summary,
+    experience,
+    education,
+    skills,
+    customSections,
+  } = resumeData;
 
   const formatUrl = (url) => {
     if (!url) return "#";
@@ -57,8 +64,7 @@ const Tpl4 = ({ resumeData: propResumeData }) => {
       {sections?.summary && summary && (
         <section className={styles.section}>
           <h2 className={styles.title}>Executive Summary</h2>
-          <p className={styles.summaryText}>{summary}</p>{" "}
-          {/* Changed this line */}
+          <p className={styles.summaryText}>{summary}</p>
         </section>
       )}
 
@@ -119,6 +125,21 @@ const Tpl4 = ({ resumeData: propResumeData }) => {
             )}
           </div>
         </section>
+      )}
+
+      {/* Added Custom Sections */}
+      {(customSections || []).map(
+        (section) =>
+          sections?.customSections && (
+            <section key={section.id} className={styles.section}>
+              <h2 className={styles.title}>{section.title}</h2>
+              <ul>
+                {(section.details || []).map(
+                  (detail, idx) => detail && <li key={idx}>{detail}</li>
+                )}
+              </ul>
+            </section>
+          )
       )}
     </div>
   );
