@@ -90,29 +90,53 @@ The project follows a standard Vite + React structure, organized for clarity and
 
 /
 |-- public/
+
 |-- src/
+
 |   |-- assets/
+
 |   |-- components/
+
 |   |   |-- common/
+
 |   |   |-- forms/
+
 |   |   |-- layout/
+
 |   |   |-- ui/
+
 |   |-- context/
+
 |   |-- features/
+
 |   |   |-- resume/
+
 |   |       |-- templates/ (Tpl1.jsx, Tpl1.module.css, etc.)
+
 |   |-- hooks/
+
 |   |-- pages/
+
 |   |-- utils/
+
 |   |-- App.jsx
+
 |   |-- main.jsx
+
 |   |-- index.css
+
 |-- .eslintrc.cjs
+
 |-- .gitignore
+
 |-- index.html
+
 |-- package.json
+
 |-- postcss.config.js
+
 |-- tailwind.config.js
+
 |-- README.md
 
 
