@@ -146,12 +146,23 @@ const TemplateSelection = () => {
           box-shadow: none !important;
           margin: 0 !important;
         }
-        @media (max-width: 1023px) {
+
+        /* Rule for extra small screens (phones) */
+        @media (max-width: 639px) {
+          .template-preview-scaler { transform: scale(0.24); }
+        }
+
+        /* Rule for small screens (tablets) */
+        @media (min-width: 640px) and (max-width: 1023px) {
           .template-preview-scaler { transform: scale(0.44); }
         }
+
+        /* Rule for medium screens */
         @media (min-width: 1024px) and (max-width: 1279px) {
           .template-preview-scaler { transform: scale(0.42); }
         }
+        
+        /* Rule for large screens */
         @media (min-width: 1280px) {
           .template-preview-scaler { transform: scale(0.32); }
         }
