@@ -5,41 +5,33 @@ export const generateOptimizedPDF = async (
   templateId,
   filename = "resume.pdf"
 ) => {
-  // Find the actual resume component, which should be the first child of the container
-  const resumeContent = element.firstElementChild;
-
-  if (!resumeContent) {
-    console.error("Could not find the resume content element to print.");
-    alert("An error occurred while preparing the PDF.");
-    return false;
+  if (!element) {
+    console.error("The element to print was not found.");
+    return;
   }
 
-  // Store the original margin style and theme to restore them later
-  const originalContentMargin = resumeContent.style.margin;
   const wasInDarkMode = document.documentElement.classList.contains("dark");
+  // Store the original transform style to restore it later
+  const originalTransform = element.style.transform;
 
   try {
-    // --- PREPARE FOR PDF RENDER ---
-
-    // 1. Force light mode to ensure a standard white background PDF
+    // --- Prepare for PDF Render ---
     if (wasInDarkMode) {
       document.documentElement.classList.remove("dark");
     }
-
-    // 2. Directly set the margin on the content element to 0. This is the key fix.
-    resumeContent.style.margin = "0";
+    // Temporarily reset the scale to ensure the content is captured correctly
+    element.style.transform = "scale(1)";
 
     // Allow a brief moment for the browser to apply these style changes
     await new Promise((resolve) => setTimeout(resolve, 50));
 
-    // --- CONFIGURE AND GENERATE PDF ---
-
+    // --- Configure and Generate PDF ---
     const options = {
       margin: 0,
       filename: filename,
       image: { type: "png", quality: 1.0 },
       html2canvas: {
-        scale: 2, // A scale of 2 is a good balance of quality and performance
+        scale: 2,
         useCORS: true,
         letterRendering: true,
         logging: false,
@@ -54,19 +46,16 @@ export const generateOptimizedPDF = async (
       enableLinks: true,
     };
 
-    // Generate the PDF from the container element
     await html2pdf().from(element).set(options).save();
+
+    return true;
   } catch (error) {
     console.error("Error generating PDF:", error);
     throw new Error("Failed to generate PDF: " + error.message);
   } finally {
-    // --- CLEAN UP ---
-    // This block always runs, ensuring the on-screen resume looks correct again.
-
-    // 1. Restore the original margin
-    resumeContent.style.margin = originalContentMargin;
-
-    // 2. Restore dark mode if it was originally active
+    // --- Clean Up ---
+    // Restore the original styles so the on-screen preview looks correct again.
+    element.style.transform = originalTransform;
     if (wasInDarkMode) {
       document.documentElement.classList.add("dark");
     }

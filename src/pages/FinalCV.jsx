@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import React, { useRef } from "react";
 import { useParams, Link } from "react-router-dom";
 import { FileDown, Layers, Home, Edit } from "lucide-react";
 import { generateOptimizedPDF } from "../utils/pdfUtils";
@@ -44,7 +44,8 @@ const FinalCV = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 dark:bg-gray-900">
+    // Add padding-bottom to the main container to make space for the footer
+    <div className="min-h-screen bg-gray-100 dark:bg-gray-900 pb-24 sm:pb-0">
       {/* Header */}
       <div className="sticky top-0 z-40 bg-white/95 dark:bg-gray-800/95 backdrop-blur-sm border-b border-gray-200 dark:border-gray-700 shadow-md">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -87,27 +88,24 @@ const FinalCV = () => {
                 Change Template
               </Link>
             </div>
-            {/* Placeholder for mobile layout balance */}
             <div className="sm:hidden w-12"></div>
           </div>
         </div>
       </div>
 
-      {/* This wrapper controls the spacing and height of the preview area */}
+      {/* Resume Preview Content Wrapper */}
       <div className="preview-wrapper">
         <div ref={resumeRef} className="resume-preview-container">
           {TemplateToRender && <TemplateToRender />}
         </div>
       </div>
 
-      {/* Main floating button for Edit action */}
       <FloatingButton
         to={`/editor/${templateId}`}
         icon={<Edit size={22} />}
         text="Edit"
       />
 
-      {/* Floating Action Buttons for Mobile */}
       <div className="sm:hidden fixed bottom-4 left-4 z-50 flex flex-col gap-3">
         <button
           onClick={handleDownloadPdf}
@@ -125,58 +123,33 @@ const FinalCV = () => {
         </Link>
       </div>
 
-      {/* This style block contains the final, robust scaling rules */}
       <style>{`
                 .preview-wrapper {
-                    /* The height of this wrapper is determined by the scaled content inside */
-                    /* On mobile, this will be the scaled height. On desktop, the full height. */
-                    height: calc(297mm * var(--resume-scale, 1));
                     padding: 2rem 0;
-                    position: relative;
+                    display: flex;
+                    justify-content: center;
                 }
-
                 .resume-preview-container {
                     width: 210mm;
                     height: 297mm;
+                    transform-origin: top center;
                     background: white;
                     box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-                    
-                    /* This new combination of styles ensures perfect centering and scaling */
-                    position: absolute;
-                    top: 0;
-                    left: 50%;
-                    transform-origin: top center;
                     transition: transform 0.2s ease-out;
-                    transform: translateX(-50%) scale(var(--resume-scale, 1));
                 }
 
-                /* --- CSS Variables for Responsive Scaling --- */
+                @media (min-width: 821px) {
+                    .resume-preview-container {
+                        transform: scale(1);
+                    }
+                }
                 
-                /* Default scale for desktop */
-                :root {
-                    --resume-scale: 1;
-                }
-
-                /* Tablets and small laptops */
                 @media (max-width: 820px) {
-                    :root { --resume-scale: 0.85; }
-                }
-
-                /* Small tablets */
-                @media (max-width: 640px) {
-                    :root { --resume-scale: 0.6; }
-                }
-
-                /* Large phones */
-                @media (max-width: 500px) {
-                    :root { --resume-scale: 0.53; }
+                    .resume-preview-container {
+                        transform: scale(calc(95vw / 210mm));
+                    }
                 }
                 
-                /* Standard and small phones */
-                @media (max-width: 420px) {
-                    :root { --resume-scale: 0.45; }
-                }
-
                 .resume-preview-container > div {
                     box-shadow: none !important;
                     overflow: hidden !important;
