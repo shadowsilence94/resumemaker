@@ -1,6 +1,6 @@
-import { useRef } from "react";
+import React, { useRef } from "react";
 import { useParams, Link } from "react-router-dom";
-import { FileDown, Layers, Home } from "lucide-react";
+import { FileDown, Layers, Home, Edit } from "lucide-react";
 import { generateOptimizedPDF } from "../utils/pdfUtils";
 
 import Tpl1 from "../features/resume/templates/Tpl1";
@@ -8,6 +8,7 @@ import Tpl2 from "../features/resume/templates/Tpl2";
 import Tpl3 from "../features/resume/templates/Tpl3";
 import Tpl4 from "../features/resume/templates/Tpl4";
 import Tpl5 from "../features/resume/templates/Tpl5";
+import FloatingButton from "../components/ui/FloatingButton";
 
 const templateMap = {
   tpl1: Tpl1,
@@ -43,138 +44,142 @@ const FinalCV = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800">
-      <div className="sticky top-0 z-50 bg-white/95 dark:bg-gray-800/95 backdrop-blur-sm border-b border-gray-200 dark:border-gray-700 shadow-lg">
+    <div className="min-h-screen bg-gray-100 dark:bg-gray-900">
+      {/* Header */}
+      <div className="sticky top-0 z-40 bg-white/95 dark:bg-gray-800/95 backdrop-blur-sm border-b border-gray-200 dark:border-gray-700 shadow-md">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col sm:flex-row justify-between items-center py-4 gap-4">
+          <div className="flex justify-between items-center py-4">
             <div className="flex items-center">
               <Link
                 to="/"
-                className="flex items-center text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200"
+                className="flex items-center text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400"
               >
                 <Home size={20} className="mr-2" />
-                <span className="font-medium">Easy Resume</span>
+                <span className="font-medium hidden sm:inline">
+                  Easy Resume
+                </span>
               </Link>
             </div>
 
             <div className="text-center">
-              <h1 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white">
+              <h1 className="text-lg sm:text-xl font-bold text-gray-900 dark:text-white">
                 Resume Preview
               </h1>
-              <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
-                Template:{" "}
+              <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400">
                 {templateNames[templateId] || templateId?.toUpperCase()}
               </p>
             </div>
 
-            <div className="flex flex-col sm:flex-row items-center gap-3">
+            {/* Buttons for Desktop View */}
+            <div className="hidden sm:flex items-center gap-3">
               <button
                 onClick={handleDownloadPdf}
-                className="flex items-center bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-semibold py-2.5 px-5 rounded-lg transition-all duration-200 shadow-md hover:shadow-lg transform hover:scale-105 w-full sm:w-auto"
+                className="flex items-center bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg shadow-sm transition-transform hover:scale-105"
               >
-                <FileDown size={18} className="mr-2" />
-                <span>Download PDF</span>
+                <FileDown size={16} className="mr-2" />
+                Download
               </button>
               <Link
                 to="/templates"
-                className="flex items-center bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white font-semibold py-2.5 px-5 rounded-lg transition-all duration-200 shadow-md hover:shadow-lg transform hover:scale-105 w-full sm:w-auto"
+                className="flex items-center bg-gray-600 hover:bg-gray-700 text-white font-semibold py-2 px-4 rounded-lg shadow-sm transition-transform hover:scale-105"
               >
-                <Layers size={18} className="mr-2" />
-                <span>Change Template</span>
+                <Layers size={16} className="mr-2" />
+                Change Template
               </Link>
             </div>
+            {/* Placeholder for mobile layout balance */}
+            <div className="sm:hidden w-12"></div>
           </div>
         </div>
       </div>
 
-      <div className="py-4 sm:py-8">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-white dark:bg-gray-800 rounded-lg sm:rounded-2xl shadow-xl p-4 sm:p-6 lg:p-8">
-            <div className="flex justify-center">
-              <div
-                ref={resumeRef}
-                className="resume-preview-container"
-                style={{
-                  width: "210mm",
-                  minHeight: "297mm",
-                  backgroundColor: "#ffffff",
-                  boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
-                  borderRadius: "4px",
-                  transformOrigin: "top center",
-                }}
-              >
-                {TemplateToRender && <TemplateToRender />}
-              </div>
-            </div>
-          </div>
-
-          <div className="mt-8 bg-blue-50 dark:bg-blue-900/20 rounded-xl p-6">
-            <h3 className="text-lg font-semibold text-blue-900 dark:text-blue-100 mb-3">
-              💡 Tips for Best Results
-            </h3>
-            <ul className="text-blue-800 dark:text-blue-200 space-y-2 text-sm">
-              <li>• Download your resume as PDF for the best print quality</li>
-              <li>
-                • The PDF will be optimized for A4 paper size (210mm × 297mm)
-              </li>
-              <li>
-                • Try different templates to find the one that best suits your
-                industry
-              </li>
-              <li>
-                • Make sure all your information is complete before downloading
-              </li>
-            </ul>
-          </div>
+      {/* This wrapper controls the spacing and height of the preview area */}
+      <div className="preview-wrapper">
+        <div ref={resumeRef} className="resume-preview-container">
+          {TemplateToRender && <TemplateToRender />}
         </div>
       </div>
 
+      {/* Main floating button for Edit action */}
+      <FloatingButton
+        to={`/editor/${templateId}`}
+        icon={<Edit size={22} />}
+        text="Edit"
+      />
+
+      {/* Floating Action Buttons for Mobile */}
+      <div className="sm:hidden fixed bottom-4 left-4 z-50 flex flex-col gap-3">
+        <button
+          onClick={handleDownloadPdf}
+          className="flex items-center justify-center bg-blue-600 hover:bg-blue-700 text-white font-bold w-14 h-14 rounded-full shadow-lg transition-transform hover:scale-110"
+          aria-label="Download PDF"
+        >
+          <FileDown size={22} />
+        </button>
+        <Link
+          to="/templates"
+          className="flex items-center justify-center bg-gray-600 hover:bg-gray-700 text-white font-bold w-14 h-14 rounded-full shadow-lg transition-transform hover:scale-110"
+          aria-label="Change Template"
+        >
+          <Layers size={22} />
+        </Link>
+      </div>
+
+      {/* This style block contains the final, robust scaling rules */}
       <style>{`
+                .preview-wrapper {
+                    /* The height of this wrapper is determined by the scaled content inside */
+                    /* On mobile, this will be the scaled height. On desktop, the full height. */
+                    height: calc(297mm * var(--resume-scale, 1));
+                    padding: 2rem 0;
+                    position: relative;
+                }
+
                 .resume-preview-container {
+                    width: 210mm;
+                    height: 297mm;
+                    background: white;
+                    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+                    
+                    /* This new combination of styles ensures perfect centering and scaling */
+                    position: absolute;
+                    top: 0;
+                    left: 50%;
                     transform-origin: top center;
-                    overflow: visible;
+                    transition: transform 0.2s ease-out;
+                    transform: translateX(-50%) scale(var(--resume-scale, 1));
                 }
+
+                /* --- CSS Variables for Responsive Scaling --- */
                 
+                /* Default scale for desktop */
+                :root {
+                    --resume-scale: 1;
+                }
+
+                /* Tablets and small laptops */
+                @media (max-width: 820px) {
+                    :root { --resume-scale: 0.85; }
+                }
+
+                /* Small tablets */
                 @media (max-width: 640px) {
-                    .resume-preview-container {
-                        transform: scale(0.6);
-                        margin-bottom: -40%;
-                    }
+                    :root { --resume-scale: 0.6; }
+                }
+
+                /* Large phones */
+                @media (max-width: 500px) {
+                    :root { --resume-scale: 0.53; }
                 }
                 
-                @media (min-width: 641px) and (max-width: 768px) {
-                    .resume-preview-container {
-                        transform: scale(0.75);
-                        margin-bottom: -25%;
-                    }
+                /* Standard and small phones */
+                @media (max-width: 420px) {
+                    :root { --resume-scale: 0.45; }
                 }
-                
-                @media (min-width: 769px) and (max-width: 1024px) {
-                    .resume-preview-container {
-                        transform: scale(0.85);
-                        margin-bottom: -15%;
-                    }
-                }
-                
-                @media (min-width: 1025px) and (max-width: 1400px) {
-                    .resume-preview-container {
-                        transform: scale(0.95);
-                        margin-bottom: -5%;
-                    }
-                }
-                
-                @media (min-width: 1401px) {
-                    .resume-preview-container {
-                        transform: scale(1);
-                        margin-bottom: 0;
-                    }
-                }
-                
-                .resume-preview-container * {
-                    word-wrap: normal !important;
-                    overflow-wrap: normal !important;
-                    hyphens: none !important;
-                    white-space: normal !important;
+
+                .resume-preview-container > div {
+                    box-shadow: none !important;
+                    overflow: hidden !important;
                 }
             `}</style>
     </div>
