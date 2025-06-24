@@ -13,7 +13,7 @@ const Footer = () => {
       <div className="max-w-7xl mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-4 gap-10">
         <div className="space-y-4 flex flex-col items-center text-center md:items-start md:text-left">
           <div className="flex items-center gap-2">
-            <FaFileAlt className="text-blue-600 dark:text-blue-400 text-2xl" />
+            <img src="/favicon.svg" alt="Easy Resume Logo" className="w-8 h-8" />
             <span className="text-xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400 bg-clip-text text-transparent">
               EasyResume
             </span>
