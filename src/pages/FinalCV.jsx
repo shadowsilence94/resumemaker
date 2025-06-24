@@ -44,8 +44,8 @@ const FinalCV = () => {
   };
 
   return (
-    // Add padding-bottom to the main container to make space for the footer
-    <div className="min-h-screen bg-gray-100 dark:bg-gray-900 pb-24 sm:pb-0">
+    // Add padding-bottom to the main page container to prevent footer overlap
+    <div className="min-h-screen bg-gray-100 dark:bg-gray-900 pb-24">
       {/* Header */}
       <div className="sticky top-0 z-40 bg-white/95 dark:bg-gray-800/95 backdrop-blur-sm border-b border-gray-200 dark:border-gray-700 shadow-md">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -61,7 +61,6 @@ const FinalCV = () => {
                 </span>
               </Link>
             </div>
-
             <div className="text-center">
               <h1 className="text-lg sm:text-xl font-bold text-gray-900 dark:text-white">
                 Resume Preview
@@ -70,8 +69,6 @@ const FinalCV = () => {
                 {templateNames[templateId] || templateId?.toUpperCase()}
               </p>
             </div>
-
-            {/* Buttons for Desktop View */}
             <div className="hidden sm:flex items-center gap-3">
               <button
                 onClick={handleDownloadPdf}
@@ -131,28 +128,30 @@ const FinalCV = () => {
                 }
                 .resume-preview-container {
                     width: 210mm;
-                    height: 297mm;
+                    /* Use min-height to allow content to grow beyond one page */
+                    min-height: 297mm;
                     transform-origin: top center;
                     background: white;
                     box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
                     transition: transform 0.2s ease-out;
+                    transform: scale(var(--resume-scale, 1));
                 }
 
-                @media (min-width: 821px) {
-                    .resume-preview-container {
-                        transform: scale(1);
-                    }
+                :root {
+                    --resume-scale: 1.0;
                 }
-                
                 @media (max-width: 820px) {
-                    .resume-preview-container {
-                        transform: scale(calc(95vw / 210mm));
-                    }
+                    :root { --resume-scale: 0.9; }
                 }
-                
+                @media (max-width: 640px) {
+                    :root { --resume-scale: 0.6; }
+                }
+                @media (max-width: 450px) {
+                    :root { --resume-scale: 0.45; }
+                }
+
                 .resume-preview-container > div {
                     box-shadow: none !important;
-                    overflow: hidden !important;
                 }
             `}</style>
     </div>
