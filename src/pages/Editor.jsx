@@ -30,28 +30,27 @@ const Editor = () => {
         alert("Please select a valid image file.");
         return;
       }
-
       if (file.size > 5 * 1024 * 1024) {
         alert("Please select an image smaller than 5MB.");
         return;
       }
 
       const reader = new FileReader();
-      reader.onloadend = () => {
-        setImageForCropping(reader.result);
-      };
-      reader.onerror = () => {
-        alert("Error reading the image file.");
-      };
+      reader.onloadend = () => setImageForCropping(reader.result);
+      reader.onerror = () => alert("Error reading the image file.");
       reader.readAsDataURL(file);
     }
     e.target.value = "";
   };
+
   const handleCropComplete = (croppedImage) => {
     updateField("personalInfo", "profileImage", croppedImage);
     setImageForCropping(null);
   };
+
   const handleClearAll = () => {
+    // NOTE: In a production app, it's better to replace window.confirm
+    // with a custom modal component for better user experience.
     if (
       window.confirm(
         "Are you sure you want to clear all data? This cannot be undone."
@@ -60,17 +59,20 @@ const Editor = () => {
       clearResumeData();
     }
   };
+
   const updateField = (section, field, value) => {
     setResumeData((prev) => ({
       ...prev,
       [section]: { ...prev[section], [field]: value },
     }));
   };
+
   const updateNestedField = (index, section, field, value) => {
     const newArray = [...(resumeData[section] || [])];
     newArray[index] = { ...newArray[index], [field]: value };
     setResumeData((prev) => ({ ...prev, [section]: newArray }));
   };
+
   const addListItem = (section) => {
     let newItem;
     if (section === "experience")
@@ -104,17 +106,21 @@ const Editor = () => {
       [section]: [...(prev[section] || []), newItem],
     }));
   };
+
   const removeListItem = (index, section) => {
     const newArray = [...resumeData[section]];
     newArray.splice(index, 1);
     setResumeData((prev) => ({ ...prev, [section]: newArray }));
   };
+
   const toggleSectionVisibility = (section) => {
     setSections((prev) => ({ ...prev, [section]: !prev[section] }));
   };
 
   return (
-    <div className="max-w-4xl mx-auto p-4 md:p-8">
+    <div className="max-w-4xl mx-auto p-4 md:p-8 pb-28">
+      {" "}
+      {/* Added padding-bottom */}
       {imageForCropping && (
         <ImageCropper
           imageSrc={imageForCropping}
@@ -122,17 +128,10 @@ const Editor = () => {
           onClose={() => setImageForCropping(null)}
         />
       )}
-
-      <div className="flex justify-center items-center mb-8 relative">
-        <h1 className="text-3xl md:text-4xl font-bold text-center dark:text-white">
+      <div className="text-center mb-8">
+        <h1 className="text-3xl md:text-4xl font-bold dark:text-white">
           Resume Editor
         </h1>
-        <button
-          onClick={handleClearAll}
-          className="absolute right-0 top-1/2 -translate-y-1/2 bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-lg flex items-center text-sm shadow-lg transition-transform transform hover:scale-105"
-        >
-          <Trash2 size={16} className="mr-2" /> Clear All
-        </button>
       </div>
       <div className="space-y-8">
         <EditorSection title="Personal Information">
@@ -506,6 +505,16 @@ const Editor = () => {
           className="w-full border-2 border-dashed border-gray-300 dark:border-gray-600 text-gray-500 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700 py-4 rounded-lg flex justify-center items-center"
         >
           <Plus size={20} className="mr-2" /> Add Custom Section
+        </button>
+      </div>
+      {/* New Floating Action Button for Clear All */}
+      <div className="fixed bottom-8 left-8 z-50">
+        <button
+          onClick={handleClearAll}
+          className="flex items-center justify-center w-14 h-14 bg-red-600 hover:bg-red-700 text-white rounded-full shadow-lg transition-transform transform hover:scale-110"
+          aria-label="Clear All Data"
+        >
+          <Trash2 size={22} />
         </button>
       </div>
     </div>

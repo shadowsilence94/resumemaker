@@ -103,9 +103,9 @@ const Home = () => {
     { number: "5min", label: "Average Time", icon: <FaClock /> },
   ];
 
-  // Animation for the main title
+  // This is the new logic to handle word wrapping correctly
   const titleText = "Create Your Perfect Resume";
-  const titleLetters = titleText.split("");
+  const titleWords = titleText.split(" ");
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-blue-50 dark:from-gray-900 dark:via-gray-800 dark:to-blue-900">
@@ -116,7 +116,6 @@ const Home = () => {
         animate={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
       >
-        {/* Animated background elements */}
         <div className="absolute inset-0 overflow-hidden">
           <motion.div
             className="absolute top-20 left-10 w-72 h-72 bg-blue-200 dark:bg-blue-800 rounded-full mix-blend-multiply filter blur-xl opacity-30"
@@ -151,15 +150,24 @@ const Home = () => {
             animate="visible"
             className="mb-6"
           >
-            <h1 className="text-5xl md:text-7xl font-bold bg-gradient-to-r from-gray-900 via-blue-800 to-purple-800 dark:from-white dark:via-blue-200 dark:to-purple-200 bg-clip-text text-transparent leading-tight">
-              {titleLetters.map((letter, index) => (
-                <motion.span
-                  key={index}
-                  variants={letterAnimation}
-                  className="inline-block"
+            <h1 className="text-5xl md:text-7xl font-bold bg-gradient-to-r from-gray-900 via-blue-800 to-purple-800 dark:from-white dark:via-blue-200 dark:to-purple-200 bg-clip-text text-transparent leading-tight text-balance">
+              {/* We now map over words, and then letters, to keep words together */}
+              {titleWords.map((word, wordIndex) => (
+                <span
+                  key={wordIndex}
+                  className="inline-block whitespace-nowrap"
                 >
-                  {letter === " " ? "\u00A0" : letter}
-                </motion.span>
+                  {word.split("").map((letter, letterIndex) => (
+                    <motion.span
+                      key={letterIndex}
+                      variants={letterAnimation}
+                      className="inline-block"
+                    >
+                      {letter}
+                    </motion.span>
+                  ))}
+                  {"\u00A0"}
+                </span>
               ))}
             </h1>
           </motion.div>
@@ -311,16 +319,12 @@ const Home = () => {
                     {feature.description}
                   </p>
                 </div>
-
-                {/* Animated gradient border */}
                 <motion.div
                   className={`absolute inset-0 bg-gradient-to-r ${feature.gradient} opacity-0 group-hover:opacity-10 rounded-2xl`}
                   initial={{ scale: 0 }}
                   whileHover={{ scale: 1 }}
                   transition={{ duration: 0.3 }}
                 />
-
-                {/* Floating particles effect */}
                 <div className="absolute inset-0 overflow-hidden rounded-2xl">
                   {[...Array(3)].map((_, i) => (
                     <motion.div
@@ -348,7 +352,6 @@ const Home = () => {
         </div>
       </motion.section>
 
-      {/* CTA Section */}
       <motion.section
         className="py-20 px-4 bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 text-white relative overflow-hidden"
         initial={{ opacity: 0 }}
@@ -356,7 +359,6 @@ const Home = () => {
         viewport={{ once: true, amount: 0.3 }}
         transition={{ duration: 0.8 }}
       >
-        {/* Animated background pattern */}
         <div className="absolute inset-0">
           {[...Array(20)].map((_, i) => (
             <motion.div

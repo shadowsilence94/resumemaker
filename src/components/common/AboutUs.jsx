@@ -79,7 +79,7 @@ const AboutUs = () => {
 
   const teamMembers = [
     {
-      name: "Mr Phyo",
+      name: "Mr. Phyo",
       role: "Lead Developer",
       image: "/profiles/arthur.jpeg",
       bio: "Full-stack developer with lots of experience in creating user-friendly applications.",
@@ -89,7 +89,7 @@ const AboutUs = () => {
       },
     },
     {
-      name: "Htut Ko Ko",
+      name: "Mr. Htut Ko Ko",
       role: "Product Manager",
       image: "/profiles/htutkoko.jpg",
       bio: "Strategic thinker focused on building products that solve real problems for users.",
@@ -99,7 +99,7 @@ const AboutUs = () => {
       },
     },
     {
-      name: "Erina",
+      name: "Ms. Erina",
       role: "UI/UX Designer",
       image: "/profiles/erina.jpg",
       bio: "Creative designer passionate about crafting beautiful and intuitive user experiences.",
@@ -111,8 +111,8 @@ const AboutUs = () => {
   ];
 
   const stats = [
-    { number: "50K+", label: "Happy Users", icon: "👥" },
-    { number: "100K+", label: "Resumes Created", icon: "📄" },
+    { number: "10K+", label: "Happy Users", icon: "👥" },
+    { number: "50K+", label: "Resumes Created", icon: "📄" },
     { number: "98%", label: "Success Rate", icon: "🎯" },
     { number: "24/7", label: "Support", icon: "🚀" },
   ];
