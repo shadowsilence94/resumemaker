@@ -49,6 +49,9 @@
 .dark .contactInfo {
   color: #d1d5db;
 }
+.dark .contactInfo a {
+  color: #93c5fd;
+}
 .contactInfo span {
   margin: 0 8px;
   display: inline-block;
@@ -69,6 +72,11 @@
 .dark .section h2 {
   color: #60a5fa;
   border-bottom-color: #374151;
+}
+/* This new rule fixes the invisible text in dark mode */
+.dark .section p,
+.dark .section ul {
+  color: #e5e7eb;
 }
 .job {
   margin-bottom: 1.5rem;
@@ -102,9 +110,6 @@
 }
 .dark .job h4 {
   color: #d1d5db;
-}
-.dark .job ul {
-  color: #e5e7eb;
 }
 .skillsList {
   list-style: none;

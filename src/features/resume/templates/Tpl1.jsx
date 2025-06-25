@@ -1,3 +1,4 @@
+import React from "react";
 import { useResumeContext } from "../../../context/ResumeContext";
 import styles from "./Tpl1.module.css";
 
@@ -61,8 +62,8 @@ const Tpl1 = ({ resumeData: propResumeData }) => {
       {sections?.experience && (experience || []).length > 0 && (
         <section className={styles.section}>
           <h2>Experience</h2>
-          {(experience || []).map((exp, index) => (
-            <div key={exp.id || index} className={styles.job}>
+          {(experience || []).map((exp) => (
+            <div key={exp.id} className={styles.job}>
               <div className={styles.jobHeader}>
                 <h3>{exp.jobTitle}</h3>
                 <span>
@@ -88,8 +89,8 @@ const Tpl1 = ({ resumeData: propResumeData }) => {
       {sections?.education && (education || []).length > 0 && (
         <section className={styles.section}>
           <h2>Education</h2>
-          {(education || []).map((edu, index) => (
-            <div key={edu.id || index} className={styles.job}>
+          {(education || []).map((edu) => (
+            <div key={edu.id} className={styles.job}>
               <div className={styles.jobHeader}>
                 <h3>{edu.degree}</h3>
                 <span>{edu.graduationDate}</span>

@@ -1,7 +1,15 @@
-import React, { useRef } from "react";
+import React, { useRef, useState, useLayoutEffect } from "react";
 import { useParams, Link } from "react-router-dom";
-import { FileDown, Layers, Home, Edit } from "lucide-react";
+import {
+  FileDown,
+  Layers,
+  Home,
+  Edit,
+  ChevronLeft,
+  ChevronRight,
+} from "lucide-react";
 import { generateOptimizedPDF } from "../utils/pdfUtils";
+import { useResumeContext } from "../context/ResumeContext";
 
 import Tpl1 from "../features/resume/templates/Tpl1";
 import Tpl2 from "../features/resume/templates/Tpl2";
@@ -28,72 +36,110 @@ const templateNames = {
 
 const FinalCV = () => {
   const { templateId } = useParams();
-  const resumeRef = useRef();
+  const { resumeData } = useResumeContext();
+  const resumeContentRef = useRef(null);
   const TemplateToRender = templateMap[templateId];
 
-  const handleDownloadPdf = async () => {
-    const input = resumeRef.current;
-    if (!input) return;
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const A4_HEIGHT_IN_PX = 1123;
 
-    try {
-      await generateOptimizedPDF(input, templateId, "my-resume.pdf");
-    } catch (error) {
-      console.error("Error generating PDF:", error);
-      alert("Failed to generate PDF. Please try again.");
-    }
+  // This hook now has a stable dependency array, which fixes the console warning.
+  useLayoutEffect(() => {
+    const calculatePages = () => {
+      if (resumeContentRef.current) {
+        const contentHeight = resumeContentRef.current.scrollHeight;
+        setTotalPages(Math.max(1, Math.ceil(contentHeight / A4_HEIGHT_IN_PX)));
+      }
+    };
+
+    const timer = setTimeout(calculatePages, 200); // Small delay for content to render
+    window.addEventListener("resize", calculatePages);
+
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener("resize", calculatePages);
+    };
+  }, [resumeData, TemplateToRender]); // Dependencies are now stable
+
+  const handleDownloadPdf = () => {
+    generateOptimizedPDF(resumeContentRef.current, templateId, "my-resume.pdf");
   };
 
+  const goToNextPage = () => setCurrentPage((p) => Math.min(p + 1, totalPages));
+  const goToPrevPage = () => setCurrentPage((p) => Math.max(p - 1, 1));
+
   return (
-    // Add padding-bottom to the main page container to prevent footer overlap
-    <div className="min-h-screen bg-gray-100 dark:bg-gray-900 pb-24">
-      {/* Header */}
-      <div className="sticky top-0 z-40 bg-white/95 dark:bg-gray-800/95 backdrop-blur-sm border-b border-gray-200 dark:border-gray-700 shadow-md">
+    <div className="min-h-screen bg-gray-100 dark:bg-gray-900 pb-20">
+      <header className="sticky top-0 z-40 bg-white/95 dark:bg-gray-800/95 backdrop-blur-sm border-b border-gray-200 dark:border-gray-700">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center py-4">
-            <div className="flex items-center">
-              <Link
-                to="/"
-                className="flex items-center text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400"
-              >
-                <Home size={20} className="mr-2" />
-                <span className="font-medium hidden sm:inline">
-                  Easy Resume
-                </span>
-              </Link>
-            </div>
+          <div className="flex justify-between items-center py-3">
+            <Link
+              to="/"
+              className="p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700"
+            >
+              <Home size={20} />
+            </Link>
             <div className="text-center">
-              <h1 className="text-lg sm:text-xl font-bold text-gray-900 dark:text-white">
-                Resume Preview
+              <h1 className="text-lg font-bold text-gray-900 dark:text-white">
+                {templateNames[templateId] || "Resume Preview"}
               </h1>
-              <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400">
-                {templateNames[templateId] || templateId?.toUpperCase()}
-              </p>
             </div>
             <div className="hidden sm:flex items-center gap-3">
               <button
                 onClick={handleDownloadPdf}
-                className="flex items-center bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg shadow-sm transition-transform hover:scale-105"
+                className="flex items-center bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg"
               >
                 <FileDown size={16} className="mr-2" />
                 Download
               </button>
               <Link
                 to="/templates"
-                className="flex items-center bg-gray-600 hover:bg-gray-700 text-white font-semibold py-2 px-4 rounded-lg shadow-sm transition-transform hover:scale-105"
+                className="flex items-center bg-gray-600 text-white font-semibold py-2 px-4 rounded-lg"
               >
                 <Layers size={16} className="mr-2" />
                 Change Template
               </Link>
             </div>
-            <div className="sm:hidden w-12"></div>
+            <div className="sm:hidden w-8"></div>
           </div>
         </div>
+      </header>
+
+      <div className="flex justify-center items-center gap-4 my-6">
+        <button
+          onClick={goToPrevPage}
+          disabled={currentPage === 1}
+          className="p-2 rounded-full bg-gray-200 dark:bg-gray-700 disabled:opacity-50"
+        >
+          <ChevronLeft size={20} />
+        </button>
+        <span className="font-medium text-gray-700 dark:text-gray-300">
+          Page {currentPage} of {totalPages}
+        </span>
+        <button
+          onClick={goToNextPage}
+          disabled={currentPage === totalPages}
+          className="p-2 rounded-full bg-gray-200 dark:bg-gray-700 disabled:opacity-50"
+        >
+          <ChevronRight size={20} />
+        </button>
       </div>
 
-      {/* Resume Preview Content Wrapper */}
-      <div className="preview-wrapper">
-        <div ref={resumeRef} className="resume-preview-container">
-          {TemplateToRender && <TemplateToRender />}
+      <div className="flex justify-center px-4">
+        <div className="resume-page-container">
+          <div
+            className="resume-content-wrapper"
+            style={{
+              transform: `translateY(-${
+                (currentPage - 1) * A4_HEIGHT_IN_PX
+              }px)`,
+            }}
+          >
+            <div ref={resumeContentRef}>
+              {TemplateToRender && <TemplateToRender />}
+            </div>
+          </div>
         </div>
       </div>
 
@@ -106,54 +152,82 @@ const FinalCV = () => {
       <div className="sm:hidden fixed bottom-4 left-4 z-50 flex flex-col gap-3">
         <button
           onClick={handleDownloadPdf}
-          className="flex items-center justify-center bg-blue-600 hover:bg-blue-700 text-white font-bold w-14 h-14 rounded-full shadow-lg transition-transform hover:scale-110"
-          aria-label="Download PDF"
+          className="flex items-center justify-center bg-blue-600 text-white w-14 h-14 rounded-full shadow-lg"
         >
           <FileDown size={22} />
         </button>
         <Link
           to="/templates"
-          className="flex items-center justify-center bg-gray-600 hover:bg-gray-700 text-white font-bold w-14 h-14 rounded-full shadow-lg transition-transform hover:scale-110"
-          aria-label="Change Template"
+          className="flex items-center justify-center bg-gray-600 text-white w-14 h-14 rounded-full shadow-lg"
         >
           <Layers size={22} />
         </Link>
       </div>
 
       <style>{`
-                .preview-wrapper {
-                    padding: 2rem 0;
-                    display: flex;
-                    justify-content: center;
-                }
-                .resume-preview-container {
-                    width: 210mm;
-                    /* Use min-height to allow content to grow beyond one page */
-                    min-height: 297mm;
-                    transform-origin: top center;
-                    background: white;
-                    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-                    transition: transform 0.2s ease-out;
-                    transform: scale(var(--resume-scale, 1));
-                }
+  .resume-page-container {
+    width: 210mm;
+    height: 297mm;
+    background: white;
+    overflow: hidden;
+    margin: 0 auto;
+    box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1),
+                0 8px 10px -6px rgb(0 0 0 / 0.1);
+    transform-origin: top center;
+    transition: transform 0.2s ease-out;
+  }
 
-                :root {
-                    --resume-scale: 1.0;
-                }
-                @media (max-width: 820px) {
-                    :root { --resume-scale: 0.9; }
-                }
-                @media (max-width: 640px) {
-                    :root { --resume-scale: 0.6; }
-                }
-                @media (max-width: 450px) {
-                    :root { --resume-scale: 0.45; }
-                }
+  .resume-content-wrapper {
+    transition: transform 0.5s ease-in-out;
+  }
 
-                .resume-preview-container > div {
-                    box-shadow: none !important;
-                }
-            `}</style>
+  /* Prevent extra spacing from box shadows */
+  .resume-page-container > div > div {
+    box-shadow: none !important;
+    margin: 0 !important;
+  }
+
+  /* Default scale */
+  :root {
+    --resume-scale: 1;
+  }
+
+  /* Scale for tablets */
+  @media (max-width: 1024px) {
+    :root {
+      --resume-scale: 0.8;
+    }
+  }
+
+  /* Scale for large phones */
+  @media (max-width: 768px) {
+    :root {
+      --resume-scale: 0.6;
+    }
+  }
+
+  /* Scale for small phones */
+  @media (max-width: 480px) {
+    :root {
+      --resume-scale: 0.45;
+    }
+  }
+
+  /* Apply scaling */
+  .resume-page-container {
+    transform: scale(var(--resume-scale));
+  }
+
+  /* Let parent container scroll if content is wider than screen */
+  .flex.justify-center.px-4 {
+    overflow-x: auto;
+  }
+
+  /* Prevent horizontal scroll clipping */
+  .resume-page-container {
+    min-width: 210mm;
+  }
+`}</style>
     </div>
   );
 };
