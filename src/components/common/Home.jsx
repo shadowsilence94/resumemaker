@@ -90,18 +90,18 @@ const Home = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-blue-50 dark:from-gray-900 dark:via-gray-800 dark:to-blue-900">
       {/* Hero Section */}
-      <section className="relative py-20 px-4 overflow-hidden">
+      <section className="relative min-h-[60vh] py-20 px-4 overflow-hidden">
         <div className="absolute inset-0">
           <div className="absolute top-20 left-10 w-72 h-72 bg-blue-200 dark:bg-blue-800 rounded-full mix-blend-multiply filter blur-xl opacity-30" />
           <div className="absolute top-40 right-10 w-72 h-72 bg-purple-200 dark:bg-purple-800 rounded-full mix-blend-multiply filter blur-xl opacity-30" />
         </div>
 
-        <div className="max-w-6xl mx-auto text-center relative z-10">
+        <div className="max-w-6xl mx-auto  mt-8   text-center relative z-10">
           <motion.div
             variants={typingAnimation}
             initial="hidden"
             animate="visible"
-            className="mb-6"
+            className="mb-10"
           >
             <h1 className="text-5xl md:text-7xl font-bold bg-gradient-to-r from-gray-900 via-blue-800 to-purple-800 dark:from-white dark:via-blue-200 dark:to-purple-200 bg-clip-text text-transparent leading-tight text-balance">
               {titleWords.map((word, wordIndex) => (
@@ -142,7 +142,7 @@ const Home = () => {
           >
             <motion.button
               onClick={handleGetStarted}
-              className="group relative px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center space-x-2 text-lg"
+              className="group mt-4 relative px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center space-x-2 text-lg"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
@@ -152,7 +152,7 @@ const Home = () => {
 
             <motion.button
               onClick={() => navigate("/templates")}
-              className="px-8 py-4 border-2 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 font-semibold rounded-full hover:border-blue-500 dark:hover:border-blue-400 hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-300 text-lg"
+              className="px-8 py-4 mt-4 border-2 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 font-semibold rounded-full hover:border-blue-500 dark:hover:border-blue-400 hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-300 text-lg"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
@@ -164,7 +164,7 @@ const Home = () => {
 
       {/* Features Section */}
       <motion.section
-        className="py-20 px-4 bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm"
+        className="py-20 px-4 bg-white dark:bg-gray-800/50  via-white bg-gradient-to-br from-blue-50  to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-purple-950 shadow-md hover:shadow-md transition-shadow duration-300 border border-gray-100 dark:border-gray-700 backdrop-blur-sm"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.2 }}
@@ -185,8 +185,12 @@ const Home = () => {
             {features.map((feature, index) => (
               <motion.div
                 key={index}
-                variants={staggerItem}
-                className="group bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-200/50 dark:border-gray-700/50"
+                initial={{ opacity: 0, x: 50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                viewport={{ once: true }}
+                // variants={staggerItem}
+                className="group bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-shadow duration-300 border border-gray-200/50 dark:border-gray-700/50"
               >
                 <div className="flex flex-col items-center text-center">
                   <div className="mb-6 p-4 rounded-full bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-700 dark:to-gray-600">
