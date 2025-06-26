@@ -6,7 +6,7 @@ const AboutUs = () => {
   const teamMembers = [
     {
       name: "Mr. Phyo",
-      role: "Lead Developer",
+      role: "Product Manager",
       image: "/profiles/arthur.jpeg",
       bio: "Full-stack developer with lots of experience in creating user-friendly applications.",
       social: {
@@ -16,7 +16,7 @@ const AboutUs = () => {
     },
     {
       name: "Mr. Htut Ko Ko",
-      role: "Product Manager",
+      role: "Lead Deeloper",
       image: "/profiles/htutkoko.jpg",
       bio: "Strategic thinker focused on building products that solve real problems for users.",
       social: {
