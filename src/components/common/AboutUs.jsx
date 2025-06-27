@@ -8,7 +8,7 @@ const AboutUs = () => {
       name: "Mr. Phyo",
       role: "Product Manager",
       image: "/profiles/arthur.jpeg",
-      bio: "Full-stack developer with lots of experience in creating user-friendly applications.",
+      bio: "Strategic thinker focused on building products that solve real problems for users.",
       social: {
         linkedin: "https://www.linkedin.com/in/aung-phyo-thu-arthur/",
         github: "#",
@@ -18,7 +18,7 @@ const AboutUs = () => {
       name: "Mr. Htut Ko Ko",
       role: "Lead Developer",
       image: "/profiles/htutkoko.jpg",
-      bio: "Strategic thinker focused on building products that solve real problems for users.",
+      bio: "Full-stack developer with lots of experience in creating user-friendly applications.",
       social: {
         linkedin: "https://www.linkedin.com/in/htut-ko-ko-805770202/",
         github: "https://github.com/shadowsilence94",
