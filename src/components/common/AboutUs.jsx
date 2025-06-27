@@ -16,7 +16,7 @@ const AboutUs = () => {
     },
     {
       name: "Mr. Htut Ko Ko",
-      role: "Lead Deeloper",
+      role: "Lead Developer",
       image: "/profiles/htutkoko.jpg",
       bio: "Strategic thinker focused on building products that solve real problems for users.",
       social: {
